@@ -31,7 +31,6 @@ private Button buttonHiragana;
             public void onClick(View v) {
                 Intent intent = new Intent(WyborHiraganaAKatakana.this, WyborHiragana.class);
                 startActivity(intent);
-                finish();
             }
 
         });
@@ -40,7 +39,6 @@ private Button buttonHiragana;
             public void onClick(View v) {
                 Intent intent = new Intent(WyborHiraganaAKatakana.this, WyborKatakana.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

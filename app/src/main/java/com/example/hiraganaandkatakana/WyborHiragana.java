@@ -1,8 +1,10 @@
 package com.example.hiraganaandkatakana;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,7 +13,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class WyborHiragana extends AppCompatActivity {
-private Button Powrot;
+    private ImageButton Powrot;
+    private Button buttonZnaki;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,13 +26,20 @@ private Button Powrot;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Powrot = findViewById(R.id.buttonBack);
+        Powrot = findViewById(R.id.buttonBackHiragana);
         Powrot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
+        buttonZnaki = findViewById(R.id.buttonZnaki);
+        buttonZnaki.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(WyborHiragana.this, ZnakiHiragana.class);
+                startActivity(intent);
+            }
+        });
     }
-
 }

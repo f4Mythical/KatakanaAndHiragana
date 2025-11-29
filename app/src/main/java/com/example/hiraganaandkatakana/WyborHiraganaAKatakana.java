@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 public class WyborHiraganaAKatakana extends AppCompatActivity {
 private Button buttonKatakana;
 private Button buttonHiragana;
+private ImageButton Powrot;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,8 +32,8 @@ private Button buttonHiragana;
         buttonHiragana.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WyborHiraganaAKatakana.this, WyborHiragana.class);
-                startActivity(intent);
+                Intent intent1 = new Intent(WyborHiraganaAKatakana.this, WyborHiragana.class);
+                startActivity(intent1);
             }
 
         });
@@ -39,6 +42,13 @@ private Button buttonHiragana;
             public void onClick(View v) {
                 Intent intent = new Intent(WyborHiraganaAKatakana.this, WyborKatakana.class);
                 startActivity(intent);
+            }
+        });
+        Powrot = findViewById(R.id.buttonBack);
+        Powrot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
     }

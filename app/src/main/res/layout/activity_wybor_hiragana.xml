@@ -79,7 +79,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginBottom="32dp" />
     <ImageButton
-        android:id="@+id/buttonBack"
+        android:id="@+id/buttonBackHiragana"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:background="?attr/selectableItemBackgroundBorderless"

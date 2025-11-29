@@ -29,7 +29,6 @@ private Button buttonStart;
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,WyborHiraganaAKatakana.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

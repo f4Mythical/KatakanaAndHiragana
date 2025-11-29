@@ -12,6 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiraganaAndKatakana">
         <activity
+            android:name=".WyborKatakana"
+            android:exported="false" />
+        <activity
+            android:name=".WyborHiragana"
+            android:exported="false" />
+        <activity
+            android:name=".WyborHiraganaAKatakana"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -66,7 +66,7 @@ public class ZnakiHiragana extends AppCompatActivity {
                     przycisk.setVisibility(View.INVISIBLE);
                 }
 
-                final String tekst = znaki[i][j];
+                String tekst = znaki[i][j];
                 przycisk.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

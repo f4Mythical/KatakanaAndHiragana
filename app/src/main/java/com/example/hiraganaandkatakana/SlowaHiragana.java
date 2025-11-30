@@ -9,10 +9,11 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,126 +29,121 @@ public class SlowaHiragana extends AppCompatActivity {
     private TextView hiraganaText;
     private EditText odpowiedzPodana;
     private ImageButton Powrot;
+    private Switch zmianaJezyka;
 
     private String[][] slowa = {
-            {"きっと", "kitto"},
-            {"もっと", "motto"},
-            {"ひと", "hito"},
-            {"ねこ", "neko"},
-            {"いぬ", "inu"},
-            {"みず", "mizu"},
-            {"ほん", "hon"},
-            {"かわ", "kawa"},
-            {"やま", "yama"},
-            {"そら", "sora"},
-            {"あさ", "asa"},
-            {"ひる", "hiru"},
-            {"よる", "yoru"},
-            {"つき", "tsuki"},
-            {"ほし", "hoshi"},
-            {"はな", "hana"},
-            {"はる", "haru"},
-            {"なつ", "natsu"},
-            {"あき", "aki"},
-            {"ふゆ", "fuyu"},
-            {"かぜ", "kaze"},
-            {"あめ", "ame"},
-            {"ゆき", "yuki"},
-            {"くも", "kumo"},
-            {"かさ", "kasa"},
-            {"てがみ", "tegami"},
-            {"くるま", "kuruma"},
-            {"でんしゃ", "densha"},
-            {"じてんしゃ", "jitensha"},
-            {"えき", "eki"},
-            {"みち", "michi"},
-            {"うみ", "umi"},
-            {"もり", "mori"},
-            {"みどり", "midori"},
-            {"せかい", "sekai"},
-            {"くち", "kuchi"},
-            {"め", "me"},
-            {"みみ", "mimi"},
-            {"て", "te"},
-            {"あし", "ashi"},
-            {"かお", "kao"},
-            {"かみ", "kami"},
-            {"は", "ha"},
-            {"しろ", "shiro"},
-            {"くろ", "kuro"},
-            {"あか", "aka"},
-            {"あお", "ao"},
-            {"きいろ", "kiiro"},
-            {"ちゃいろ", "chairo"},
-            {"みせ", "mise"},
-            {"にく", "niku"},
-            {"さかな", "sakana"},
-            {"くだもの", "kudamono"},
-            {"りんご", "ringo"},
-            {"みかん", "mikan"},
-            {"いちご", "ichigo"},
-            {"ごはん", "gohan"},
-            {"すし", "sushi"},
-            {"てんぷら", "tenpura"},
-            {"おちゃ", "ocha"},
-            {"ぎゅうにゅう", "gyuunyuu"},
-            {"こおり", "koori"},
-            {"みず", "mizu"},
-            {"ぎんこう", "ginkou"},
-            {"がっこう", "gakkou"},
-            {"せんせい", "sensei"},
-            {"がくせい", "gakusei"},
-            {"ともだち", "tomodachi"},
-            {"かぞく", "kazoku"},
-            {"ちち", "chichi"},
-            {"はは", "haha"},
-            {"あに", "ani"},
-            {"あね", "ane"},
-            {"いもうと", "imouto"},
-            {"おとうと", "otouto"},
-            {"うた", "uta"},
-            {"おんがく", "ongaku"},
-            {"てんき", "tenki"},
-            {"しごと", "shigoto"},
-            {"やすみ", "yasumi"},
-            {"へや", "heya"},
-            {"いえ", "ie"},
-            {"まど", "mado"},
-            {"つくえ", "tsukue"},
-            {"いす", "isu"},
-            {"けしごむ", "keshigomu"},
-            {"えんぴつ", "enpitsu"},
-            {"ほんだな", "hondana"},
-            {"はし", "hashi"},
-            {"とけい", "tokei"},
-            {"かばん", "kaban"},
-            {"ぼうし", "boushi"},
-            {"ふく", "fuku"},
-            {"くつ", "kutsu"},
-            {"くつした", "kutsushita"},
-            {"あそび", "asobi"},
-            {"えいが", "eiga"},
-            {"まんが", "manga"},
-            {"にゅうす", "nyuusu"},
-            {"かいもの", "kaimono"},
-            {"すうじ", "suuji"},
-            {"え", "e"},
-            {"おかね", "okane"},
-            {"しゅくだい", "shukudai"},
-            {"れいぞうこ", "reizouko"},
-            {"てれび", "terebi"},
-            {"けいたい", "keitai"},
-            {"さら", "sara"},
-            {"おはし", "ohashi"},
-            {"せっけん", "sekken"},
-            {"かぜ", "kaze"},
-            {"ぎょぎょ", "gyogyo"},
-            {"たまご", "tamago"},
-            {"あめ", "ame"},
-            {"おにぎり", "onigiri"}
+            {"きっと", "kitto", "na pewno"},
+            {"もっと", "motto", "bardziej"},
+            {"ひと", "hito", "człowiek"},
+            {"ねこ", "neko", "kot"},
+            {"いぬ", "inu", "pies"},
+            {"みず", "mizu", "woda"},
+            {"ほん", "hon", "książka"},
+            {"かわ", "kawa", "rzeka"},
+            {"やま", "yama", "góra"},
+            {"そら", "sora", "niebo"},
+            {"あさ", "asa", "rano"},
+            {"ひる", "hiru", "południe"},
+            {"よる", "yoru", "noc"},
+            {"つき", "tsuki", "księżyc"},
+            {"ほし", "hoshi", "gwiazda"},
+            {"はな", "hana", "kwiat"},
+            {"はる", "haru", "wiosna"},
+            {"なつ", "natsu", "lato"},
+            {"あき", "aki", "jesień"},
+            {"ふゆ", "fuyu", "zima"},
+            {"かぜ", "kaze", "wiatr"},
+            {"あめ", "ame", "deszcz"},
+            {"ゆき", "yuki", "śnieg"},
+            {"くも", "kumo", "chmura"},
+            {"かさ", "kasa", "parasolka"},
+            {"てがみ", "tegami", "list"},
+            {"くるま", "kuruma", "samochód"},
+            {"でんしゃ", "densha", "pociąg"},
+            {"じてんしゃ", "jitensha", "rower"},
+            {"えき", "eki", "stacja"},
+            {"みち", "michi", "droga"},
+            {"うみ", "umi", "morze"},
+            {"もり", "mori", "las"},
+            {"みどり", "midori", "zieleń"},
+            {"せかい", "sekai", "świat"},
+            {"くち", "kuchi", "usta"},
+            {"め", "me", "oko"},
+            {"みみ", "mimi", "ucho"},
+            {"て", "te", "ręka"},
+            {"あし", "ashi", "noga"},
+            {"かお", "kao", "twarz"},
+            {"かみ", "kami", "włosy"},
+            {"は", "ha", "ząb"},
+            {"しろ", "shiro", "biały"},
+            {"くろ", "kuro", "czarny"},
+            {"あか", "aka", "czerwony"},
+            {"あお", "ao", "niebieski"},
+            {"きいろ", "kiiro", "żółty"},
+            {"ちゃいろ", "chairo", "brązowy"},
+            {"みせ", "mise", "sklep"},
+            {"にく", "niku", "mięso"},
+            {"さかな", "sakana", "ryba"},
+            {"くだもの", "kudamono", "owoce"},
+            {"りんご", "ringo", "jabłko"},
+            {"みかん", "mikan", "mandarynka"},
+            {"いちご", "ichigo", "truskawka"},
+            {"ごはん", "gohan", "ryż"},
+            {"すし", "sushi", "sushi"},
+            {"てんぷら", "tenpura", "tempura"},
+            {"おちゃ", "ocha", "herbata"},
+            {"ぎゅうにゅう", "gyuunyuu", "mleko"},
+            {"こおり", "koori", "lód"},
+            {"ぎんこう", "ginkou", "bank"},
+            {"がっこう", "gakkou", "szkoła"},
+            {"せんせい", "sensei", "nauczyciel"},
+            {"がくせい", "gakusei", "uczeń"},
+            {"ともだち", "tomodachi", "przyjaciel"},
+            {"かぞく", "kazoku", "rodzina"},
+            {"ちち", "chichi", "ojciec"},
+            {"はは", "haha", "matka"},
+            {"あに", "ani", "brat"},
+            {"あね", "ane", "siostra"},
+            {"いもうと", "imouto", "siostra"},
+            {"おとうと", "otouto", "brat"},
+            {"うた", "uta", "piosenka"},
+            {"おんがく", "ongaku", "muzyka"},
+            {"てんき", "tenki", "pogoda"},
+            {"しごと", "shigoto", "praca"},
+            {"やすみ", "yasumi", "odpoczynek"},
+            {"へや", "heya", "pokój"},
+            {"いえ", "ie", "dom"},
+            {"まど", "mado", "okno"},
+            {"つくえ", "tsukue", "biurko"},
+            {"いす", "isu", "krzesło"},
+            {"けしごむ", "keshigomu", "gumka"},
+            {"えんぴつ", "enpitsu", "ołówek"},
+            {"ほんだな", "hondana", "regał"},
+            {"はし", "hashi", "pałeczki"},
+            {"とけい", "tokei", "zegar"},
+            {"かばん", "kaban", "torba"},
+            {"ぼうし", "boushi", "czapka"},
+            {"ふく", "fuku", "ubranie"},
+            {"くつ", "kutsu", "buty"},
+            {"くつした", "kutsushita", "skarpetki"},
+            {"あそび", "asobi", "zabawa"},
+            {"えいが", "eiga", "film"},
+            {"まんが", "manga", "manga"},
+            {"にゅうす", "nyuusu", "wiadomości"},
+            {"かいもの", "kaimono", "zakupy"},
+            {"すうじ", "suuji", "cyfry"},
+            {"え", "e", "obrazek"},
+            {"おかね", "okane", "pieniądze"},
+            {"しゅくだい", "shukudai", "praca"},
+            {"れいぞうこ", "reizouko", "lodówka"},
+            {"てれび", "terebi", "telewizor"},
+            {"けいたい", "keitai", "telefon"},
+            {"さら", "sara", "talerz"},
+            {"おはし", "ohashi", "pałeczki"},
+            {"せっけん", "sekken", "mydło"},
+            {"たまご", "tamago", "jajko"},
+            {"おにぎり", "onigiri", "onigiri"}
     };
-
-
 
     private Random random = new Random();
     private int aktualnyIndex = -1;
@@ -168,6 +164,7 @@ public class SlowaHiragana extends AppCompatActivity {
         buttonSprawdz = findViewById(R.id.buttonSprawdz);
         hiraganaText = findViewById(R.id.textHiragana);
         odpowiedzPodana = findViewById(R.id.editTextYourAnswer);
+        zmianaJezyka = findViewById(R.id.switchChangeLanguage);
 
         Powrot.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -190,12 +187,36 @@ public class SlowaHiragana extends AppCompatActivity {
             }
         });
 
+        zmianaJezyka.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    zmianaJezyka.setText("JPN");
+                    if (aktualnyIndex != -1) {
+                        hiraganaText.setText(slowa[aktualnyIndex][2]);
+                    }
+                } else {
+                    zmianaJezyka.setText("PL");
+                    if (aktualnyIndex != -1) {
+                        hiraganaText.setText(slowa[aktualnyIndex][0]);
+                    }
+                }
+            }
+        });
+
         losujSlowo();
     }
 
     private void losujSlowo() {
         aktualnyIndex = random.nextInt(slowa.length);
-        hiraganaText.setText(slowa[aktualnyIndex][0]);
+
+        boolean czyPolski = zmianaJezyka.isChecked();
+        if (czyPolski) {
+            hiraganaText.setText(slowa[aktualnyIndex][2]);
+        } else {
+            hiraganaText.setText(slowa[aktualnyIndex][0]);
+        }
+
         hiraganaText.setTextColor(Color.parseColor("#E65100"));
         odpowiedzPodana.setText("");
     }
@@ -206,7 +227,9 @@ public class SlowaHiragana extends AppCompatActivity {
         }
 
         String odpowiedz = odpowiedzPodana.getText().toString().toLowerCase().trim();
-        String poprawna = slowa[aktualnyIndex][1];
+
+        boolean czyPolski = zmianaJezyka.isChecked();
+        String poprawna = czyPolski ? slowa[aktualnyIndex][1] : slowa[aktualnyIndex][1];
 
         SpannableString spannable = new SpannableString(odpowiedz);
 
@@ -230,7 +253,5 @@ public class SlowaHiragana extends AppCompatActivity {
         }
 
         odpowiedzPodana.setText(spannable);
-
-
     }
 }

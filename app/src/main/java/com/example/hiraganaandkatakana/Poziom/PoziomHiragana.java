@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.Poziom;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.hiraganaandkatakana.R;
+import com.example.hiraganaandkatakana.Slowa.SlowaHiragana;
 
 public class PoziomHiragana extends AppCompatActivity {
 private Button Slowa;
@@ -37,7 +40,7 @@ private ImageView Powrot;
         Slowa.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PoziomHiragana.this,SlowaHiragana.class);
+                Intent intent = new Intent(PoziomHiragana.this, SlowaHiragana.class);
                 startActivity(intent);
             }
         });

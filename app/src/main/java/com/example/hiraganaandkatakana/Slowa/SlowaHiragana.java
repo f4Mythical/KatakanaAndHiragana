@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.Slowa;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.hiraganaandkatakana.R;
 
 import java.util.Random;
 

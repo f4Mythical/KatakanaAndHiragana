@@ -11,6 +11,8 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.hiraganaandkatakana.Wybor.WyborHiraganaAKatakana;
+
 public class MainActivity extends AppCompatActivity {
 private Button buttonStart;
     @Override
@@ -27,7 +29,7 @@ private Button buttonStart;
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,WyborHiraganaAKatakana.class);
+                Intent intent = new Intent(MainActivity.this, WyborHiraganaAKatakana.class);
                 startActivity(intent);
             }
         });

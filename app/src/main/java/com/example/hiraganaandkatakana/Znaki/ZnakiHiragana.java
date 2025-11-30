@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.Znaki;
 
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +13,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.hiraganaandkatakana.R;
 
 public class ZnakiHiragana extends AppCompatActivity {
     private ImageButton Powrot;

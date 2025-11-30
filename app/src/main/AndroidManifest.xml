@@ -12,37 +12,37 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiraganaAndKatakana">
         <activity
-            android:name=".SlowaKatakana"
+            android:name=".Slowa.SlowaKatakana"
             android:exported="false" />
         <activity
-            android:name=".PoziomKatakana"
+            android:name=".Poziom.PoziomKatakana"
             android:exported="false" />
         <activity
-            android:name=".LiteryKatakana"
+            android:name=".Litery.LiteryKatakana"
             android:exported="false" />
         <activity
-            android:name=".ZnakiKatakana"
+            android:name=".Znaki.ZnakiKatakana"
             android:exported="false" />
         <activity
-            android:name=".LiteryHiragana"
+            android:name=".Litery.LiteryHiragana"
             android:exported="false" />
         <activity
-            android:name=".SlowaHiragana"
+            android:name=".Slowa.SlowaHiragana"
             android:exported="false" />
         <activity
-            android:name=".PoziomHiragana"
+            android:name=".Poziom.PoziomHiragana"
             android:exported="false" />
         <activity
-            android:name=".ZnakiHiragana"
+            android:name=".Znaki.ZnakiHiragana"
             android:exported="false" />
         <activity
-            android:name=".WyborKatakana"
+            android:name=".Wybor.WyborKatakana"
             android:exported="false" />
         <activity
-            android:name=".WyborHiragana"
+            android:name=".Wybor.WyborHiragana"
             android:exported="false" />
         <activity
-            android:name=".WyborHiraganaAKatakana"
+            android:name=".Wybor.WyborHiraganaAKatakana"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

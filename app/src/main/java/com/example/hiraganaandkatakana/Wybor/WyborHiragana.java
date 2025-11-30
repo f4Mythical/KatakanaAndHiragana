@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.Wybor;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.example.hiraganaandkatakana.Poziom.PoziomHiragana;
+import com.example.hiraganaandkatakana.R;
+import com.example.hiraganaandkatakana.Znaki.ZnakiHiragana;
 
 public class WyborHiragana extends AppCompatActivity {
     private ImageButton Powrot;
@@ -46,7 +50,7 @@ public class WyborHiragana extends AppCompatActivity {
         buttonZadanie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WyborHiragana.this,PoziomHiragana.class);
+                Intent intent = new Intent(WyborHiragana.this, PoziomHiragana.class);
                 startActivity(intent);
             }
         });

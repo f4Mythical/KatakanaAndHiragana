@@ -12,6 +12,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiraganaAndKatakana">
         <activity
+            android:name=".SlowaKatakana"
+            android:exported="false" />
+        <activity
+            android:name=".PoziomKatakana"
+            android:exported="false" />
+        <activity
+            android:name=".LiteryKatakana"
+            android:exported="false" />
+        <activity
+            android:name=".ZnakiKatakana"
+            android:exported="false" />
+        <activity
+            android:name=".LiteryHiragana"
+            android:exported="false" />
+        <activity
             android:name=".SlowaHiragana"
             android:exported="false" />
         <activity

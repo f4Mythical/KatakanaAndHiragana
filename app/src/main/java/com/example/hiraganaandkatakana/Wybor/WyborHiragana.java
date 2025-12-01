@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.hiraganaandkatakana.Poziom.PoziomHiragana;
 import com.example.hiraganaandkatakana.R;
+import com.example.hiraganaandkatakana.WyborPoziomu.WyborPoziomuHiragana;
 import com.example.hiraganaandkatakana.Znaki.ZnakiHiragana;
 
 public class WyborHiragana extends AppCompatActivity {
@@ -50,9 +51,11 @@ public class WyborHiragana extends AppCompatActivity {
         buttonZadanie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(WyborHiragana.this, PoziomHiragana.class);
-                startActivity(intent);
+                  Intent intent = new Intent(WyborHiragana.this,WyborPoziomuHiragana.class);
+                  startActivity(intent);
             }
+
+
         });
     }
 }

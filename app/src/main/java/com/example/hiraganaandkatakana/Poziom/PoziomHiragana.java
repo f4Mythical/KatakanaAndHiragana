@@ -12,12 +12,14 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.hiraganaandkatakana.Litery.LiteryHiragana;
 import com.example.hiraganaandkatakana.R;
 import com.example.hiraganaandkatakana.Slowa.SlowaHiragana;
 
 public class PoziomHiragana extends AppCompatActivity {
 private Button Slowa;
 private Button Zdania;
+private Button Litery;
 private ImageView Powrot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,14 @@ private ImageView Powrot;
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PoziomHiragana.this, SlowaHiragana.class);
+                startActivity(intent);
+            }
+        });
+        Litery = findViewById(R.id.buttonLitery);
+        Litery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PoziomHiragana.this, LiteryHiragana.class);
                 startActivity(intent);
             }
         });

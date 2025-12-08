@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hiraganaandkatakana.Litery.LiteryHiragana;
@@ -14,7 +16,7 @@ public class WyborPoziomuHiragana extends AppCompatActivity {
 
     private Button btnPodstawowe, btnDakuten, btnKombinowane, buttonStart;
     private boolean p = false, d = false, k = false;
-    private Button Powrot;
+    private ImageButton Powrot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

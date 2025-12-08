@@ -51,7 +51,7 @@ public class WyborHiragana extends AppCompatActivity {
         buttonZadanie.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                  Intent intent = new Intent(WyborHiragana.this,WyborPoziomuHiragana.class);
+                  Intent intent = new Intent(WyborHiragana.this,PoziomHiragana.class);
                   startActivity(intent);
             }
 

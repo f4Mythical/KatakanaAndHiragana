@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import androidx.activity.EdgeToEdge;
@@ -15,12 +16,13 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.hiraganaandkatakana.Litery.LiteryHiragana;
 import com.example.hiraganaandkatakana.R;
 import com.example.hiraganaandkatakana.Slowa.SlowaHiragana;
+import com.example.hiraganaandkatakana.WyborPoziomu.WyborPoziomuHiragana;
 
 public class PoziomHiragana extends AppCompatActivity {
 private Button Slowa;
 private Button Zdania;
 private Button Litery;
-private ImageView Powrot;
+private ImageButton Powrot;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +52,7 @@ private ImageView Powrot;
         Litery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PoziomHiragana.this, LiteryHiragana.class);
+                Intent intent = new Intent(PoziomHiragana.this, WyborPoziomuHiragana.class);
                 startActivity(intent);
             }
         });

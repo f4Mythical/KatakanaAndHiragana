@@ -71,7 +71,7 @@ public class LiteryHiragana extends AppCompatActivity {
         boolean d = getIntent().getBooleanExtra("DAKUTEN", false);
         boolean k = getIntent().getBooleanExtra("KOMBINOWANE", false);
 
-        int total = (p ? zestawPodstawowy.length : 0)
+            int total = (p ? zestawPodstawowy.length : 0)
                 + (d ? zestawDakuten.length : 0)
                 + (k ? zestawKombinowane.length : 0);
 

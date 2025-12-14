@@ -21,6 +21,20 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp" />
 
+    <ImageButton
+        android:id="@+id/buttonSettings"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@android:drawable/ic_menu_preferences"
+        android:scaleType="centerInside"
+        android:contentDescription="Ustawienia"
+        android:padding="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="16dp" />
+
     <TextView
         android:id="@+id/titleZnaki"
         android:layout_width="wrap_content"
@@ -34,54 +48,160 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp" />
 
+    <HorizontalScrollView
+        android:id="@+id/filterScrollView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:scrollbars="none"
+        app:layout_constraintTop_toBottomOf="@id/titleZnaki"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/filterAll"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="Wszystkie"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#E65100"
+                android:layout_marginEnd="8dp"
+                android:minWidth="80dp"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp" />
+
+            <Button
+                android:id="@+id/filterA"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="A"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7043"
+                android:layout_marginEnd="8dp"
+                android:minWidth="60dp" />
+
+            <Button
+                android:id="@+id/filterI"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="I"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7043"
+                android:layout_marginEnd="8dp"
+                android:minWidth="60dp" />
+
+            <Button
+                android:id="@+id/filterU"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="U"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7043"
+                android:layout_marginEnd="8dp"
+                android:minWidth="60dp" />
+
+            <Button
+                android:id="@+id/filterE"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="E"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7043"
+                android:layout_marginEnd="8dp"
+                android:minWidth="60dp" />
+
+            <Button
+                android:id="@+id/filterO"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:text="O"
+                android:textSize="14sp"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7043"
+                android:minWidth="60dp" />
+
+        </LinearLayout>
+    </HorizontalScrollView>
+
     <ScrollView
+        android:id="@+id/scrollViewContainer"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/titleZnaki"
-        app:layout_constraintBottom_toTopOf="@id/buttonWczesniejsze"
+        app:layout_constraintTop_toBottomOf="@id/filterScrollView"
+        app:layout_constraintBottom_toTopOf="@id/navigationButtons"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
         android:padding="8dp">
 
-        <TableLayout
-            android:id="@+id/tabelaZnakow"
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:stretchColumns="*"
-            android:shrinkColumns="*">
+            android:layout_height="wrap_content">
 
-        </TableLayout>
+            <LinearLayout
+                android:id="@+id/listaZnakow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
+            </LinearLayout>
+
+            <TableLayout
+                android:id="@+id/tabelaZnakow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:stretchColumns="*"
+                android:shrinkColumns="*"
+                android:visibility="gone">
+            </TableLayout>
+
+        </FrameLayout>
 
     </ScrollView>
 
-    <Button
-        android:id="@+id/buttonWczesniejsze"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="Pre"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#FF5722"
+    <LinearLayout
+        android:id="@+id/navigationButtons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/buttonKolejne"
         android:layout_marginStart="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="16dp" />
-
-    <Button
-        android:id="@+id/buttonKolejne"
-        android:layout_width="0dp"
-        android:layout_height="60dp"
-        android:text="Next"
-        android:textSize="18sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#FF7043"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/buttonWczesniejsze"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginStart="8dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp" />
+        android:layout_marginBottom="16dp">
+
+        <Button
+            android:id="@+id/buttonWczesniejsze"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="Pre"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF5722"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/buttonKolejne"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:text="Next"
+            android:textSize="18sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#FF7043" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

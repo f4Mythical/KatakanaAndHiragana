@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import com.example.hiraganaandkatakana.Wybor.WyborHiraganaAKatakana;
 
 public class MainActivity extends AppCompatActivity {
 private Button buttonStart;
+private ImageButton Login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,5 +35,15 @@ private Button buttonStart;
                 startActivity(intent);
             }
         });
+        Login = findViewById(R.id.imageButtonLogin);
+        Login.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        LoginDialogFragment dialog = new LoginDialogFragment();
+                        dialog.show(getSupportFragmentManager(), "loginDialog");
+                    }
+                }
+        );
     }
 }

@@ -28,19 +28,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/Poczatek"
         android:layout_width="300dp"
         android:layout_height="110dp"
         android:layout_marginTop="100dp"
-        android:backgroundTint="#FF5722"
-        android:elevation="16dp"
         android:text="Start"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
         android:textSize="34sp"
         android:textStyle="bold"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#FF5722"
         app:cornerRadius="28dp"
+        app:elevation="16dp"
+        app:rippleColor="#80FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Przywitanie" />

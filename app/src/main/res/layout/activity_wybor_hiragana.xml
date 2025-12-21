@@ -25,15 +25,13 @@
         android:id="@+id/verticalTextContainer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="40dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/buttonZnaki"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.948"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.339">
 
         <LinearLayout
             android:layout_width="wrap_content"

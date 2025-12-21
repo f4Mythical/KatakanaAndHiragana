@@ -33,11 +33,11 @@ public class LoginDialogFragment extends DialogFragment {
             // u później Firebase Auth
         });
 // TODO ZROBIC FRAGMENT
-//        tvRegister.setOnClickListener(v -> {
-//            dismiss();
-//            new RegisterDialogFragment()
-//                    .show(getParentFragmentManager(), "registerDialog");
-//        });
+        tvRegister.setOnClickListener(v -> {
+            dismiss();
+            new RegisterDialogFragment()
+                    .show(getParentFragmentManager(), "registerDialog");
+        });
 
         builder.setView(view);
         return builder.create();

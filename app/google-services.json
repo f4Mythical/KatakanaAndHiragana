@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "710961212672",
+    "project_id": "hiraganakatakanaapp",
+    "storage_bucket": "hiraganakatakanaapp.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710961212672:android:3d5115bcccec82e67017e5",
+        "android_client_info": {
+          "package_name": "com.example.hiraganaandkatakana"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJAIJqvfNeUCMIpBCQq65ZOcvMAsayU34"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

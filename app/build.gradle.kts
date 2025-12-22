@@ -42,7 +42,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-
+    implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("org.apache.poi:poi-ooxml:5.2.3")
     implementation("androidx.multidex:multidex:2.0.1")
     implementation("androidx.recyclerview:recyclerview:1.3.2")

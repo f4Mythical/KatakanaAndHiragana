@@ -31,7 +31,7 @@ private ImageButton Login;
         buttonStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, WyborHiraganaAKatakana.class);
+                Intent intent = new Intent(MainActivity.this, PoczatekHiraganaKatakana.class);
                 startActivity(intent);
             }
         });

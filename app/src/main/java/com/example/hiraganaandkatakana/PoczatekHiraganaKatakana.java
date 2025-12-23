@@ -1,6 +1,7 @@
 package com.example.hiraganaandkatakana;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -117,7 +118,31 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
         Button btnDakuten = findViewById(R.id.buttonDakuten);
         Button btnKombinowane = findViewById(R.id.buttonKombinowane);
 
+        Button btnPodstawoweHiragana = findViewById(R.id.buttonBasicHiragana);
 
+
+        btnPodstawoweHiragana.setOnClickListener(v ->{
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicHiragana.class);
+            startActivity(intent);
+        });
+
+        Button btnPodstawoweKatakana = findViewById(R.id.buttonBasicKatakana);
+        btnPodstawoweKatakana.setOnClickListener(v -> {
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_basic_katakana.class);
+            startActivity(intent);
+        });
+
+        Button btnPremiumHiragana = findViewById(R.id.buttonPremiumHiragana);
+        btnPremiumHiragana.setOnClickListener(v -> {
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this,widok_premium_hiragana.class);
+            startActivity(intent);
+        });
+
+        Button bntPremiumKatakana = findViewById(R.id.buttonPremiumKatakana);
+        bntPremiumKatakana.setOnClickListener(v -> {
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_katakana.class);
+            startActivity(intent);
+        });
         back.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
@@ -294,4 +319,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
         }
     }
     //TODO zrobic przyciski ale to dopiero gdy bedzie polaczenie z baza danych
+    // TODO zrobic jednak przycisk z intentem do podstawy i narazie do premium bez bazy danych
+
 }

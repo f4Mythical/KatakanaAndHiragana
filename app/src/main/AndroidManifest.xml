@@ -12,6 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HiraganaAndKatakana">
         <activity
+            android:name=".widok_premium_katakana"
+            android:exported="false" />
+        <activity
+            android:name=".widok_premium_hiragana"
+            android:exported="false" />
+        <activity
+            android:name=".widok_basic_katakana"
+            android:exported="false" />
+        <activity
+            android:name=".WidokBasicHiragana"
+            android:exported="false" />
+        <activity
             android:name=".PoczatekHiraganaKatakana"
             android:exported="false" />
         <activity

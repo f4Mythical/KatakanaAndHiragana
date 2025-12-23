@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">HiraganaAndKatakana</string>
     <string name="tytul">Hiragana &amp; Katakana</string>
+    <string name="hiragana">Hiragana\nひらがな</string>
+    <string name="katakana">Katakana\nカタカナ</string>
+    <string name="znaki">Znaki</string>
+    <string name="s_owa">Słowa</string>
+    <string name="zdania">Zdania</string>
+    <string name="wersja_podstawowa">Wersja Podstawowa</string>
+    <string name="wersja_premium">Wersja Premium</string>
 </resources>

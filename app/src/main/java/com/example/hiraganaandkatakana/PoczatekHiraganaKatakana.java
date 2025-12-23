@@ -100,7 +100,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable[] pendingTasks = null;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,18 +117,30 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
         Button btnDakuten = findViewById(R.id.buttonDakuten);
         Button btnKombinowane = findViewById(R.id.buttonKombinowane);
 
-        back.setOnClickListener(v -> finish());
+
+        back.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                    }
+                });
 
         login.setOnClickListener(v -> {
             LoginDialogFragment dialog = new LoginDialogFragment();
             dialog.show(getSupportFragmentManager(), "login");
         });
 
+        LinearLayout layoutHira = findViewById(R.id.layoutHiraganaButtons);
+        LinearLayout layoutKata = findViewById(R.id.layoutKatakanaButtons);
+
         tabHira.setOnClickListener(v -> {
             if (!czyHiragana) {
                 czyHiragana = true;
                 updateTabStyles(tabHira, tabKata);
                 ustawZestaw();
+                layoutHira.setVisibility(View.VISIBLE);
+                layoutKata.setVisibility(View.GONE);
             }
         });
 
@@ -138,6 +149,8 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
                 czyHiragana = false;
                 updateTabStyles(tabHira, tabKata);
                 ustawZestaw();
+                layoutHira.setVisibility(View.GONE);
+                layoutKata.setVisibility(View.VISIBLE);
             }
         });
 

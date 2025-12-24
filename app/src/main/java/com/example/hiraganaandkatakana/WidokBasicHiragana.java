@@ -28,6 +28,7 @@ public class WidokBasicHiragana extends AppCompatActivity {
             Intent intent = new Intent(WidokBasicHiragana.this,widok_basic_katakana.class);
             startActivity(intent);
             finish();
+
         });
         ImageButton ibtnBack = findViewById(R.id.buttonBack);
         ibtnBack.setOnClickListener(v -> {

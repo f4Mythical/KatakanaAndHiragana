@@ -34,5 +34,13 @@ public class WidokBasicHiragana extends AppCompatActivity {
         ibtnBack.setOnClickListener(v -> {
             finish();
         });
+        Button btnZnaki = findViewById(R.id.buttonZnaki);
+        btnZnaki.setOnClickListener(v -> {
+            Intent intent1 = new Intent(
+                    WidokBasicHiragana.this,
+                    HiraganaBasicZnaki.class
+            );
+            startActivity(intent1);
+        });
     }
 }

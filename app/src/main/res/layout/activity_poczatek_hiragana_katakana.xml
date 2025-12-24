@@ -11,15 +11,9 @@
 
     <ImageButton
         android:id="@+id/buttonBack"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        style="@style/BackButtonStyle"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="12dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/arrow_back"
-        android:contentDescription="Powrót"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

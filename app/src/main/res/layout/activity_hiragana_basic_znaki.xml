@@ -1,0 +1,80 @@
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA">
+
+    <ImageButton
+        android:id="@+id/buttonBack"
+        style="@style/BackButtonStyle"
+        android:layout_margin="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/inputText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:padding="16dp"
+        android:text=""
+        android:textSize="24sp"
+        android:textColor="#E65100"
+        android:background="#FFF3E0"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/buttonBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/keyboardLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <GridLayout
+            android:id="@+id/keyboardContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:columnCount="10"
+            android:useDefaultMargins="true"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp">
+
+            <Button
+                android:id="@+id/buttonSpace"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="3"
+                android:text="SPACJA"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF7043"
+                app:cornerRadius="20dp"/>
+
+            <Button
+                android:id="@+id/buttonDelete"
+                android:layout_width="0dp"
+                android:layout_height="52dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:text="⌫"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#E64A19"
+                app:cornerRadius="20dp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

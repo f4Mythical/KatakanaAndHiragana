@@ -9,16 +9,12 @@
 
     <ImageButton
         android:id="@+id/buttonBack"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/arrow_back"
-        android:scaleType="centerInside"
-        android:contentDescription="Powrót"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        style="@style/BackButtonStyle"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp" />
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <Switch
         android:id="@+id/switchChangeLanguage"

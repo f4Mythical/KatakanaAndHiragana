@@ -1,6 +1,9 @@
 package com.example.hiraganaandkatakana;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +22,17 @@ public class widok_premium_hiragana extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
+        });
+        ImageButton ibtnKatakana = findViewById(R.id.imageButtonKatakana);
+        ibtnKatakana.setOnClickListener(v -> {
+            Intent intent = new Intent(widok_premium_hiragana.this,widok_premium_katakana.class);
+            startActivity(intent);
+            finish();
+
+        });
+        ImageButton ibtnBack = findViewById(R.id.buttonBack);
+        ibtnBack.setOnClickListener(v -> {
+            finish();
         });
     }
 }

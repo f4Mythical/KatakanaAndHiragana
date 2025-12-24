@@ -11,17 +11,12 @@
 
     <ImageButton
         android:id="@+id/buttonBack"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        style="@style/BackButtonStyle"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Powrót"
-        android:padding="12dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/textViewText"
@@ -102,4 +97,13 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+    <ImageButton
+        android:id="@+id/imageButtonHiragana"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:padding="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hzdjeciezplusem" />
 </androidx.constraintlayout.widget.ConstraintLayout>

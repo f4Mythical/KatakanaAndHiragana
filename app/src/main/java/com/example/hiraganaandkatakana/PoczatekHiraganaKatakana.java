@@ -16,7 +16,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
-public class PoczatekHiraganaKatakana extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+
+public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthCallback {
 
     GridLayout container;
     boolean czyHiragana = true;
@@ -101,6 +103,10 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable[] pendingTasks = null;
 
+    private ImageButton przyciskLogowanie;
+    private ImageButton przyciskRejestracja;
+    private ImageButton przyciskKonto;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,124 +114,154 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
 
         container = findViewById(R.id.dynamicContainer);
 
-        ImageButton back = findViewById(R.id.buttonBack);
-        ImageButton login = findViewById(R.id.imageButtonLogin);
+        ImageButton przyciskWstecz = findViewById(R.id.buttonBack);
+        przyciskLogowanie = findViewById(R.id.imageButtonLogin);
+        przyciskRejestracja = findViewById(R.id.imageButtonRegister);
+        przyciskKonto = findViewById(R.id.imageButtonAccount);
 
-        TextView tabHira = findViewById(R.id.tabHiragana);
-        TextView tabKata = findViewById(R.id.tabKatakana);
+        przyciskKonto.setVisibility(View.GONE);
 
-        Button btnPodstawowe = findViewById(R.id.buttonPodstawowe);
-        Button btnDakuten = findViewById(R.id.buttonDakuten);
-        Button btnKombinowane = findViewById(R.id.buttonKombinowane);
+        TextView zakladkaHiragana = findViewById(R.id.tabHiragana);
+        TextView zakladkaKatakana = findViewById(R.id.tabKatakana);
 
-        Button btnPodstawoweHiragana = findViewById(R.id.buttonBasicHiragana);
+        Button przyciskPodstawowe = findViewById(R.id.buttonPodstawowe);
+        Button przyciskDakuten = findViewById(R.id.buttonDakuten);
+        Button przyciskKombinowane = findViewById(R.id.buttonKombinowane);
 
+        Button przyciskPodstawoweHiragana = findViewById(R.id.buttonBasicHiragana);
+        Button przyciskPodstawoweKatakana = findViewById(R.id.buttonBasicKatakana);
+        Button przyciskPremiumHiragana = findViewById(R.id.buttonPremiumHiragana);
+        Button przyciskPremiumKatakana = findViewById(R.id.buttonPremiumKatakana);
 
-        btnPodstawoweHiragana.setOnClickListener(v ->{
+        przyciskPodstawoweHiragana.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicHiragana.class);
             startActivity(intent);
         });
 
-        Button btnPodstawoweKatakana = findViewById(R.id.buttonBasicKatakana);
-        btnPodstawoweKatakana.setOnClickListener(v -> {
+        przyciskPodstawoweKatakana.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_basic_katakana.class);
             startActivity(intent);
         });
 
-        Button btnPremiumHiragana = findViewById(R.id.buttonPremiumHiragana);
-        btnPremiumHiragana.setOnClickListener(v -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this,widok_premium_hiragana.class);
+        przyciskPremiumHiragana.setOnClickListener(v -> {
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_hiragana.class);
             startActivity(intent);
         });
 
-        Button bntPremiumKatakana = findViewById(R.id.buttonPremiumKatakana);
-        bntPremiumKatakana.setOnClickListener(v -> {
+        przyciskPremiumKatakana.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_katakana.class);
             startActivity(intent);
         });
-        back.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        finish();
-                    }
-                });
 
-        login.setOnClickListener(v -> {
+        przyciskWstecz.setOnClickListener(v -> finish());
+
+        przyciskLogowanie.setOnClickListener(v -> {
             LoginDialogFragment dialog = new LoginDialogFragment();
-            dialog.show(getSupportFragmentManager(), "login");
+            dialog.show(getSupportFragmentManager(), "logowanie");
         });
 
-        LinearLayout layoutHira = findViewById(R.id.layoutHiraganaButtons);
-        LinearLayout layoutKata = findViewById(R.id.layoutKatakanaButtons);
+        przyciskRejestracja.setOnClickListener(v -> {
+            RegisterDialogFragment dialog = new RegisterDialogFragment();
+            dialog.show(getSupportFragmentManager(), "rejestracja");
+        });
 
-        tabHira.setOnClickListener(v -> {
+        LinearLayout layoutHiragana = findViewById(R.id.layoutHiraganaButtons);
+        LinearLayout layoutKatakana = findViewById(R.id.layoutKatakanaButtons);
+
+        zakladkaHiragana.setOnClickListener(v -> {
             if (!czyHiragana) {
                 czyHiragana = true;
-                updateTabStyles(tabHira, tabKata);
+                ustawStyleZakladek(zakladkaHiragana, zakladkaKatakana);
                 ustawZestaw();
-                layoutHira.setVisibility(View.VISIBLE);
-                layoutKata.setVisibility(View.GONE);
+                layoutHiragana.setVisibility(View.VISIBLE);
+                layoutKatakana.setVisibility(View.GONE);
             }
         });
 
-        tabKata.setOnClickListener(v -> {
+        zakladkaKatakana.setOnClickListener(v -> {
             if (czyHiragana) {
                 czyHiragana = false;
-                updateTabStyles(tabHira, tabKata);
+                ustawStyleZakladek(zakladkaHiragana, zakladkaKatakana);
                 ustawZestaw();
-                layoutHira.setVisibility(View.GONE);
-                layoutKata.setVisibility(View.VISIBLE);
+                layoutHiragana.setVisibility(View.GONE);
+                layoutKatakana.setVisibility(View.VISIBLE);
             }
         });
 
-        btnPodstawowe.setOnClickListener(v -> {
+        przyciskPodstawowe.setOnClickListener(v -> {
             if (!aktualnyTyp.equals("PODSTAWOWE")) {
                 aktualnyTyp = "PODSTAWOWE";
-                updateButtonStyles(btnPodstawowe, btnDakuten, btnKombinowane);
+                ustawStylePrzyciskow(przyciskPodstawowe, przyciskDakuten, przyciskKombinowane);
                 ustawZestaw();
             }
         });
 
-        btnDakuten.setOnClickListener(v -> {
+        przyciskDakuten.setOnClickListener(v -> {
             if (!aktualnyTyp.equals("DAKUTEN")) {
                 aktualnyTyp = "DAKUTEN";
-                updateButtonStyles(btnDakuten, btnPodstawowe, btnKombinowane);
+                ustawStylePrzyciskow(przyciskDakuten, przyciskPodstawowe, przyciskKombinowane);
                 ustawZestaw();
             }
         });
 
-        btnKombinowane.setOnClickListener(v -> {
+        przyciskKombinowane.setOnClickListener(v -> {
             if (!aktualnyTyp.equals("KOMBINOWANE")) {
                 aktualnyTyp = "KOMBINOWANE";
-                updateButtonStyles(btnKombinowane, btnPodstawowe, btnDakuten);
+                ustawStylePrzyciskow(przyciskKombinowane, przyciskPodstawowe, przyciskDakuten);
                 ustawZestaw();
             }
         });
 
         aktualnyZestaw = hiraPodstawowe;
         wyswietlZestaw();
+        sprawdzStanZalogowania();
     }
 
-    private void updateTabStyles(TextView tabHira, TextView tabKata) {
-        if (czyHiragana) {
-            tabHira.setBackgroundColor(0xFFFFFFFF);
-            tabKata.setBackgroundColor(0xFFFFF3E0);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        sprawdzStanZalogowania();
+    }
+
+    private void sprawdzStanZalogowania() {
+        FirebaseAuth autoryzacja = FirebaseAuth.getInstance();
+        if (autoryzacja.getCurrentUser() != null) {
+            przyciskLogowanie.setVisibility(View.GONE);
+            przyciskRejestracja.setVisibility(View.GONE);
+            przyciskKonto.setVisibility(View.VISIBLE);
         } else {
-            tabHira.setBackgroundColor(0xFFFFF3E0);
-            tabKata.setBackgroundColor(0xFFFFFFFF);
+            przyciskLogowanie.setVisibility(View.VISIBLE);
+            przyciskRejestracja.setVisibility(View.VISIBLE);
+            przyciskKonto.setVisibility(View.GONE);
         }
     }
 
-    private void updateButtonStyles(Button active, Button inactive1, Button inactive2) {
-        active.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFF7043));
-        active.setTextColor(0xFFFFFFFF);
+    @Override
+    public void onUserAuthenticated() {
+        przyciskLogowanie.setVisibility(View.GONE);
+        przyciskRejestracja.setVisibility(View.GONE);
+        przyciskKonto.setVisibility(View.VISIBLE);
+    }
 
-        inactive1.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
-        inactive1.setTextColor(0xFFE65100);
+    private void ustawStyleZakladek(TextView zakladkaHiragana, TextView zakladkaKatakana) {
+        if (czyHiragana) {
+            zakladkaHiragana.setBackgroundColor(0xFFFFFFFF);
+            zakladkaKatakana.setBackgroundColor(0xFFFFF3E0);
+        } else {
+            zakladkaHiragana.setBackgroundColor(0xFFFFF3E0);
+            zakladkaKatakana.setBackgroundColor(0xFFFFFFFF);
+        }
+    }
 
-        inactive2.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
-        inactive2.setTextColor(0xFFE65100);
+    private void ustawStylePrzyciskow(Button aktywny, Button nieaktywny1, Button nieaktywny2) {
+        aktywny.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFF7043));
+        aktywny.setTextColor(0xFFFFFFFF);
+
+        nieaktywny1.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
+        nieaktywny1.setTextColor(0xFFE65100);
+
+        nieaktywny2.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
+        nieaktywny2.setTextColor(0xFFE65100);
     }
 
     private void ustawZestaw() {
@@ -243,9 +279,9 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
 
     private void wyswietlZestaw() {
         if (pendingTasks != null) {
-            for (Runnable task : pendingTasks) {
-                if (task != null) {
-                    handler.removeCallbacks(task);
+            for (Runnable zadanie : pendingTasks) {
+                if (zadanie != null) {
+                    handler.removeCallbacks(zadanie);
                 }
             }
         }
@@ -254,36 +290,36 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
 
         pendingTasks = new Runnable[aktualnyZestaw.length];
 
-        int columns = 5;
-        container.setColumnCount(columns);
+        int kolumny = 5;
+        container.setColumnCount(kolumny);
 
         for (int i = 0; i < aktualnyZestaw.length; i++) {
             final String[] znak = aktualnyZestaw[i];
-            final long delay = i * 30L;
+            final long opoznienie = i * 30L;
 
-            Runnable task = () -> {
-                CardView card = new CardView(this);
-                GridLayout.LayoutParams cardParams = new GridLayout.LayoutParams();
-                cardParams.width = 0;
-                cardParams.height = GridLayout.LayoutParams.WRAP_CONTENT;
-                cardParams.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
-                cardParams.setMargins(8, 8, 8, 8);
-                card.setLayoutParams(cardParams);
-                card.setCardElevation(4f);
-                card.setRadius(12f);
-                card.setCardBackgroundColor(0xFFFFFFFF);
+            Runnable zadanie = () -> {
+                CardView karta = new CardView(this);
+                GridLayout.LayoutParams parametryKarty = new GridLayout.LayoutParams();
+                parametryKarty.width = 0;
+                parametryKarty.height = GridLayout.LayoutParams.WRAP_CONTENT;
+                parametryKarty.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
+                parametryKarty.setMargins(8, 8, 8, 8);
+                karta.setLayoutParams(parametryKarty);
+                karta.setCardElevation(4f);
+                karta.setRadius(12f);
+                karta.setCardBackgroundColor(0xFFFFFFFF);
 
-                LinearLayout item = new LinearLayout(this);
-                item.setOrientation(LinearLayout.VERTICAL);
-                item.setPadding(16, 24, 16, 24);
-                item.setGravity(Gravity.CENTER);
+                LinearLayout element = new LinearLayout(this);
+                element.setOrientation(LinearLayout.VERTICAL);
+                element.setPadding(16, 24, 16, 24);
+                element.setGravity(Gravity.CENTER);
 
                 TextView kana = new TextView(this);
                 kana.setText(znak[0]);
                 kana.setTextSize(32);
                 kana.setTextColor(0xFFE65100);
                 kana.setGravity(Gravity.CENTER);
-                item.addView(kana);
+                element.addView(kana);
 
                 if (!znak[1].isEmpty()) {
                     TextView romaji = new TextView(this);
@@ -291,34 +327,31 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity {
                     romaji.setTextSize(14);
                     romaji.setTextColor(0xFF999999);
                     romaji.setGravity(Gravity.CENTER);
-                    LinearLayout.LayoutParams romajiParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams parametryRomaji = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,
                             LinearLayout.LayoutParams.WRAP_CONTENT
                     );
-                    romajiParams.setMargins(0, 8, 0, 0);
-                    romaji.setLayoutParams(romajiParams);
-                    item.addView(romaji);
+                    parametryRomaji.setMargins(0, 8, 0, 0);
+                    romaji.setLayoutParams(parametryRomaji);
+                    element.addView(romaji);
                 }
 
-                card.addView(item);
+                karta.addView(element);
 
-                card.setAlpha(0f);
-                card.setTranslationY(50f);
-                card.animate()
+                karta.setAlpha(0f);
+                karta.setTranslationY(50f);
+                karta.animate()
                         .alpha(1f)
                         .translationY(0f)
                         .setDuration(300)
                         .setStartDelay(0)
                         .start();
 
-                container.addView(card);
+                container.addView(karta);
             };
 
-            pendingTasks[i] = task;
-            handler.postDelayed(task, delay);
+            pendingTasks[i] = zadanie;
+            handler.postDelayed(zadanie, opoznienie);
         }
     }
-    //TODO zrobic przyciski ale to dopiero gdy bedzie polaczenie z baza danych
-    // TODO zrobic jednak przycisk z intentem do podstawy i narazie do premium bez bazy danych
-
 }

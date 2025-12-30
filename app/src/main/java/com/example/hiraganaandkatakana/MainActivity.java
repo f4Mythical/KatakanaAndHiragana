@@ -3,7 +3,6 @@ package com.example.hiraganaandkatakana;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -12,14 +11,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements AuthCallback {
 
-    private Button przyciskStart;
-    private ImageButton przyciskLogowanie;
-    private ImageButton przyciskRejestracja;
-    private ImageButton przyciskKonto;
+    private MaterialButton przyciskStart;
+    private ImageButton przyciskAuth;
+    private FirebaseAuth autoryzacja;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,54 +34,67 @@ public class MainActivity extends AppCompatActivity implements AuthCallback {
             return insets;
         });
 
+        autoryzacja = FirebaseAuth.getInstance();
         przyciskStart = findViewById(R.id.Poczatek);
-        przyciskLogowanie = findViewById(R.id.imageButtonLogin);
-        przyciskRejestracja = findViewById(R.id.imageButtonRegister);
-        przyciskKonto = findViewById(R.id.imageButtonAccount);
+        przyciskAuth = findViewById(R.id.imageButtonAuth);
 
-        przyciskKonto.setVisibility(View.GONE);
+        authStateListener = firebaseAuth -> {
+            FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
+            if (uzytkownik != null) {
+                przyciskAuth.setImageResource(R.drawable.konto1);
+                przyciskAuth.setContentDescription("Wyloguj się");
+            } else {
+                przyciskAuth.setImageResource(R.drawable.login);
+                przyciskAuth.setContentDescription("Zaloguj się");
+            }
+        };
 
         przyciskStart.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, PoczatekHiraganaKatakana.class);
             startActivity(intent);
         });
 
-        przyciskLogowanie.setOnClickListener(v -> {
+        przyciskAuth.setOnClickListener(v -> obsluzPrzyciskAuth());
+    }
+
+    private void obsluzPrzyciskAuth() {
+        FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
+        if (aktualnyUzytkownik != null) {
+            autoryzacja.signOut();
+            // Po wylogowaniu odświeżamy stan
+            sprawdzStanZalogowania();
+        } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
             dialog.show(getSupportFragmentManager(), "logowanie");
-        });
+        }
+    }
 
-        przyciskRejestracja.setOnClickListener(v -> {
-            RegisterDialogFragment dialog = new RegisterDialogFragment();
-            dialog.show(getSupportFragmentManager(), "rejestracja");
-        });
-
-        sprawdzStanZalogowania();
+    private void sprawdzStanZalogowania() {
+        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
+        if (uzytkownik != null) {
+            przyciskAuth.setImageResource(R.drawable.konto1);
+            przyciskAuth.setContentDescription("Wyloguj się");
+        } else {
+            przyciskAuth.setImageResource(R.drawable.login);
+            przyciskAuth.setContentDescription("Zaloguj się");
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        autoryzacja.addAuthStateListener(authStateListener);
         sprawdzStanZalogowania();
     }
 
-    private void sprawdzStanZalogowania() {
-        FirebaseAuth autoryzacja = FirebaseAuth.getInstance();
-        if (autoryzacja.getCurrentUser() != null) {
-            przyciskLogowanie.setVisibility(View.GONE);
-            przyciskRejestracja.setVisibility(View.GONE);
-            przyciskKonto.setVisibility(View.VISIBLE);
-        } else {
-            przyciskLogowanie.setVisibility(View.VISIBLE);
-            przyciskRejestracja.setVisibility(View.VISIBLE);
-            przyciskKonto.setVisibility(View.GONE);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        autoryzacja.removeAuthStateListener(authStateListener);
     }
 
     @Override
     public void onUserAuthenticated() {
-        przyciskLogowanie.setVisibility(View.GONE);
-        przyciskRejestracja.setVisibility(View.GONE);
-        przyciskKonto.setVisibility(View.VISIBLE);
+        sprawdzStanZalogowania();
     }
 }

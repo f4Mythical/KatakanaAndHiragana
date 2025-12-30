@@ -41,15 +41,10 @@ public class LoginDialogFragment extends DialogFragment {
 
             autoryzacja.signInWithEmailAndPassword(emailUzytkownika, hasloUzytkownika)
                     .addOnSuccessListener(authResult -> {
-                        String identyfikatorUzytkownika = autoryzacja.getCurrentUser().getUid();
-                        bazaDanych.collection("users").document(identyfikatorUzytkownika).get()
-                                .addOnSuccessListener(documentSnapshot -> {
-                                    if (getActivity() instanceof AuthCallback) {
-                                        ((AuthCallback) getActivity()).onUserAuthenticated();
-                                    }
-                                    dismiss();
-                                })
-                                .addOnFailureListener(e -> dismiss());
+                        if (getActivity() instanceof AuthCallback) {
+                            ((AuthCallback) getActivity()).onUserAuthenticated();
+                        }
+                        dismiss();
                     })
                     .addOnFailureListener(e -> {
                     });
@@ -57,7 +52,7 @@ public class LoginDialogFragment extends DialogFragment {
 
         tekstRejestracja.setOnClickListener(v -> {
             dismiss();
-            new RegisterDialogFragment().show(getParentFragmentManager(), "loginDialog");
+            new RegisterDialogFragment().show(getParentFragmentManager(), "rejestracja");
         });
 
         builder.setView(view);

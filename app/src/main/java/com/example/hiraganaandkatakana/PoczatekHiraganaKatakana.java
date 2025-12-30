@@ -1,6 +1,5 @@
 package com.example.hiraganaandkatakana;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,14 +14,19 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthCallback {
 
     GridLayout container;
     boolean czyHiragana = true;
     String aktualnyTyp = "PODSTAWOWE";
+    private ImageButton przyciskAuth;
+    private FirebaseAuth autoryzacja;
+    private FirebaseAuth.AuthStateListener authStateListener;
 
     String[][] hiraPodstawowe = {
             {"あ","a"}, {"い","i"}, {"う","u"}, {"え","e"}, {"お","o"},
@@ -103,23 +107,15 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     private final Handler handler = new Handler(Looper.getMainLooper());
     private Runnable[] pendingTasks = null;
 
-    private ImageButton przyciskLogowanie;
-    private ImageButton przyciskRejestracja;
-    private ImageButton przyciskKonto;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poczatek_hiragana_katakana);
 
+        autoryzacja = FirebaseAuth.getInstance();
         container = findViewById(R.id.dynamicContainer);
-
         ImageButton przyciskWstecz = findViewById(R.id.buttonBack);
-        przyciskLogowanie = findViewById(R.id.imageButtonLogin);
-        przyciskRejestracja = findViewById(R.id.imageButtonRegister);
-        przyciskKonto = findViewById(R.id.imageButtonAccount);
-
-        przyciskKonto.setVisibility(View.GONE);
+        przyciskAuth = findViewById(R.id.imageButtonAuth);
 
         TextView zakladkaHiragana = findViewById(R.id.tabHiragana);
         TextView zakladkaKatakana = findViewById(R.id.tabKatakana);
@@ -154,16 +150,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         });
 
         przyciskWstecz.setOnClickListener(v -> finish());
-
-        przyciskLogowanie.setOnClickListener(v -> {
-            LoginDialogFragment dialog = new LoginDialogFragment();
-            dialog.show(getSupportFragmentManager(), "logowanie");
-        });
-
-        przyciskRejestracja.setOnClickListener(v -> {
-            RegisterDialogFragment dialog = new RegisterDialogFragment();
-            dialog.show(getSupportFragmentManager(), "rejestracja");
-        });
 
         LinearLayout layoutHiragana = findViewById(R.id.layoutHiraganaButtons);
         LinearLayout layoutKatakana = findViewById(R.id.layoutKatakanaButtons);
@@ -212,35 +198,62 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             }
         });
 
+        authStateListener = firebaseAuth -> {
+            FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
+            if (uzytkownik != null) {
+                przyciskAuth.setImageResource(R.drawable.konto1);
+                przyciskAuth.setContentDescription("Wyloguj się");
+            } else {
+                przyciskAuth.setImageResource(R.drawable.login);
+                przyciskAuth.setContentDescription("Zaloguj się");
+            }
+        };
+
+        przyciskAuth.setOnClickListener(v -> obsluzPrzyciskAuth());
+
         aktualnyZestaw = hiraPodstawowe;
         wyswietlZestaw();
-        sprawdzStanZalogowania();
+    }
+
+    private void obsluzPrzyciskAuth() {
+        FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
+        if (aktualnyUzytkownik != null) {
+            autoryzacja.signOut();
+            // Po wylogowaniu odświeżamy stan
+            sprawdzStanZalogowania();
+        } else {
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(getSupportFragmentManager(), "logowanie");
+        }
+    }
+
+    private void sprawdzStanZalogowania() {
+        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
+        if (uzytkownik != null) {
+            przyciskAuth.setImageResource(R.drawable.konto1);
+            przyciskAuth.setContentDescription("Wyloguj się");
+        } else {
+            przyciskAuth.setImageResource(R.drawable.login);
+            przyciskAuth.setContentDescription("Zaloguj się");
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        autoryzacja.addAuthStateListener(authStateListener);
         sprawdzStanZalogowania();
     }
 
-    private void sprawdzStanZalogowania() {
-        FirebaseAuth autoryzacja = FirebaseAuth.getInstance();
-        if (autoryzacja.getCurrentUser() != null) {
-            przyciskLogowanie.setVisibility(View.GONE);
-            przyciskRejestracja.setVisibility(View.GONE);
-            przyciskKonto.setVisibility(View.VISIBLE);
-        } else {
-            przyciskLogowanie.setVisibility(View.VISIBLE);
-            przyciskRejestracja.setVisibility(View.VISIBLE);
-            przyciskKonto.setVisibility(View.GONE);
-        }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        autoryzacja.removeAuthStateListener(authStateListener);
     }
 
     @Override
     public void onUserAuthenticated() {
-        przyciskLogowanie.setVisibility(View.GONE);
-        przyciskRejestracja.setVisibility(View.GONE);
-        przyciskKonto.setVisibility(View.VISIBLE);
+        sprawdzStanZalogowania();
     }
 
     private void ustawStyleZakladek(TextView zakladkaHiragana, TextView zakladkaKatakana) {
@@ -353,5 +366,9 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             pendingTasks[i] = zadanie;
             handler.postDelayed(zadanie, opoznienie);
         }
+    }
+
+    private FragmentActivity getActivity() {
+        return this;
     }
 }

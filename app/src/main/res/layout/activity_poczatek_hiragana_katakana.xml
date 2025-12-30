@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/imageButtonLogin"
+        android:id="@+id/imageButtonAuth"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -27,34 +27,8 @@
         android:padding="12dp"
         app:srcCompat="@drawable/login"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/imageButtonRegister"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:padding="12dp"
-        android:visibility="gone"
-        app:srcCompat="@drawable/login"
-        app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintTop_toBottomOf="@id/imageButtonLogin" />
-
-    <ImageButton
-        android:id="@+id/imageButtonAccount"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@android:color/transparent"
-        android:padding="12dp"
-        android:visibility="gone"
-        app:srcCompat="@drawable/konto1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/titleText"
@@ -67,7 +41,7 @@
         android:layout_marginTop="28dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
-        app:layout_constraintEnd_toStartOf="@id/imageButtonLogin" />
+        app:layout_constraintEnd_toStartOf="@id/imageButtonAuth" />
 
     <LinearLayout
         android:id="@+id/tabLayout"

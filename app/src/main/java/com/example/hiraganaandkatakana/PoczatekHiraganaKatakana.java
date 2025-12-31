@@ -11,15 +11,19 @@ import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthCallback {
+public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthCallback,
+        UserProfileDialogFragment.OnProfileDialogListener,
+        PremiumStatusTracker.OnPremiumStatusChangedListener {
 
     GridLayout container;
     boolean czyHiragana = true;
@@ -27,6 +31,11 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     private ImageButton przyciskAuth;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
+    private long czasZalogowania = 0;
+    private FragmentManager fragmentManager;
+    private boolean czyMaPremium = false;
+    private Button przyciskPremiumHiragana, przyciskPremiumKatakana;
+    private PremiumStatusTracker premiumTracker;
 
     String[][] hiraPodstawowe = {
             {"あ","a"}, {"い","i"}, {"う","u"}, {"え","e"}, {"お","o"},
@@ -112,7 +121,13 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_poczatek_hiragana_katakana);
 
+        czyMaPremium = getIntent().getBooleanExtra("czyMaPremium", false);
+        czasZalogowania = getIntent().getLongExtra("czasZalogowania", System.currentTimeMillis());
+
         autoryzacja = FirebaseAuth.getInstance();
+        premiumTracker = PremiumStatusTracker.getInstance();
+        premiumTracker.setOnPremiumStatusChangedListener(this);
+        fragmentManager = getSupportFragmentManager();
         container = findViewById(R.id.dynamicContainer);
         ImageButton przyciskWstecz = findViewById(R.id.buttonBack);
         przyciskAuth = findViewById(R.id.imageButtonAuth);
@@ -126,8 +141,18 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
         Button przyciskPodstawoweHiragana = findViewById(R.id.buttonBasicHiragana);
         Button przyciskPodstawoweKatakana = findViewById(R.id.buttonBasicKatakana);
-        Button przyciskPremiumHiragana = findViewById(R.id.buttonPremiumHiragana);
-        Button przyciskPremiumKatakana = findViewById(R.id.buttonPremiumKatakana);
+        przyciskPremiumHiragana = findViewById(R.id.buttonPremiumHiragana);
+        przyciskPremiumKatakana = findViewById(R.id.buttonPremiumKatakana);
+
+        przyciskPremiumHiragana.setOnClickListener(v -> obsluzPrzyciskPremium(() -> {
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_hiragana.class);
+            startActivity(intent);
+        }));
+
+        przyciskPremiumKatakana.setOnClickListener(v -> obsluzPrzyciskPremium(() -> {
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_katakana.class);
+            startActivity(intent);
+        }));
 
         przyciskPodstawoweHiragana.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicHiragana.class);
@@ -136,16 +161,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
         przyciskPodstawoweKatakana.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_basic_katakana.class);
-            startActivity(intent);
-        });
-
-        przyciskPremiumHiragana.setOnClickListener(v -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_hiragana.class);
-            startActivity(intent);
-        });
-
-        przyciskPremiumKatakana.setOnClickListener(v -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_katakana.class);
             startActivity(intent);
         });
 
@@ -201,9 +216,14 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
             if (uzytkownik != null) {
+                czasZalogowania = System.currentTimeMillis();
+                premiumTracker.aktualizujStatusDlaUzytkownika();
                 przyciskAuth.setImageResource(R.drawable.konto1);
-                przyciskAuth.setContentDescription("Wyloguj się");
+                przyciskAuth.setContentDescription("Mój profil");
             } else {
+                czasZalogowania = 0;
+                czyMaPremium = false;
+                premiumTracker.stopListening();
                 przyciskAuth.setImageResource(R.drawable.login);
                 przyciskAuth.setContentDescription("Zaloguj się");
             }
@@ -213,48 +233,104 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
         aktualnyZestaw = hiraPodstawowe;
         wyswietlZestaw();
+        aktualizujStanPrzyciskowPremium();
+    }
+
+    private void obsluzPrzyciskPremium(Runnable akcjaDlaPremium) {
+        if (czyMaPremium) {
+            akcjaDlaPremium.run();
+        } else {
+            Toast.makeText(this, "Aby uzyskać dostęp do tej funkcji, potrzebujesz konta Premium!", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void obsluzPrzyciskAuth() {
         FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
         if (aktualnyUzytkownik != null) {
-            autoryzacja.signOut();
-            // Po wylogowaniu odświeżamy stan
-            sprawdzStanZalogowania();
+            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(czasZalogowania, premiumTracker.getCzyMaPremium());
+            dialog.show(fragmentManager, "profilUzytkownika");
         } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
-            dialog.show(getSupportFragmentManager(), "logowanie");
+            dialog.show(fragmentManager, "logowanie");
         }
     }
 
-    private void sprawdzStanZalogowania() {
-        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
-        if (uzytkownik != null) {
-            przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription("Wyloguj się");
-        } else {
-            przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription("Zaloguj się");
-        }
+    private void aktualizujStanPrzyciskowPremium() {
+        przyciskPremiumHiragana.setEnabled(czyMaPremium);
+        przyciskPremiumHiragana.setAlpha(czyMaPremium ? 1.0f : 0.5f);
+        przyciskPremiumKatakana.setEnabled(czyMaPremium);
+        przyciskPremiumKatakana.setAlpha(czyMaPremium ? 1.0f : 0.5f);
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         autoryzacja.addAuthStateListener(authStateListener);
-        sprawdzStanZalogowania();
+        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
+        if (uzytkownik != null) {
+            czasZalogowania = System.currentTimeMillis();
+            premiumTracker.startListening();
+            premiumTracker.aktualizujStatusDlaUzytkownika();
+            przyciskAuth.setImageResource(R.drawable.konto1);
+            przyciskAuth.setContentDescription("Mój profil");
+        } else {
+            czasZalogowania = 0;
+            czyMaPremium = false;
+            premiumTracker.stopListening();
+            przyciskAuth.setImageResource(R.drawable.login);
+            przyciskAuth.setContentDescription("Zaloguj się");
+        }
+        aktualizujStanPrzyciskowPremium();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        premiumTracker.stopListening();
         autoryzacja.removeAuthStateListener(authStateListener);
     }
 
     @Override
     public void onUserAuthenticated() {
-        sprawdzStanZalogowania();
+        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
+        if (uzytkownik != null) {
+            czasZalogowania = System.currentTimeMillis();
+            premiumTracker.startListening();
+            premiumTracker.aktualizujStatusDlaUzytkownika();
+            przyciskAuth.setImageResource(R.drawable.konto1);
+            przyciskAuth.setContentDescription("Mój profil");
+        } else {
+            czasZalogowania = 0;
+            czyMaPremium = false;
+            premiumTracker.stopListening();
+            przyciskAuth.setImageResource(R.drawable.login);
+            przyciskAuth.setContentDescription("Zaloguj się");
+        }
+        aktualizujStanPrzyciskowPremium();
     }
+
+    @Override
+    public void onUserLoggedOut() {
+        czasZalogowania = 0;
+        czyMaPremium = false;
+        premiumTracker.stopListening();
+        przyciskAuth.setImageResource(R.drawable.login);
+        przyciskAuth.setContentDescription("Zaloguj się");
+        aktualizujStanPrzyciskowPremium();
+    }
+
+    @Override
+    public void onPremiumStatusChanged(boolean czyMaPremium) {
+        this.czyMaPremium = czyMaPremium;
+        runOnUiThread(this::aktualizujStanPrzyciskowPremium);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        premiumTracker.stopListening();
+    }
+
 
     private void ustawStyleZakladek(TextView zakladkaHiragana, TextView zakladkaKatakana) {
         if (czyHiragana) {

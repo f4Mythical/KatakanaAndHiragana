@@ -8,7 +8,6 @@
     android:layout_height="match_parent"
     android:background="#FAFAFA"
     tools:context=".PoczatekHiraganaKatakana">
-
     <ImageButton
         android:id="@+id/buttonBack"
         style="@style/BackButtonStyle"
@@ -16,7 +15,6 @@
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <ImageButton
         android:id="@+id/imageButtonAuth"
         android:layout_width="56dp"
@@ -29,7 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="ContentDescription" />
-
     <TextView
         android:id="@+id/titleText"
         android:layout_width="wrap_content"
@@ -42,7 +39,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/buttonBack"
         app:layout_constraintEnd_toStartOf="@id/imageButtonAuth" />
-
     <LinearLayout
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
@@ -54,7 +50,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
         <TextView
             android:id="@+id/tabHiragana"
             android:layout_width="0dp"
@@ -67,12 +62,10 @@
             android:gravity="center"
             android:padding="16dp"
             android:background="#FFFFFF" />
-
         <View
             android:layout_width="1dp"
             android:layout_height="match_parent"
             android:background="#FFCCBC" />
-
         <TextView
             android:id="@+id/tabKatakana"
             android:layout_width="0dp"
@@ -86,7 +79,6 @@
             android:padding="16dp"
             android:background="#FFF3E0" />
     </LinearLayout>
-
     <View
         android:id="@+id/divider"
         android:layout_width="0dp"
@@ -95,7 +87,6 @@
         app:layout_constraintTop_toBottomOf="@id/tabLayout"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
-
     <ScrollView
         android:id="@+id/scrollContent"
         android:layout_width="0dp"
@@ -106,7 +97,6 @@
         app:layout_constraintBottom_toTopOf="@id/typeSelection"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
         <GridLayout
             android:id="@+id/dynamicContainer"
             android:layout_width="match_parent"
@@ -115,7 +105,6 @@
             android:alignmentMode="alignBounds"
             android:useDefaultMargins="false" />
     </ScrollView>
-
     <LinearLayout
         android:id="@+id/typeSelection"
         android:layout_width="0dp"
@@ -128,13 +117,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center">
-
             <Button
                 android:id="@+id/buttonPodstawowe"
                 android:layout_width="0dp"
@@ -148,7 +135,6 @@
                 android:textColor="#FFFFFF"
                 android:backgroundTint="#FF7043"
                 app:cornerRadius="16dp" />
-
             <Button
                 android:id="@+id/buttonDakuten"
                 android:layout_width="0dp"
@@ -162,7 +148,6 @@
                 android:textColor="#E65100"
                 android:backgroundTint="#FFCCBC"
                 app:cornerRadius="16dp" />
-
             <Button
                 android:id="@+id/buttonKombinowane"
                 android:layout_width="0dp"
@@ -177,19 +162,16 @@
                 android:backgroundTint="#FFCCBC"
                 app:cornerRadius="16dp" />
         </LinearLayout>
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp">
-
             <LinearLayout
                 android:id="@+id/layoutHiraganaButtons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center">
-
                 <Button
                     android:id="@+id/buttonBasicHiragana"
                     android:layout_width="0dp"
@@ -202,7 +184,6 @@
                     android:textColor="#E65100"
                     android:backgroundTint="#FFCCBC"
                     app:cornerRadius="16dp" />
-
                 <Button
                     android:id="@+id/buttonPremiumHiragana"
                     android:layout_width="0dp"
@@ -216,7 +197,6 @@
                     android:backgroundTint="#FFCCBC"
                     app:cornerRadius="16dp" />
             </LinearLayout>
-
             <LinearLayout
                 android:id="@+id/layoutKatakanaButtons"
                 android:layout_width="match_parent"
@@ -224,7 +204,6 @@
                 android:orientation="horizontal"
                 android:gravity="center"
                 android:visibility="gone">
-
                 <Button
                     android:id="@+id/buttonBasicKatakana"
                     android:layout_width="0dp"
@@ -237,7 +216,6 @@
                     android:textColor="#E65100"
                     android:backgroundTint="#FFCCBC"
                     app:cornerRadius="16dp" />
-
                 <Button
                     android:id="@+id/buttonPremiumKatakana"
                     android:layout_width="0dp"
@@ -252,7 +230,5 @@
                     app:cornerRadius="16dp" />
             </LinearLayout>
         </FrameLayout>
-
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

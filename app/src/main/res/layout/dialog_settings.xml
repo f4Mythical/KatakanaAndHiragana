@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_dialog"
+    android:padding="16dp">
+
+    <TextView
+        android:text="Wybierz typ znaków"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#E65100"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <ToggleButton
+        android:id="@+id/togglePodstawowe"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textOn="Podstawowe ✓"
+        android:textOff="Podstawowe"
+        android:checked="true"
+        android:textSize="16sp"
+        android:textColor="#E65100"
+        android:backgroundTint="#FFF3E0"/>
+
+    <ToggleButton
+        android:id="@+id/toggleDakuten"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textOn="Dakuten ✓"
+        android:textOff="Dakuten"
+        android:textSize="16sp"
+        android:textColor="#E65100"
+        android:backgroundTint="#FFF3E0"
+        android:layout_marginTop="8dp"/>
+
+    <ToggleButton
+        android:id="@+id/toggleKombinowane"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:textOn="Kombinowane ✓"
+        android:textOff="Kombinowane"
+        android:textSize="16sp"
+        android:textColor="#E65100"
+        android:backgroundTint="#FFF3E0"
+        android:layout_marginTop="8dp"/>
+
+    <Button
+        android:id="@+id/buttonUstaw"
+        android:text="Ustaw"
+        android:textStyle="bold"
+        android:backgroundTint="#E65100"
+        android:textColor="#FFFFFF"
+        android:minHeight="48dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
+
+</LinearLayout>

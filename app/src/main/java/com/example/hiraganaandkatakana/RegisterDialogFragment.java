@@ -68,9 +68,11 @@ public class RegisterDialogFragment extends DialogFragment {
                                     dismiss();
                                 })
                                 .addOnFailureListener(e -> {
+                                    tekstBladEmail.setVisibility(View.VISIBLE);
                                 });
                     })
                     .addOnFailureListener(e -> {
+                        tekstBladEmail.setVisibility(View.VISIBLE);
                     });
         });
 

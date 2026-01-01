@@ -14,17 +14,15 @@
         <activity
             android:name=".HiraganaBasicZnaki"
             android:exported="false" />
+
         <activity
-            android:name=".hiragana_znaki"
+            android:name=".WidokPremiumKatakana"
             android:exported="false" />
         <activity
-            android:name=".widok_premium_katakana"
+            android:name=".WidokPremiumHiragana"
             android:exported="false" />
         <activity
-            android:name=".widok_premium_hiragana"
-            android:exported="false" />
-        <activity
-            android:name=".widok_basic_katakana"
+            android:name=".WidokBasicKatakana"
             android:exported="false" />
         <activity
             android:name=".WidokBasicHiragana"
@@ -32,45 +30,19 @@
         <activity
             android:name=".PoczatekHiraganaKatakana"
             android:exported="false" />
-        <activity
-            android:name=".WyborPoziomu.WyborPoziomuHiragana"
-            android:exported="false" />
+
         <activity
             android:name=".WyborPoziomu.WyborPoziomuKatakana"
             android:exported="false" />
         <activity
             android:name=".Slowa.SlowaKatakana"
             android:exported="false" />
-        <activity
-            android:name=".Poziom.PoziomKatakana"
-            android:exported="false" />
-        <activity
-            android:name=".Litery.LiteryKatakana"
-            android:exported="false" />
-        <activity
-            android:name=".Znaki.ZnakiKatakana"
-            android:exported="false" />
-        <activity
-            android:name=".Litery.LiteryHiragana"
-            android:exported="false" />
+
         <activity
             android:name=".Slowa.SlowaHiragana"
             android:exported="false" />
-        <activity
-            android:name=".Poziom.PoziomHiragana"
-            android:exported="false" />
-        <activity
-            android:name=".Znaki.ZnakiHiragana"
-            android:exported="false" />
-        <activity
-            android:name=".Wybor.WyborKatakana"
-            android:exported="false" />
-        <activity
-            android:name=".Wybor.WyborHiragana"
-            android:exported="false" />
-        <activity
-            android:name=".Wybor.WyborHiraganaAKatakana"
-            android:exported="false" />
+
+
         <activity
             android:name=".MainActivity"
             android:exported="true">

@@ -152,12 +152,12 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         statusPremiumZaladowany = false;
 
         przyciskPremiumHiragana.setOnClickListener(v -> obsluzPrzyciskPremium(() -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_hiragana.class);
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicHiragana.class);
             startActivity(intent);
         }));
 
         przyciskPremiumKatakana.setOnClickListener(v -> obsluzPrzyciskPremium(() -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_premium_katakana.class);
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokPremiumKatakana.class);
             startActivity(intent);
         }));
 
@@ -167,7 +167,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         });
 
         przyciskPodstawoweKatakana.setOnClickListener(v -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, widok_basic_katakana.class);
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicKatakana.class);
             startActivity(intent);
         });
 

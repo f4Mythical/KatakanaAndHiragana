@@ -1,23 +1,28 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="300dp"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="24dp"
     android:background="@drawable/bg_dialog"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:padding="16dp">
 
     <TextView
         android:text="Logowanie"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:textColor="#E65100"
+        android:gravity="center"
         android:layout_marginBottom="16dp"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
     <EditText
         android:id="@+id/poleEmail"
         android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColor="#333333"
+        android:textColorHint="#80000000"
+        android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
@@ -25,13 +30,29 @@
         android:id="@+id/poleHaslo"
         android:hint="Hasło"
         android:inputType="textPassword"
+        android:textColor="#333333"
+        android:textColorHint="#80000000"
+        android:minHeight="48dp"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
+    <TextView
+        android:id="@+id/tekstBladLogowanie"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Email albo hasło jest złe"
+        android:textColor="#FF5252"
+        android:textSize="12sp"
+        android:visibility="gone"
+        android:layout_marginTop="4dp"/>
+
     <Button
         android:id="@+id/przyciskLogowanie"
         android:text="Zaloguj"
+        android:backgroundTint="#E65100"
+        android:textColor="#FFFFFF"
+        android:minHeight="48dp"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -39,6 +60,7 @@
     <TextView
         android:id="@+id/tekstRejestracja"
         android:text="Nie masz konta? Zarejestruj się"
+        android:textColor="#E65100"
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

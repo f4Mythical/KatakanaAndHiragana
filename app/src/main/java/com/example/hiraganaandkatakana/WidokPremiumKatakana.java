@@ -2,7 +2,6 @@ package com.example.hiraganaandkatakana;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -11,7 +10,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class widok_premium_katakana extends AppCompatActivity {
+public class WidokPremiumKatakana extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +24,7 @@ public class widok_premium_katakana extends AppCompatActivity {
         });
         ImageButton ibtnHiragana = findViewById(R.id.imageButtonHiragana);
         ibtnHiragana.setOnClickListener(v -> {
-            Intent intent = new Intent(widok_premium_katakana.this,widok_premium_hiragana.class);
+            Intent intent = new Intent(WidokPremiumKatakana.this, WidokPremiumHiragana.class);
             startActivity(intent);
             finish();
 

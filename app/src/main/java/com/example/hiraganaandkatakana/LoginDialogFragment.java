@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
@@ -19,6 +18,7 @@ public class LoginDialogFragment extends DialogFragment {
 
     private FirebaseAuth autoryzacja;
     private FirebaseFirestore bazaDanych;
+    private TextView tekstBladLogowanie;
 
     @NonNull
     @Override
@@ -33,12 +33,15 @@ public class LoginDialogFragment extends DialogFragment {
         EditText poleHaslo = view.findViewById(R.id.poleHaslo);
         Button przyciskLogowanie = view.findViewById(R.id.przyciskLogowanie);
         TextView tekstRejestracja = view.findViewById(R.id.tekstRejestracja);
+        tekstBladLogowanie = view.findViewById(R.id.tekstBladLogowanie);
 
         przyciskLogowanie.setOnClickListener(v -> {
             String emailUzytkownika = poleEmail.getText().toString().trim();
             String hasloUzytkownika = poleHaslo.getText().toString().trim();
 
             if (emailUzytkownika.isEmpty() || hasloUzytkownika.isEmpty()) return;
+
+            tekstBladLogowanie.setVisibility(View.GONE);
 
             autoryzacja.signInWithEmailAndPassword(emailUzytkownika, hasloUzytkownika)
                     .addOnSuccessListener(authResult -> {
@@ -48,6 +51,7 @@ public class LoginDialogFragment extends DialogFragment {
                         dismiss();
                     })
                     .addOnFailureListener(e -> {
+                        tekstBladLogowanie.setVisibility(View.VISIBLE);
                     });
         });
 

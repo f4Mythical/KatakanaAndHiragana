@@ -117,22 +117,22 @@ public class SlowaHiragana extends AppCompatActivity {
         SpannableString spannable = new SpannableString(odpowiedz);
         int minLength = Math.min(odpowiedz.length(), poprawna.length());
 
-        for (int i = 0; i < minLength; i++) {
-            if (odpowiedz.charAt(i) == poprawna.charAt(i)) {
-                spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#4CAF50")), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannable.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            } else {
-                spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#F44336")), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannable.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            for (int i = 0; i < minLength; i++) {
+                if (odpowiedz.charAt(i) == poprawna.charAt(i)) {
+                    spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#4CAF50")), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannable.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                } else {
+                    spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#F44336")), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannable.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
             }
-        }
 
-        if (odpowiedz.length() > poprawna.length()) {
-            for (int i = minLength; i < odpowiedz.length(); i++) {
-                spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#F44336")), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                spannable.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if (odpowiedz.length() > poprawna.length()) {
+                for (int i = minLength; i < odpowiedz.length(); i++) {
+                    spannable.setSpan(new ForegroundColorSpan(Color.parseColor("#F44336")), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    spannable.setSpan(new StyleSpan(Typeface.BOLD), i, i + 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                }
             }
-        }
 
         odpowiedzPodana.setText(spannable);
     }

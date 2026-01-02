@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     private ImageButton przyciskAuth;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private long czasZalogowania = 0;
     private FragmentManager fragmentManager;
     private boolean czyMaPremium = false;
     private PremiumStatusTracker premiumTracker;
@@ -51,12 +50,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
             if (uzytkownik != null) {
-                czasZalogowania = System.currentTimeMillis();
                 premiumTracker.aktualizujStatusDlaUzytkownika();
                 przyciskAuth.setImageResource(R.drawable.konto1);
                 przyciskAuth.setContentDescription("Mój profil");
             } else {
-                czasZalogowania = 0;
                 czyMaPremium = false;
                 premiumTracker.stopListening();
                 przyciskAuth.setImageResource(R.drawable.login);
@@ -65,10 +62,7 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         };
 
         przyciskStart.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, PoczatekHiraganaKatakana.class);
-            intent.putExtra("czyMaPremium", czyMaPremium);
-            intent.putExtra("czasZalogowania", czasZalogowania);
-            startActivity(intent);
+            startActivity(new Intent(this, PoczatekHiraganaKatakana.class));
         });
 
         przyciskAuth.setOnClickListener(v -> obsluzPrzyciskAuth());
@@ -77,7 +71,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     private void obsluzPrzyciskAuth() {
         FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
         if (aktualnyUzytkownik != null) {
-            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(czasZalogowania, premiumTracker.getCzyMaPremium());
+            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(
+                    premiumTracker.getCzasZalogowania(),
+                    premiumTracker.getCzyMaPremium()
+            );
             dialog.show(fragmentManager, "profilUzytkownika");
         } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
@@ -91,13 +88,11 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         autoryzacja.addAuthStateListener(authStateListener);
         FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
         if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
             premiumTracker.startListening();
             premiumTracker.aktualizujStatusDlaUzytkownika();
             przyciskAuth.setImageResource(R.drawable.konto1);
             przyciskAuth.setContentDescription("Mój profil");
         } else {
-            czasZalogowania = 0;
             czyMaPremium = false;
             premiumTracker.stopListening();
             przyciskAuth.setImageResource(R.drawable.login);
@@ -116,13 +111,12 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     public void onUserAuthenticated() {
         FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
         if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
+            premiumTracker.ustawCzasZalogowania(System.currentTimeMillis());
             premiumTracker.startListening();
             premiumTracker.aktualizujStatusDlaUzytkownika();
             przyciskAuth.setImageResource(R.drawable.konto1);
             przyciskAuth.setContentDescription("Mój profil");
         } else {
-            czasZalogowania = 0;
             czyMaPremium = false;
             premiumTracker.stopListening();
             przyciskAuth.setImageResource(R.drawable.login);
@@ -132,7 +126,6 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
     @Override
     public void onUserLoggedOut() {
-        czasZalogowania = 0;
         czyMaPremium = false;
         premiumTracker.stopListening();
         przyciskAuth.setImageResource(R.drawable.login);

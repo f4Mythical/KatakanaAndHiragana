@@ -3,6 +3,8 @@ package com.example.hiraganaandkatakana;
 import android.os.Handler;
 import android.os.Looper;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -24,7 +26,6 @@ public class PremiumStatusTracker {
     private boolean czyMaPremium = false;
     private boolean nasluchiwanieAktywne = false;
     private Handler mainHandler = new Handler(Looper.getMainLooper());
-    private long czasZalogowania = 0;
 
     private PremiumStatusTracker() {
         autoryzacja = FirebaseAuth.getInstance();
@@ -36,14 +37,6 @@ public class PremiumStatusTracker {
             instance = new PremiumStatusTracker();
         }
         return instance;
-    }
-
-    public long getCzasZalogowania() {
-        return czasZalogowania;
-    }
-
-    public void ustawCzasZalogowania(long czas) {
-        this.czasZalogowania = czas;
     }
 
     public void startListening() {
@@ -75,6 +68,7 @@ public class PremiumStatusTracker {
             premiumListenerRegistration = null;
             nasluchiwanieAktywne = false;
         }
+        zaktualizujStatusPremium(false);
     }
 
     private void zaktualizujStatusPremium(boolean nowyStatus) {
@@ -99,10 +93,6 @@ public class PremiumStatusTracker {
     public void aktualizujStatusDlaUzytkownika() {
         FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
         if (aktualnyUzytkownik != null) {
-            if (czasZalogowania == 0) {
-                czasZalogowania = System.currentTimeMillis();
-            }
-
             bazaDanych.collection("users").document(aktualnyUzytkownik.getUid()).get()
                     .addOnSuccessListener(snapshot -> {
                         if (snapshot.exists()) {
@@ -118,7 +108,6 @@ public class PremiumStatusTracker {
                     });
         } else {
             zaktualizujStatusPremium(false);
-            czasZalogowania = 0;
         }
     }
 

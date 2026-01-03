@@ -1,12 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HiraganaAndKatakana</string>
+    <string name="hiragana">Hiragana</string>
+    <string name="katakana">Katakana</string>
+
+    <!-- ktore korzystam do tlumaczen-->
+    <string name="start">Start</string>
     <string name="tytul">Hiragana &amp; Katakana</string>
-    <string name="hiragana">Hiragana\nひらがな</string>
-    <string name="katakana">Katakana\nカタカナ</string>
-    <string name="znaki">Znaki</string>
-    <string name="s_owa">Słowa</string>
-    <string name="zdania">Zdania</string>
     <string name="wersja_podstawowa">Wersja Podstawowa</string>
     <string name="wersja_premium">Wersja Premium</string>
-    <string name="powrot">Powrót</string>
+    <string name="wybierz_jezyk">Wybierz język</string>
+    <string name="gotowy">Gotowy</string>
+    <string name="znaki">Znaki</string>
+    <string name="slowa">Słowa</string>
+    <string name="zdania">Zdania</string>
+    <string name="spacja">SPACJA</string>
+    <!--do hiragana katakany-->
+    <string name="podstawa">Podstawa</string>
+    <string name="premium">Premium</string>
+    <string name="podstawoweWybor">Podstawowe</string>
+    <string name="dakutenWybor">Dakuten</string>
+    <string name="kombinowaneWybor">Kombinowane</string>
+    <!--ustawienia do znakow-->
+    <string name="typZnakow">Wybierz typ znaków</string>
+    <string name="podstawowe">PODSTAWOWE</string>
+    <!--dla mojego mozgu nie ma to tlumaczenia-->
+    <string name="dakuten">DAKUTEN</string>
+    <string name="kombinowane">KOMBINOWANE</string>
+    <string name="ustaw">Ustaw</string>
+
+    <string name="podstawoweWyb">PODSTAWOWE ✓</string>
+    <string name="dakutenWyb">DAKUTEN ✓</string>
+    <string name="kombinowaneWyb">KOMBINOWANE ✓</string>
+
+    <!--do profilu -->
+    <string name="profil">Mój profil</string>
+    <string name="premiumBol">Premium</string>
+    <string name="premiumTrue">Tak</string>
+    <string name="premiumFalse">Nie</string>
+    <string name="czas">Czas sesji:</string>
+    <string name="wyloguj">Wyloguj się</string>
+    <string name="email">Email</string>
+    <!--Do logowania -->
+    <string name="haslo">Hasło</string>
+    <string name="logowanie">Logowanie</string>
+    <string name="rejestracja">Zarejestruj się</string>
+    <string name="zarejestruj">Zarejestruj</string>
+    <string name="zaloguj">Zaloguj</string>
+    <string name="brakKonta">Nie masz konta? Zarejestruj się</string>
+    <string name="jestKonto">Masz konto? Zaloguj się</string>
+    <string name="made_by">MadeByMythical</string>
+
 </resources>

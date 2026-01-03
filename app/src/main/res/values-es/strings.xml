@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HiraganaAndKatakana</string>
+    <string name="hiragana">Hiragana</string>
+    <string name="katakana">Katakana</string>
+
+    <!-- ktore korzystam do tlumaczen-->
+    <string name="start">Iniciar</string>
+    <string name="tytul">Hiragana y Katakana</string>
+    <string name="wersja_podstawowa">Versión Básica</string>
+    <string name="wersja_premium">Versión Premium</string>
+    <string name="wybierz_jezyk">Elige idioma</string>
+    <string name="gotowy">Listo</string>
+    <string name="znaki">Caracteres</string>
+    <string name="slowa">Palabras</string>
+    <string name="zdania">Oraciones</string>
+    <string name="spacja">ESPACIO</string>
+    <!--do hiragana katakany-->
+    <string name="podstawa">Base</string>
+    <string name="premium">Premium</string>
+    <string name="podstawoweWybor">Básico</string>
+    <string name="dakutenWybor">Dakuten</string>
+    <string name="kombinowaneWybor">Combinado</string>
+    <!--ustawienia do znakow-->
+    <string name="typZnakow">Elegir tipo de caracteres</string>
+    <string name="podstawowe">BÁSICO</string>
+    <!--dla mojego mozgu nie ma to tlumaczenia-->
+    <string name="dakuten">DAKUTEN</string>
+    <string name="kombinowane">COMBINADO</string>
+    <string name="ustaw">Establecer</string>
+
+    <string name="podstawoweWyb">BÁSICO ✓</string>
+    <string name="dakutenWyb">DAKUTEN ✓</string>
+    <string name="kombinowaneWyb">COMBINADO ✓</string>
+
+    <!--do profilu -->
+    <string name="profil">Mi perfil</string>
+    <string name="premiumBol">Premium</string>
+    <string name="premiumTrue">Sí</string>
+    <string name="premiumFalse">No</string>
+    <string name="czas">Tiempo de sesión:</string>
+    <string name="wyloguj">Cerrar sesión</string>
+    <string name="email">E-mail</string>
+
+    <!--Do logowania -->
+    <string name="haslo">Contraseña</string>
+    <string name="logowanie">Iniciar sesión</string>
+    <string name="rejestracja">Registrarse</string>
+    <string name="zarejestruj">Registrarse</string>
+    <string name="zaloguj">Ingresar</string>
+    <string name="brakKonta">¿No tienes cuenta? Regístrate</string>
+    <string name="jestKonto">¿Tienes cuenta? Inicia sesión</string>
+    <string name="made_by">MadeByMythical</string>
+
+</resources>

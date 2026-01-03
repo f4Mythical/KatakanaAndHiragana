@@ -76,17 +76,24 @@ public class UserProfileDialogFragment extends DialogFragment {
 
         FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
         if (uzytkownik != null) {
-            emailTextView.setText("Email: " + uzytkownik.getEmail());
-            premiumTextView.setText("Premium: " + (czyMaPremium ? "Tak" : "Nie"));
+            String emailLabel = getString(R.string.email) + ": " + uzytkownik.getEmail();
+            emailTextView.setText(emailLabel);
+
+            String premiumLabel = getString(R.string.premiumBol) + ": " +
+                    (czyMaPremium ? getString(R.string.premiumTrue) : getString(R.string.premiumFalse));
+            premiumTextView.setText(premiumLabel);
         }
 
         startTimer();
 
         logoutText.setOnClickListener(v -> {
             autoryzacja.signOut();
-            if (mListener != null) {
+
+            // Nie wywołuj listenera w MainActivity - unikamy finish()
+            if (mListener != null && !(requireActivity() instanceof MainActivity)) {
                 mListener.onUserLoggedOut();
             }
+
             dismiss();
         });
 
@@ -120,10 +127,11 @@ public class UserProfileDialogFragment extends DialogFragment {
         int minuty = (int) ((czasTrwania % 3600000) / 60000);
         int sekundy = (int) ((czasTrwania % 60000) / 1000);
 
+        String czasLabel = getString(R.string.czas) + " ";
         if (godziny > 0) {
-            sessionTextView.setText(String.format("Czas sesji: %02d:%02d:%02d", godziny, minuty, sekundy));
+            sessionTextView.setText(czasLabel + String.format("%02d:%02d:%02d", godziny, minuty, sekundy));
         } else {
-            sessionTextView.setText(String.format("Czas sesji: %02d:%02d", minuty, sekundy));
+            sessionTextView.setText(czasLabel + String.format("%02d:%02d", minuty, sekundy));
         }
     }
 

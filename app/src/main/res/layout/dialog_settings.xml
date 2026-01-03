@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <TextView
-        android:text="Wybierz typ znaków"
+        android:text="@string/typZnakow"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#E65100"
@@ -20,8 +20,8 @@
         android:id="@+id/togglePodstawowe"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:textOn="Podstawowe ✓"
-        android:textOff="Podstawowe"
+        android:textOn="@string/podstawoweWyb"
+        android:textOff="@string/podstawowe"
         android:checked="true"
         android:textSize="16sp"
         android:textColor="#E65100"
@@ -31,8 +31,8 @@
         android:id="@+id/toggleDakuten"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:textOn="Dakuten ✓"
-        android:textOff="Dakuten"
+        android:textOn="@string/dakutenWyb"
+        android:textOff="@string/dakuten"
         android:textSize="16sp"
         android:textColor="#E65100"
         android:backgroundTint="#FFF3E0"
@@ -42,8 +42,8 @@
         android:id="@+id/toggleKombinowane"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:textOn="Kombinowane ✓"
-        android:textOff="Kombinowane"
+        android:textOn="@string/kombinowaneWyb"
+        android:textOff="@string/kombinowane"
         android:textSize="16sp"
         android:textColor="#E65100"
         android:backgroundTint="#FFF3E0"
@@ -51,7 +51,7 @@
 
     <Button
         android:id="@+id/buttonUstaw"
-        android:text="Ustaw"
+        android:text="@string/ustaw"
         android:textStyle="bold"
         android:backgroundTint="#E65100"
         android:textColor="#FFFFFF"

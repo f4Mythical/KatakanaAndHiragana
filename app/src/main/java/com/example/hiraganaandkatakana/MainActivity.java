@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
     private MaterialButton przyciskStart;
     private ImageButton przyciskAuth;
+    private TextView madeByText;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
     private long czasZalogowania = 0;
@@ -45,8 +47,13 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         premiumTracker = PremiumStatusTracker.getInstance();
         premiumTracker.setOnPremiumStatusChangedListener(this);
         fragmentManager = getSupportFragmentManager();
+
         przyciskStart = findViewById(R.id.Poczatek);
         przyciskAuth = findViewById(R.id.imageButtonAuth);
+        madeByText = findViewById(R.id.madeByText);
+
+        madeByText.setText(R.string.made_by);
+        przyciskStart.setText(R.string.start);
 
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
@@ -54,13 +61,13 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
                 czasZalogowania = System.currentTimeMillis();
                 premiumTracker.aktualizujStatusDlaUzytkownika();
                 przyciskAuth.setImageResource(R.drawable.konto1);
-                przyciskAuth.setContentDescription("Mój profil");
+                przyciskAuth.setContentDescription(getString(R.string.profil));
             } else {
                 czasZalogowania = 0;
                 czyMaPremium = false;
                 premiumTracker.stopListening();
                 przyciskAuth.setImageResource(R.drawable.login);
-                przyciskAuth.setContentDescription("Zaloguj się");
+                przyciskAuth.setContentDescription(getString(R.string.zaloguj));
             }
         };
 
@@ -95,13 +102,13 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
             premiumTracker.startListening();
             premiumTracker.aktualizujStatusDlaUzytkownika();
             przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription("Mój profil");
+            przyciskAuth.setContentDescription(getString(R.string.profil));
         } else {
             czasZalogowania = 0;
             czyMaPremium = false;
             premiumTracker.stopListening();
             przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription("Zaloguj się");
+            przyciskAuth.setContentDescription(getString(R.string.zaloguj));
         }
     }
 
@@ -120,13 +127,13 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
             premiumTracker.startListening();
             premiumTracker.aktualizujStatusDlaUzytkownika();
             przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription("Mój profil");
+            przyciskAuth.setContentDescription(getString(R.string.profil));
         } else {
             czasZalogowania = 0;
             czyMaPremium = false;
             premiumTracker.stopListening();
             przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription("Zaloguj się");
+            przyciskAuth.setContentDescription(getString(R.string.zaloguj));
         }
     }
 
@@ -136,13 +143,13 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         czyMaPremium = false;
         premiumTracker.stopListening();
         przyciskAuth.setImageResource(R.drawable.login);
-        przyciskAuth.setContentDescription("Zaloguj się");
+        przyciskAuth.setContentDescription(getString(R.string.zaloguj));
         finish();
     }
 
     @Override
-    public void onPremiumStatusChanged(boolean czyMaPremium) {
-        this.czyMaPremium = czyMaPremium;
+    public void onPremiumStatusChanged(boolean statusPremium) {
+        czyMaPremium = statusPremium;
     }
 
     @Override

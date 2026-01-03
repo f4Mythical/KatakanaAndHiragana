@@ -7,7 +7,7 @@
     android:padding="16dp">
 
     <TextView
-        android:text="Logowanie"
+        android:text="@string/logowanie"
         android:textSize="20sp"
         android:textStyle="bold"
         android:textColor="#E65100"
@@ -28,7 +28,7 @@
 
     <EditText
         android:id="@+id/poleHaslo"
-        android:hint="Hasło"
+        android:hint="@string/haslo"
         android:inputType="textPassword"
         android:textColor="#333333"
         android:textColorHint="#80000000"
@@ -49,7 +49,7 @@
 
     <Button
         android:id="@+id/przyciskLogowanie"
-        android:text="Zaloguj"
+        android:text="@string/zaloguj"
         android:backgroundTint="#E65100"
         android:textColor="#FFFFFF"
         android:minHeight="48dp"
@@ -59,7 +59,7 @@
 
     <TextView
         android:id="@+id/tekstRejestracja"
-        android:text="Nie masz konta? Zarejestruj się"
+        android:text="@string/brakKonta"
         android:textColor="#E65100"
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"

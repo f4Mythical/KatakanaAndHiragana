@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -31,7 +30,7 @@
         android:layout_width="300dp"
         android:layout_height="110dp"
         android:layout_marginTop="100dp"
-        android:text="Start"
+        android:text="@string/start"
         android:textSize="34sp"
         android:textStyle="bold"
         android:textAllCaps="false"
@@ -48,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
-        android:text="MadeByMythical"
+        android:text="@string/made_by"
         android:textColor="#CC2525"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"

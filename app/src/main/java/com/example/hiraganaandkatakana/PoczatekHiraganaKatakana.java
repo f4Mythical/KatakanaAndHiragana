@@ -61,18 +61,18 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     };
 
     String[][] hiraKombinowane = {
-            {"きゃ","kya"}, {"きゅ","kyu"}, {"きょ","kyo"},{" "," "},{" "," "},
-            {"ぎゃ","gya"}, {"ぎゅ","gyu"}, {"ぎょ","gyo"},{" "," "},{" "," "},
-            {"しゃ","sha"}, {"しゅ","shu"}, {"しょ","sho"},{" "," "},{" "," "},
-            {"じゃ","ja"}, {"じゅ","ju"}, {"じょ","jo"},{" "," "},{" "," "},
-            {"ちゃ","cha"}, {"ちゅ","chu"}, {"ちょ","cho"},{" "," "},{" "," "},
-            {"ぢゃ","ja"}, {"ぢゅ","ju"}, {"ぢょ","jo"},{" "," "},{" "," "},
-            {"にゃ","nya"}, {"にゅ","nyu"}, {"にょ","nyo"},{" "," "},{" "," "},
-            {"ひゃ","hya"}, {"ひゅ","hyu"}, {"ひょ","hyo"},{" "," "},{" "," "},
-            {"びゃ","bya"}, {"びゅ","byu"}, {"びょ","byo"},{" "," "},{" "," "},
-            {"ぴゃ","pya"}, {"ぴゅ","pyu"}, {"ぴょ","pyo"},{" "," "},{" "," "},
-            {"みゃ","mya"}, {"みゅ","myu"}, {"みょ","myo"},{" "," "},{" "," "},
-            {"りゃ","rya"}, {"りゅ","ryu"}, {"りょ","ryo"},{" "," "},{" "," "},
+            {"きゃ","kya"}, {" "," "},{"きゅ","kyu"},{" "," "}, {"きょ","kyo"},
+            {"ぎゃ","gya"}, {" "," "}, {"ぎゅ","gyu"},{" "," "}, {"ぎょ","gyo"},
+            {"しゃ","sha"}, {" "," "}, {"しゅ","shu"},{" "," "}, {"しょ","sho"},
+            {"じゃ","ja"},{" "," "}, {"じゅ","ju"},{" "," "}, {"じょ","jo"},
+            {"ちゃ","cha"},{" "," "}, {"ちゅ","chu"}, {" "," "},{"ちょ","cho"},
+            {"ぢゃ","ja"}, {" "," "},{"ぢゅ","ju"},{" "," "}, {"ぢょ","jo"},
+            {"にゃ","nya"},{" "," "}, {"にゅ","nyu"}, {" "," "},{"にょ","nyo"},
+            {"ひゃ","hya"},{" "," "}, {"ひゅ","hyu"},{" "," "}, {"ひょ","hyo"},
+            {"びゃ","bya"},{" "," "}, {"びゅ","byu"},{" "," "}, {"びょ","byo"},
+            {"ぴゃ","pya"}, {" "," "},{"ぴゅ","pyu"},{" "," "}, {"ぴょ","pyo"},
+            {"みゃ","mya"},{" "," "}, {"みゅ","myu"}, {" "," "},{"みょ","myo"},
+            {"りゃ","rya"},{" "," "}, {"りゅ","ryu"},{" "," "}, {"りょ","ryo"},
     };
 
     String[][] kataPodstawowe = {
@@ -98,18 +98,18 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     };
 
     String[][] kataKombinowane = {
-            {"キャ","kya"}, {"キュ","kyu"}, {"キョ","kyo"},
-            {"ギャ","gya"}, {"ギュ","gyu"}, {"ギョ","gyo"},
-            {"シャ","sha"}, {"シュ","shu"}, {"ショ","sho"},
-            {"ジャ","ja"}, {"ジュ","ju"}, {"ジョ","jo"},
-            {"チャ","cha"}, {"チュ","chu"}, {"チョ","cho"},
-            {"ヂャ","ja"}, {"ヂュ","ju"}, {"ヂョ","jo"},
-            {"ニャ","nya"}, {"ニュ","nyu"}, {"ニョ","nyo"},
-            {"ヒャ","hya"}, {"ヒュ","hyu"}, {"ヒョ","hyo"},
-            {"ビャ","bya"}, {"ビュ","byu"}, {"ビョ","byo"},
-            {"ピャ","pya"}, {"ピュ","pyu"}, {"ピョ","pyo"},
-            {"ミャ","mya"}, {"ミュ","myu"}, {"ミョ","myo"},
-            {"リャ","rya"}, {"リュ","ryu"}, {"リョ","ryo"}
+            {"キャ","kya"},{" "," "}, {"キュ","kyu"}, {" "," "},{"キョ","kyo"},
+            {"ギャ","gya"}, {" "," "},{"ギュ","gyu"}, {" "," "},{"ギョ","gyo"},
+            {"シャ","sha"},{" "," "}, {"シュ","shu"},{" "," "}, {"ショ","sho"},
+            {"ジャ","ja"}, {" "," "},{"ジュ","ju"}, {" "," "},{"ジョ","jo"},
+            {"チャ","cha"},{" "," "}, {"チュ","chu"},{" "," "}, {"チョ","cho"},
+            {"ヂャ","ja"}, {" "," "},{"ヂュ","ju"},{" "," "}, {"ヂョ","jo"},
+            {"ニャ","nya"},{" "," "}, {"ニュ","nyu"},{" "," "}, {"ニョ","nyo"},
+            {"ヒャ","hya"},{" "," "}, {"ヒュ","hyu"},{" "," "}, {"ヒョ","hyo"},
+            {"ビャ","bya"},{" "," "}, {"ビュ","byu"},{" "," "}, {"ビョ","byo"},
+            {"ピャ","pya"},{" "," "}, {"ピュ","pyu"},{" "," "}, {"ピョ","pyo"},
+            {"ミャ","mya"}, {" "," "},{"ミュ","myu"},{" "," "}, {"ミョ","myo"},
+            {"リャ","rya"},{" "," "}, {"リュ","ryu"}, {" "," "},{"リョ","ryo"}
     };
 
     String[][] aktualnyZestaw;
@@ -390,6 +390,11 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         wyswietlZestaw();
     }
 
+    private int dpToPx(int dp) {
+        float density = getResources().getDisplayMetrics().density;
+        return Math.round(dp * density);
+    }
+
     private void wyswietlZestaw() {
         if (pendingTasks != null) {
             for (Runnable zadanie : pendingTasks) {
@@ -414,7 +419,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
                 CardView karta = new CardView(this);
                 GridLayout.LayoutParams parametryKarty = new GridLayout.LayoutParams();
                 parametryKarty.width = 0;
-                parametryKarty.height = GridLayout.LayoutParams.WRAP_CONTENT;
+                parametryKarty.height = dpToPx(140);
                 parametryKarty.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
                 parametryKarty.setMargins(8, 8, 8, 8);
                 karta.setLayoutParams(parametryKarty);

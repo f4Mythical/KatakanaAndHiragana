@@ -1,9 +1,7 @@
 Zrobic musze ze sie lacza zdania z pliku excel
 dokonczyc dzialanie tak samo jak w katakanie
-zrobic zmiane kolorow na ciemny
 zrobic przelacznik na strone, ktora bedzie miala takie sama dzialanie
 zrobic dzialajace zdania(najtrudniejsze)
-zrobic option z kolorami
 dokonczyc podstawowa wersje
 dokonczyc permium wersje
 wpasc na dodatki do premium, znaki beda mialy rysowanie slowo beda mialy kategorie  a zdania to nie wiem 

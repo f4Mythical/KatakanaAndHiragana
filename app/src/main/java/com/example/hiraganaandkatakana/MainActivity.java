@@ -1,13 +1,14 @@
 package com.example.hiraganaandkatakana;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
     private MaterialButton przyciskStart;
     private ImageButton przyciskAuth;
+    private ImageButton przyciskUstawienia;
     private TextView madeByText;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
@@ -33,7 +35,26 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        SharedPreferences prefs = getSharedPreferences("ustawienia_aplikacji", MODE_PRIVATE);
+        String jezyk = prefs.getString("jezyk_aplikacji", "pl");
+        Utils.ustawJezyk(this, jezyk);
+
         super.onCreate(savedInstanceState);
+
+        if (prefs.getBoolean("pierwsze_uruchomienie", true)) {
+            prefs.edit().putBoolean("pierwsze_uruchomienie", false).apply();
+            startActivity(new Intent(this, LanguageSelectionActivity.class));
+            finish();
+            return;
+        }
+
+        String tryb = prefs.getString("tryb_aplikacji", "jasny");
+        if (tryb.equals("ciemny")) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        }
+
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
@@ -50,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
         przyciskStart = findViewById(R.id.Poczatek);
         przyciskAuth = findViewById(R.id.imageButtonAuth);
+        przyciskUstawienia = findViewById(R.id.imageButtonSettings);
         madeByText = findViewById(R.id.madeByText);
 
         madeByText.setText(R.string.made_by);
@@ -79,6 +101,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         });
 
         przyciskAuth.setOnClickListener(v -> obsluzPrzyciskAuth());
+        przyciskUstawienia.setOnClickListener(v -> {
+            GeneralSettingsDialogFragment dialog = new GeneralSettingsDialogFragment();
+            dialog.show(fragmentManager, "ustawieniaOgolne");
+        });
     }
 
     private void obsluzPrzyciskAuth() {

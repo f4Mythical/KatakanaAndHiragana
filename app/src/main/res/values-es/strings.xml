@@ -51,5 +51,12 @@
     <string name="brakKonta">¿No tienes cuenta? Regístrate</string>
     <string name="jestKonto">¿Tienes cuenta? Inicia sesión</string>
     <string name="made_by">MadeByMythical</string>
+    <!--ustawienia ogolne-->
+    <string name="ustawienia">Configuración</string>
+    <string name="tryb">Elegir modo</string>
+    <string name="jasny">Claro</string>
+    <string name="ciemny">Oscuro</string>
+    <string name="zmienjezyk">Cambiar idioma</string>
+
 
 </resources>

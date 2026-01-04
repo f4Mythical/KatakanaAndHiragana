@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
@@ -19,9 +20,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 public class LanguageSelectionActivity extends AppCompatActivity {
 
@@ -40,10 +38,14 @@ public class LanguageSelectionActivity extends AppCompatActivity {
         wczytajZapisanyJezyk();
         ustawLocale(wybranyKodJezyka);
 
-        setContentView(R.layout.activity_language_selection);
-
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_language_selection);
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
 
         inicjalizujWidoki();
         przygotujMapeJezykow();

@@ -69,11 +69,11 @@ public class GeneralSettingsDialogFragment extends DialogFragment {
 
     private void updateButtonColors(String aktualnyTryb) {
         if (TRYB_JASNY.equals(aktualnyTryb)) {
-            buttonJasny.setBackgroundTintList(getResources().getColorStateList(R.color.orange_selected));
-            buttonCiemny.setBackgroundTintList(getResources().getColorStateList(R.color.gray_unselected));
+            buttonJasny.setBackgroundTintList(getResources().getColorStateList(R.color.pomaranczowy_zaznaczony));
+            buttonCiemny.setBackgroundTintList(getResources().getColorStateList(R.color.szary_niezaznaczony));
         } else {
-            buttonJasny.setBackgroundTintList(getResources().getColorStateList(R.color.gray_unselected));
-            buttonCiemny.setBackgroundTintList(getResources().getColorStateList(R.color.orange_selected));
+            buttonJasny.setBackgroundTintList(getResources().getColorStateList(R.color.szary_niezaznaczony));
+            buttonCiemny.setBackgroundTintList(getResources().getColorStateList(R.color.pomaranczowy_zaznaczony));
         }
     }
 }

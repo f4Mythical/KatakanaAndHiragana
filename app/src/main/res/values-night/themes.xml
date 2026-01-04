@@ -1,7 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.HiraganaAndKatakana" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+    <style name="Base.Theme.HiraganaAndKatakana" parent="Theme.Material3.DayNight">
+        <!-- KOLORY TRYB CIEMNY -->
+        <item name="colorPrimary">#FF6F00</item>
+        <item name="colorPrimaryDark">#E65100</item>
+        <item name="colorAccent">#FF8A65</item>
+        <item name="colorSurface">#1E1E1E</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorOnSurface">#FF6F00</item>
     </style>
+
+    <style name="Theme.HiraganaAndKatakana" parent="Base.Theme.HiraganaAndKatakana" />
 </resources>

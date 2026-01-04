@@ -2,14 +2,18 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_start_screen">
+
     <View
         android:id="@+id/view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/gradient_start_screen" />
+
     <TextView
         android:id="@+id/Przywitanie"
         android:layout_width="wrap_content"
@@ -19,12 +23,13 @@
         android:lineSpacingExtra="4dp"
         android:text="@string/tytul"
         android:textAlignment="center"
-        android:textColor="#E65100"
+        android:textColor="@color/tekst_glowny"
         android:textSize="44sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/Poczatek"
         android:layout_width="300dp"
@@ -34,25 +39,27 @@
         android:textSize="34sp"
         android:textStyle="bold"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#FF5722"
+        android:textColor="@color/tekst_na_glownym"
+        app:backgroundTint="@color/przycisk_glowny"
         app:cornerRadius="28dp"
         app:elevation="16dp"
-        app:rippleColor="#80FFFFFF"
+        app:rippleColor="@color/ripple"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/Przywitanie" />
+
     <TextView
         android:id="@+id/madeByText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="40dp"
         android:text="@string/made_by"
-        android:textColor="#CC2525"
+        android:textColor="@color/tekst_wykonawca"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
     <ImageButton
         android:id="@+id/imageButtonAuth"
         android:layout_width="wrap_content"
@@ -64,6 +71,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/login" />
+
     <ImageButton
         android:id="@+id/imageButtonSettings"
         android:layout_width="wrap_content"
@@ -74,6 +82,5 @@
         android:padding="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@android:drawable/ic_menu_preferences"
-        />
+        app:srcCompat="@android:drawable/ic_menu_preferences" />
 </androidx.constraintlayout.widget.ConstraintLayout>

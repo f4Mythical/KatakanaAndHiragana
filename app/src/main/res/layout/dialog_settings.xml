@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/bg_dialog"
+    android:background="@color/tlo_powierzchnia"
     android:padding="16dp">
 
     <TextView
         android:text="@string/typZnakow"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#E65100"
+        android:textColor="@color/tekst_glowny"
         android:gravity="center"
         android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
@@ -24,8 +25,8 @@
         android:textOff="@string/podstawowe"
         android:checked="true"
         android:textSize="16sp"
-        android:textColor="#E65100"
-        android:backgroundTint="#FFF3E0"/>
+        android:textColor="@color/tekst_glowny"
+        android:backgroundTint="@color/przycisk_dodatkowy"/>
 
     <ToggleButton
         android:id="@+id/toggleDakuten"
@@ -34,8 +35,8 @@
         android:textOn="@string/dakutenWyb"
         android:textOff="@string/dakuten"
         android:textSize="16sp"
-        android:textColor="#E65100"
-        android:backgroundTint="#FFF3E0"
+        android:textColor="@color/tekst_glowny"
+        android:backgroundTint="@color/przycisk_dodatkowy"
         android:layout_marginTop="8dp"/>
 
     <ToggleButton
@@ -45,16 +46,16 @@
         android:textOn="@string/kombinowaneWyb"
         android:textOff="@string/kombinowane"
         android:textSize="16sp"
-        android:textColor="#E65100"
-        android:backgroundTint="#FFF3E0"
+        android:textColor="@color/tekst_glowny"
+        android:backgroundTint="@color/przycisk_dodatkowy"
         android:layout_marginTop="8dp"/>
 
     <Button
         android:id="@+id/buttonUstaw"
         android:text="@string/ustaw"
         android:textStyle="bold"
-        android:backgroundTint="#E65100"
-        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/przycisk_glowny"
+        android:textColor="@color/tekst_na_glownym"
         android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

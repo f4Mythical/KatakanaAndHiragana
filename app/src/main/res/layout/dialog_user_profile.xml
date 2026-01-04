@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/bg_dialog"
+    android:background="@color/tlo_powierzchnia"
     android:padding="16dp">
 
     <TextView
@@ -14,7 +13,7 @@
         android:text="@string/profil"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#E65100"
+        android:textColor="@color/tekst_glowny"
         android:gravity="center"
         android:paddingBottom="12dp"/>
 
@@ -24,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="Email: ..."
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="@color/tekst_podstawowy"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"/>
 
@@ -34,7 +33,7 @@
         android:layout_height="wrap_content"
         android:text="@string/premium"
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="@color/tekst_podstawowy"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"/>
 
@@ -44,7 +43,7 @@
         android:layout_height="wrap_content"
         android:text="@string/czas"
         android:textSize="16sp"
-        android:textColor="#333333"
+        android:textColor="@color/tekst_podstawowy"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"/>
 
@@ -54,7 +53,7 @@
         android:layout_height="wrap_content"
         android:text="@string/wyloguj"
         android:textSize="16sp"
-        android:textColor="#FF5252"
+        android:textColor="@color/tekst_blad"
         android:gravity="center"
         android:padding="12dp"
         android:background="?attr/selectableItemBackground"

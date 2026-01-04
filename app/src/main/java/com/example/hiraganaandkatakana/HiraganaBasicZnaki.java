@@ -1,6 +1,5 @@
 package com.example.hiraganaandkatakana;
 
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Spannable;
@@ -103,16 +102,16 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
             key.setLayoutParams(params);
 
             if (litera.equals("👍")) {
-                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFF4CAF50));
-                key.setTextColor(0xFFFFFFFF);
+                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.przycisk_poprawny)));
+                key.setTextColor(getColor(R.color.tekst_na_glownym));
                 key.setOnClickListener(v -> sprawdzOdpowiedz());
             } else if (litera.equals("🎲")) {
-                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFF7043));
-                key.setTextColor(0xFFFFFFFF);
+                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.przycisk_losuj)));
+                key.setTextColor(getColor(R.color.tekst_na_glownym));
                 key.setOnClickListener(v -> losujInnyZnak());
             } else {
-                key.setTextColor(0xFFE65100);
-                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
+                key.setTextColor(getColor(R.color.tekst_podstawowy));
+                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.przycisk_klawiatura)));
                 key.setOnClickListener(v -> {
                     input.append(litera);
                     inputText.setText(input.toString());
@@ -179,7 +178,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
             losujNowyZnak();
             input.setLength(0);
             inputText.setText("");
-            inputText.setTextColor(0xFFE65100);
+            inputText.setTextColor(getColor(R.color.tekst_podstawowy));
             dialog.dismiss();
         });
 
@@ -250,7 +249,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
     private void losujInnyZnak() {
         input.setLength(0);
         inputText.setText("");
-        inputText.setTextColor(0xFFE65100);
+        inputText.setTextColor(getColor(R.color.tekst_podstawowy));
         losujNowyZnak();
     }
 
@@ -264,7 +263,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         if (odpowiedz.equalsIgnoreCase(obecnaOdpowiedz)) {
             input.setLength(0);
             inputText.setText("");
-            inputText.setTextColor(0xFFE65100);
+            inputText.setTextColor(getColor(R.color.tekst_podstawowy));
             losujNowyZnak();
         } else {
             pokazKolorowanaOdpowiedz(odpowiedz, obecnaOdpowiedz);
@@ -278,7 +277,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         for (int i = 0; i < minLength; i++) {
             if (String.valueOf(odpowiedz.charAt(i)).equalsIgnoreCase(String.valueOf(poprawna.charAt(i)))) {
                 spannable.setSpan(
-                        new ForegroundColorSpan(Color.parseColor("#4CAF50")),
+                        new ForegroundColorSpan(getColor(R.color.poprawny)),
                         i, i + 1,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 );
@@ -289,7 +288,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
                 );
             } else {
                 spannable.setSpan(
-                        new ForegroundColorSpan(Color.parseColor("#B71C1C")),
+                        new ForegroundColorSpan(getColor(R.color.bledny)),
                         i, i + 1,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 );
@@ -304,7 +303,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         if (odpowiedz.length() > poprawna.length()) {
             for (int i = minLength; i < odpowiedz.length(); i++) {
                 spannable.setSpan(
-                        new ForegroundColorSpan(Color.parseColor("#B71C1C")),
+                        new ForegroundColorSpan(getColor(R.color.bledny)),
                         i, i + 1,
                         Spannable.SPAN_EXCLUSIVE_EXCLUSIVE
                 );

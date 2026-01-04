@@ -1,16 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="300dp"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="@drawable/bg_dialog"
+    android:background="@color/tlo_powierzchnia"
     android:padding="16dp">
 
     <TextView
         android:text="@string/logowanie"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="#E65100"
+        android:textColor="@color/tekst_glowny"
         android:gravity="center"
         android:layout_marginBottom="16dp"
         android:layout_width="match_parent"
@@ -20,8 +21,8 @@
         android:id="@+id/poleEmail"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        android:textColor="#333333"
-        android:textColorHint="#80000000"
+        android:textColor="@color/tekst_podstawowy"
+        android:textColorHint="@color/tekst_podpowiedz"
         android:minHeight="48dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
@@ -30,8 +31,8 @@
         android:id="@+id/poleHaslo"
         android:hint="@string/haslo"
         android:inputType="textPassword"
-        android:textColor="#333333"
-        android:textColorHint="#80000000"
+        android:textColor="@color/tekst_podstawowy"
+        android:textColorHint="@color/tekst_podpowiedz"
         android:minHeight="48dp"
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
@@ -42,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Email albo hasło jest złe"
-        android:textColor="#FF5252"
+        android:textColor="@color/tekst_blad"
         android:textSize="12sp"
         android:visibility="gone"
         android:layout_marginTop="4dp"/>
@@ -50,8 +51,8 @@
     <Button
         android:id="@+id/przyciskLogowanie"
         android:text="@string/zaloguj"
-        android:backgroundTint="#E65100"
-        android:textColor="#FFFFFF"
+        android:backgroundTint="@color/przycisk_glowny"
+        android:textColor="@color/tekst_na_glownym"
         android:minHeight="48dp"
         android:layout_marginTop="16dp"
         android:layout_width="match_parent"
@@ -60,7 +61,7 @@
     <TextView
         android:id="@+id/tekstRejestracja"
         android:text="@string/brakKonta"
-        android:textColor="#E65100"
+        android:textColor="@color/tekst_glowny"
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>

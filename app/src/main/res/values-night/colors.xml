@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="tlo_glowne">#121212</color>
+    <color name="tlo_zakladki">#1E1E1E</color>
+    <color name="tlo_powierzchnia">#1E1E1E</color>
+    <color name="tekst_glowny">#FF6F00</color>
+    <color name="tekst_dodatkowy">#B3B3B3</color>
+    <color name="linia_glowna">#FF6F00</color>
+    <color name="linia_jasna">#3E2723</color>
+    <color name="przycisk_glowny">#FF6F00</color>
+    <color name="przycisk_dodatkowy">#3E2723</color>
+    <color name="tekst_na_glownym">#FFFFFF</color>
+    <color name="tekst_na_dodatkowym">#FF6F00</color>
+    <color name="pomaranczowy_zaznaczony">#FF6F00</color>
+    <color name="szary_niezaznaczony">#9E9E9E</color>
+    <color name="tekst_podstawowy">#E0E0E0</color>
+    <color name="tekst_podpowiedz">#80FFFFFF</color>
+    <color name="tekst_blad">#FF5252</color>
+    <color name="tekst_akcentowy">#FFAB40</color>
+    <color name="tlo_pola">#3E2723</color>
+    <color name="przycisk_usun">#D32F2F</color>
+    <color name="tekst_wykonawca">#FF6B6B</color>
+    <color name="ripple">#40FFFFFF</color>
+    <color name="przycisk_poprawny">#66BB6A</color>
+    <color name="przycisk_losuj">#FF8A65</color>
+    <color name="przycisk_klawiatura">#5D4037</color>
+    <color name="poprawny">#66BB6A</color>
+    <color name="bledny">#FF5252</color>
+</resources>

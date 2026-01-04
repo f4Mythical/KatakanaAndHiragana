@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@drawable/bg_dialog"
+    android:background="@color/tlo_powierzchnia"
     android:padding="20dp">
 
     <TextView
@@ -13,7 +13,7 @@
         android:text="@string/ustawienia"
         android:textSize="22sp"
         android:textStyle="bold"
-        android:textColor="#E65100"
+        android:textColor="@color/tekst_glowny"
         android:gravity="center"
         android:paddingBottom="16dp"/>
 
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/tryb"
         android:textSize="18sp"
-        android:textColor="#333333"
+        android:textColor="@color/tekst_podstawowy"
         android:textStyle="bold"
         android:paddingTop="8dp"
         android:paddingBottom="12dp"/>
@@ -40,9 +40,9 @@
             android:layout_weight="1"
             android:text="@string/jasny"
             android:textSize="17sp"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/tekst_na_glownym"
             android:layout_marginEnd="8dp"
-            app:backgroundTint="#FF5722"
+            app:backgroundTint="@color/przycisk_glowny"
             app:cornerRadius="12dp"
             android:padding="14dp"/>
 
@@ -53,9 +53,9 @@
             android:layout_weight="1"
             android:text="@string/ciemny"
             android:textSize="17sp"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/tekst_na_glownym"
             android:layout_marginStart="8dp"
-            app:backgroundTint="#FF5722"
+            app:backgroundTint="@color/przycisk_glowny"
             app:cornerRadius="12dp"
             android:padding="14dp"/>
 
@@ -67,8 +67,8 @@
         android:layout_height="wrap_content"
         android:text="@string/zmienjezyk"
         android:textSize="15sp"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#FF5722"
+        android:textColor="@color/tekst_na_glownym"
+        app:backgroundTint="@color/przycisk_glowny"
         app:cornerRadius="12dp"
         android:padding="10dp"
         android:layout_marginBottom="20dp"/>
@@ -79,8 +79,8 @@
         android:layout_height="wrap_content"
         android:text="@string/gotowy"
         android:textSize="17sp"
-        android:textColor="#FFFFFF"
-        app:backgroundTint="#FF5722"
+        android:textColor="@color/tekst_na_glownym"
+        app:backgroundTint="@color/przycisk_glowny"
         app:cornerRadius="12dp"
         android:padding="14dp"/>
 

@@ -1,8 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Base.Theme.HiraganaAndKatakana" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.HiraganaAndKatakana" parent="Theme.Material3.DayNight">
+        <!-- KOLORY TRYB JASNY -->
+        <item name="colorPrimary">#E65100</item>
+        <item name="colorPrimaryDark">#BF360C</item>
+        <item name="colorAccent">#FF7043</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorOnSurface">#E65100</item>
     </style>
 
     <style name="Theme.HiraganaAndKatakana" parent="Base.Theme.HiraganaAndKatakana" />

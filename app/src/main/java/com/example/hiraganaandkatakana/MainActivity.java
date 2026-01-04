@@ -3,8 +3,10 @@ package com.example.hiraganaandkatakana;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -74,6 +76,11 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         przyciskUstawienia = findViewById(R.id.imageButtonSettings);
         madeByText = findViewById(R.id.madeByText);
 
+        if (przyciskStart == null) {
+            Log.e("MainActivity", "BŁĄD: przyciskStart jest null!");
+            Toast.makeText(this, "Błąd UI: nie znaleziono przycisku", Toast.LENGTH_SHORT).show();
+        }
+
         madeByText.setText(R.string.made_by);
         przyciskStart.setText(R.string.start);
 
@@ -94,6 +101,7 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         };
 
         przyciskStart.setOnClickListener(v -> {
+            Log.d("MainActivity", "Przycisk Start kliknięty!");
             Intent intent = new Intent(MainActivity.this, PoczatekHiraganaKatakana.class);
             intent.putExtra("czyMaPremium", czyMaPremium);
             intent.putExtra("czasZalogowania", czasZalogowania);

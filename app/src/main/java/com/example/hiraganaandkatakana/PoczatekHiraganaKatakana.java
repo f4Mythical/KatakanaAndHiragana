@@ -85,7 +85,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             {"マ","ma"}, {"ミ","mi"}, {"ム","mu"}, {"メ","me"}, {"モ","mo"},
             {"ヤ","ya"}, {"  ","  "}, {"ユ","yu"}, {"  ","  "}, {"ヨ","yo"},
             {"ラ","ra"}, {"リ","ri"}, {"ル","ru"}, {"レ","re"}, {"ロ","ro"},
-            {"ワ","wa"}, {"  ","  "}, {"  ","  "}, {"  ","  "}, {"ヲ","wo"},
+            {"ワ","wa"}, {"  ","  "}, {"  "," "}, {"  ","  "}, {"ヲ","wo"},
             {"  ","  "}, {"  ","  "}, {"  ","  "}, {"  ","  "}, {"ン","n"}
     };
 
@@ -108,7 +108,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             {"ヒャ","hya"},{" "," "}, {"ヒュ","hyu"},{" "," "}, {"ヒョ","hyo"},
             {"ビャ","bya"},{" "," "}, {"ビュ","byu"},{" "," "}, {"ビョ","byo"},
             {"ピャ","pya"},{" "," "}, {"ピュ","pyu"},{" "," "}, {"ピョ","pyo"},
-            {"ミャ","mya"}, {" "," "},{"ミュ","myu"},{" "," "}, {"ミョ","myo"},
+            {"ミャ","mya"}, {" "," "},{"ミュ","myu"}, {" "," "}, {"ミョ","myo"},
             {"リャ","rya"},{" "," "}, {"リュ","ryu"}, {" "," "},{"リョ","ryo"}
     };
 
@@ -358,23 +358,23 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
     private void ustawStyleZakladek(TextView zakladkaHiragana, TextView zakladkaKatakana) {
         if (czyHiragana) {
-            zakladkaHiragana.setBackgroundColor(0xFFFFFFFF);
-            zakladkaKatakana.setBackgroundColor(0xFFFFF3E0);
+            zakladkaHiragana.setBackgroundColor(getResources().getColor(R.color.tlo_powierzchnia));
+            zakladkaKatakana.setBackgroundColor(getResources().getColor(R.color.tlo_zakladki));
         } else {
-            zakladkaHiragana.setBackgroundColor(0xFFFFF3E0);
-            zakladkaKatakana.setBackgroundColor(0xFFFFFFFF);
+            zakladkaHiragana.setBackgroundColor(getResources().getColor(R.color.tlo_zakladki));
+            zakladkaKatakana.setBackgroundColor(getResources().getColor(R.color.tlo_powierzchnia));
         }
     }
 
     private void ustawStylePrzyciskow(Button aktywny, Button nieaktywny1, Button nieaktywny2) {
-        aktywny.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFF7043));
-        aktywny.setTextColor(0xFFFFFFFF);
+        aktywny.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.przycisk_glowny)));
+        aktywny.setTextColor(getResources().getColor(R.color.tekst_na_glownym));
 
-        nieaktywny1.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
-        nieaktywny1.setTextColor(0xFFE65100);
+        nieaktywny1.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.przycisk_dodatkowy)));
+        nieaktywny1.setTextColor(getResources().getColor(R.color.tekst_na_dodatkowym));
 
-        nieaktywny2.setBackgroundTintList(android.content.res.ColorStateList.valueOf(0xFFFFCCBC));
-        nieaktywny2.setTextColor(0xFFE65100);
+        nieaktywny2.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getResources().getColor(R.color.przycisk_dodatkowy)));
+        nieaktywny2.setTextColor(getResources().getColor(R.color.tekst_na_dodatkowym));
     }
 
     private void ustawZestaw() {
@@ -425,7 +425,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
                 karta.setLayoutParams(parametryKarty);
                 karta.setCardElevation(4f);
                 karta.setRadius(12f);
-                karta.setCardBackgroundColor(0xFFFFFFFF);
+                karta.setCardBackgroundColor(getResources().getColor(R.color.tlo_powierzchnia));
 
                 LinearLayout element = new LinearLayout(this);
                 element.setOrientation(LinearLayout.VERTICAL);
@@ -435,7 +435,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
                 TextView kana = new TextView(this);
                 kana.setText(znak[0]);
                 kana.setTextSize(32);
-                kana.setTextColor(0xFFE65100);
+                kana.setTextColor(getResources().getColor(R.color.tekst_glowny));
                 kana.setGravity(Gravity.CENTER);
                 element.addView(kana);
 
@@ -443,7 +443,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
                     TextView romaji = new TextView(this);
                     romaji.setText(znak[1]);
                     romaji.setTextSize(14);
-                    romaji.setTextColor(0xFF999999);
+                    romaji.setTextColor(getResources().getColor(R.color.tekst_dodatkowy));
                     romaji.setGravity(Gravity.CENTER);
                     LinearLayout.LayoutParams parametryRomaji = new LinearLayout.LayoutParams(
                             LinearLayout.LayoutParams.MATCH_PARENT,

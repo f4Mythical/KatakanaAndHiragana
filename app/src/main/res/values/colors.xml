@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
-    <color name="orange_selected">#E64A19</color>
-    <color name="gray_unselected">#757575</color>
+    <color name="tlo_glowne">#FAFAFA</color>
+    <color name="tlo_zakladki">#FFF3E0</color>
+    <color name="tlo_powierzchnia">#FFFFFF</color>
+    <color name="tekst_glowny">#E65100</color>
+    <color name="tekst_dodatkowy">#999999</color>
+    <color name="linia_glowna">#FF7043</color>
+    <color name="linia_jasna">#FFCCBC</color>
+    <color name="przycisk_glowny">#FF7043</color>
+    <color name="przycisk_dodatkowy">#FFCCBC</color>
+    <color name="tekst_na_glownym">#FFFFFF</color>
+    <color name="tekst_na_dodatkowym">#E65100</color>
+    <color name="pomaranczowy_zaznaczony">#E64A19</color>
+    <color name="szary_niezaznaczony">#757575</color>
+    <color name="tekst_podstawowy">#333333</color>
+    <color name="tekst_podpowiedz">#80000000</color>
+    <color name="tekst_blad">#FF5252</color>
+    <color name="tekst_akcentowy">#D84315</color>
+    <color name="tlo_pola">#FFF3E0</color>
+    <color name="przycisk_usun">#BF360C</color>
+    <color name="tekst_wykonawca">#CC2525</color>
+    <color name="ripple">#80FFFFFF</color>
+    <color name="przycisk_poprawny">#4CAF50</color>
+    <color name="przycisk_losuj">#FF7043</color>
+    <color name="przycisk_klawiatura">#FFCCBC</color>
+    <color name="poprawny">#4CAF50</color>
+    <color name="bledny">#B71C1C</color>
 </resources>

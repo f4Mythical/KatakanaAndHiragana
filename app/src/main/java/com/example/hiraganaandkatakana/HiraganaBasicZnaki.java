@@ -8,7 +8,6 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -85,47 +84,87 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         ImageButton settings = findViewById(R.id.buttonSettings);
         settings.setOnClickListener(v -> pokazDialogUstawien());
 
-        GridLayout keyboard = findViewById(R.id.keyboardContainer);
-        keyboard.setColumnCount(10);
+        // Inicjalizacja klawiatury
+        setupKeyboard();
 
-        for (String litera : getAlphabetButtons()) {
-            Button key = new Button(this);
-            key.setText(litera);
-            key.setAllCaps(false);
-            key.setTextSize(12f);
-            key.setMinHeight(48);
+        przygotujDostepneZnaki();
+        losujNowyZnak();
+    }
 
-            GridLayout.LayoutParams params = new GridLayout.LayoutParams();
-            params.width = 2;
-            params.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f);
-            params.setMargins(3, 3, 3, 3);
-            key.setLayoutParams(params);
+    private void setupKeyboard() {
+        // Rząd 1: Q W E R T Y U I O P
+        Button buttonQ = findViewById(R.id.buttonQ);
+        Button buttonW = findViewById(R.id.buttonW);
+        Button buttonE = findViewById(R.id.buttonE);
+        Button buttonR = findViewById(R.id.buttonR);
+        Button buttonT = findViewById(R.id.buttonT);
+        Button buttonY = findViewById(R.id.buttonY);
+        Button buttonU = findViewById(R.id.buttonU);
+        Button buttonI = findViewById(R.id.buttonI);
+        Button buttonO = findViewById(R.id.buttonO);
+        Button buttonP = findViewById(R.id.buttonP);
 
-            if (litera.equals("👍")) {
-                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.przycisk_poprawny)));
-                key.setTextColor(getColor(R.color.tekst_na_glownym));
-                key.setOnClickListener(v -> sprawdzOdpowiedz());
-            } else if (litera.equals("🎲")) {
-                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.przycisk_losuj)));
-                key.setTextColor(getColor(R.color.tekst_na_glownym));
-                key.setOnClickListener(v -> losujInnyZnak());
-            } else {
-                key.setTextColor(getColor(R.color.tekst_podstawowy));
-                key.setBackgroundTintList(android.content.res.ColorStateList.valueOf(getColor(R.color.przycisk_klawiatura)));
-                key.setOnClickListener(v -> {
-                    input.append(litera);
-                    inputText.setText(input.toString());
-                });
-            }
+        // Rząd 2: A S D F G H J K L
+        Button buttonA = findViewById(R.id.buttonA);
+        Button buttonS = findViewById(R.id.buttonS);
+        Button buttonD = findViewById(R.id.buttonD);
+        Button buttonF = findViewById(R.id.buttonF);
+        Button buttonG = findViewById(R.id.buttonG);
+        Button buttonH = findViewById(R.id.buttonH);
+        Button buttonJ = findViewById(R.id.buttonJ);
+        Button buttonK = findViewById(R.id.buttonK);
+        Button buttonL = findViewById(R.id.buttonL);
 
-            keyboard.addView(key);
-        }
+        // Rząd 3: Z X C V B N M
+        Button buttonZ = findViewById(R.id.buttonZ);
+        Button buttonX = findViewById(R.id.buttonX);
+        Button buttonC = findViewById(R.id.buttonC);
+        Button buttonV = findViewById(R.id.buttonV);
+        Button buttonB = findViewById(R.id.buttonB);
+        Button buttonN = findViewById(R.id.buttonN);
+        Button buttonM = findViewById(R.id.buttonM);
+
+        // Przypisz listenery do wszystkich przycisków liter (rząd 1)
+        buttonQ.setOnClickListener(v -> addCharacter("Q"));
+        buttonW.setOnClickListener(v -> addCharacter("W"));
+        buttonE.setOnClickListener(v -> addCharacter("E"));
+        buttonR.setOnClickListener(v -> addCharacter("R"));
+        buttonT.setOnClickListener(v -> addCharacter("T"));
+        buttonY.setOnClickListener(v -> addCharacter("Y"));
+        buttonU.setOnClickListener(v -> addCharacter("U"));
+        buttonI.setOnClickListener(v -> addCharacter("I"));
+        buttonO.setOnClickListener(v -> addCharacter("O"));
+        buttonP.setOnClickListener(v -> addCharacter("P"));
+
+        // Rząd 2
+        buttonA.setOnClickListener(v -> addCharacter("A"));
+        buttonS.setOnClickListener(v -> addCharacter("S"));
+        buttonD.setOnClickListener(v -> addCharacter("D"));
+        buttonF.setOnClickListener(v -> addCharacter("F"));
+        buttonG.setOnClickListener(v -> addCharacter("G"));
+        buttonH.setOnClickListener(v -> addCharacter("H"));
+        buttonJ.setOnClickListener(v -> addCharacter("J"));
+        buttonK.setOnClickListener(v -> addCharacter("K"));
+        buttonL.setOnClickListener(v -> addCharacter("L"));
+
+        // Rząd 3
+        buttonZ.setOnClickListener(v -> addCharacter("Z"));
+        buttonX.setOnClickListener(v -> addCharacter("X"));
+        buttonC.setOnClickListener(v -> addCharacter("C"));
+        buttonV.setOnClickListener(v -> addCharacter("V"));
+        buttonB.setOnClickListener(v -> addCharacter("B"));
+        buttonN.setOnClickListener(v -> addCharacter("N"));
+        buttonM.setOnClickListener(v -> addCharacter("M"));
+
+        // Przyciski specjalne
+        Button buttonCheck = findViewById(R.id.buttonCheck);
+        buttonCheck.setOnClickListener(v -> sprawdzOdpowiedz());
+
+        Button buttonRandom = findViewById(R.id.buttonRandom);
+        buttonRandom.setOnClickListener(v -> losujInnyZnak());
 
         Button space = findViewById(R.id.buttonSpace);
-        space.setOnClickListener(v -> {
-            input.append(" ");
-            inputText.setText(input.toString());
-        });
+        space.setOnClickListener(v -> addCharacter(" "));
 
         Button delete = findViewById(R.id.buttonDelete);
         delete.setOnClickListener(v -> {
@@ -134,9 +173,11 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
                 inputText.setText(input.toString());
             }
         });
+    }
 
-        przygotujDostepneZnaki();
-        losujNowyZnak();
+    private void addCharacter(String character) {
+        input.append(character);
+        inputText.setText(input.toString());
     }
 
     private void pokazDialogUstawien() {
@@ -316,13 +357,5 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         }
 
         inputText.setText(spannable);
-    }
-
-    private String[] getAlphabetButtons() {
-        return new String[] {
-                "Q","W","E","R","T","Y","U","I","O","P",
-                "A","S","D","F","G","H","J","K","L","X",
-                "C","V","B","N","M","👍","🎲"
-        };
     }
 }

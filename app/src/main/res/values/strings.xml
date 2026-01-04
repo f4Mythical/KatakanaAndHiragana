@@ -56,4 +56,6 @@
     <string name="jasny">Jasny</string>
     <string name="ciemny">Ciemny</string>
     <string name="zmienjezyk">Zmien Jezyk</string>
+
+    <string name="Q">Q</string>
 </resources>

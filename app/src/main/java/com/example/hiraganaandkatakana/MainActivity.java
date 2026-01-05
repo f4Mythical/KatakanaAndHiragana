@@ -16,6 +16,9 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.hiraganaandkatakana.Dialog.GeneralSettingsDialogFragment;
+import com.example.hiraganaandkatakana.Dialog.LoginDialogFragment;
+import com.example.hiraganaandkatakana.Dialog.UserProfileDialogFragment;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

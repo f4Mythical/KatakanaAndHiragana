@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.Dialog;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
+import com.example.hiraganaandkatakana.MainActivity;
+import com.example.hiraganaandkatakana.R;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

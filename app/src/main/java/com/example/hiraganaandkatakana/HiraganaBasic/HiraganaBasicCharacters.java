@@ -75,7 +75,7 @@ public class HiraganaBasicCharacters extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hiragana_basic_znaki);
+        setContentView(R.layout.hiragana_basic_characters);
 
         displayText = findViewById(R.id.displayText);
         inputText = findViewById(R.id.inputText);

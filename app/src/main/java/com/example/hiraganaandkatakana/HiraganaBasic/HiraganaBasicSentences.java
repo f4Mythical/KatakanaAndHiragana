@@ -1,4 +1,16 @@
 package com.example.hiraganaandkatakana.HiraganaBasic;
 
-public class HiraganaBasicSentences {
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hiraganaandkatakana.R;
+
+public class HiraganaBasicSentences extends AppCompatActivity {
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.hiragana_basic_sentences);
+    }
 }

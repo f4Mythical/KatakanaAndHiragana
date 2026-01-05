@@ -18,6 +18,8 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
+import com.example.hiraganaandkatakana.Dialog.LoginDialogFragment;
+import com.example.hiraganaandkatakana.Dialog.UserProfileDialogFragment;
 import com.example.hiraganaandkatakana.HiraganaBasic.WidokBasicHiragana;
 import com.example.hiraganaandkatakana.HiraganaPremium.WidokPremiumHiragana;
 import com.example.hiraganaandkatakana.KatakanaBasic.WidokBasicKatakana;

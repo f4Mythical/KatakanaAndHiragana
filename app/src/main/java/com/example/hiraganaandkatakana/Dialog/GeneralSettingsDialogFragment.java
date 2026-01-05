@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.Dialog;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.DialogFragment;
+
+import com.example.hiraganaandkatakana.LanguageSelectionActivity;
+import com.example.hiraganaandkatakana.R;
 
 public class GeneralSettingsDialogFragment extends DialogFragment {
     private static final String PREFS_NAME = "ustawienia_aplikacji";

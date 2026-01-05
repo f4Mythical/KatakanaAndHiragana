@@ -2,6 +2,7 @@ package com.example.hiraganaandkatakana.KatakanaBasic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -10,6 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicCharacters;
 import com.example.hiraganaandkatakana.HiraganaBasic.WidokBasicHiragana;
 import com.example.hiraganaandkatakana.R;
 
@@ -35,6 +37,11 @@ public class WidokBasicKatakana extends AppCompatActivity {
         ImageButton ibtnBack = findViewById(R.id.buttonBack);
         ibtnBack.setOnClickListener(v -> {
             finish();
+        });
+        Button KatakanaCharacters = findViewById(R.id.buttonZnaki);
+        KatakanaCharacters.setOnClickListener(v -> {
+            Intent intent = new Intent(WidokBasicKatakana.this, KatakanaBasicCharacters.class);
+            startActivity(intent);
         });
     }
 }

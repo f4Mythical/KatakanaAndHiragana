@@ -84,7 +84,6 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         ImageButton settings = findViewById(R.id.buttonSettings);
         settings.setOnClickListener(v -> pokazDialogUstawien());
 
-        // Inicjalizacja klawiatury
         setupKeyboard();
 
         przygotujDostepneZnaki();
@@ -92,7 +91,6 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
     }
 
     private void setupKeyboard() {
-        // Rząd 1: Q W E R T Y U I O P
         Button buttonQ = findViewById(R.id.buttonQ);
         Button buttonW = findViewById(R.id.buttonW);
         Button buttonE = findViewById(R.id.buttonE);
@@ -104,7 +102,6 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         Button buttonO = findViewById(R.id.buttonO);
         Button buttonP = findViewById(R.id.buttonP);
 
-        // Rząd 2: A S D F G H J K L
         Button buttonA = findViewById(R.id.buttonA);
         Button buttonS = findViewById(R.id.buttonS);
         Button buttonD = findViewById(R.id.buttonD);
@@ -115,7 +112,6 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         Button buttonK = findViewById(R.id.buttonK);
         Button buttonL = findViewById(R.id.buttonL);
 
-        // Rząd 3: Z X C V B N M
         Button buttonZ = findViewById(R.id.buttonZ);
         Button buttonX = findViewById(R.id.buttonX);
         Button buttonC = findViewById(R.id.buttonC);
@@ -124,7 +120,6 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         Button buttonN = findViewById(R.id.buttonN);
         Button buttonM = findViewById(R.id.buttonM);
 
-        // Przypisz listenery do wszystkich przycisków liter (rząd 1)
         buttonQ.setOnClickListener(v -> addCharacter("Q"));
         buttonW.setOnClickListener(v -> addCharacter("W"));
         buttonE.setOnClickListener(v -> addCharacter("E"));
@@ -136,7 +131,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         buttonO.setOnClickListener(v -> addCharacter("O"));
         buttonP.setOnClickListener(v -> addCharacter("P"));
 
-        // Rząd 2
+
         buttonA.setOnClickListener(v -> addCharacter("A"));
         buttonS.setOnClickListener(v -> addCharacter("S"));
         buttonD.setOnClickListener(v -> addCharacter("D"));
@@ -147,7 +142,7 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         buttonK.setOnClickListener(v -> addCharacter("K"));
         buttonL.setOnClickListener(v -> addCharacter("L"));
 
-        // Rząd 3
+
         buttonZ.setOnClickListener(v -> addCharacter("Z"));
         buttonX.setOnClickListener(v -> addCharacter("X"));
         buttonC.setOnClickListener(v -> addCharacter("C"));
@@ -156,17 +151,16 @@ public class HiraganaBasicZnaki extends AppCompatActivity {
         buttonN.setOnClickListener(v -> addCharacter("N"));
         buttonM.setOnClickListener(v -> addCharacter("M"));
 
-        // Przyciski specjalne
         Button buttonCheck = findViewById(R.id.buttonCheck);
         buttonCheck.setOnClickListener(v -> sprawdzOdpowiedz());
 
-        Button buttonRandom = findViewById(R.id.buttonRandom);
+        TextView buttonRandom = findViewById(R.id.buttonRandom);
         buttonRandom.setOnClickListener(v -> losujInnyZnak());
 
         Button space = findViewById(R.id.buttonSpace);
         space.setOnClickListener(v -> addCharacter(" "));
 
-        Button delete = findViewById(R.id.buttonDelete);
+        TextView delete = findViewById(R.id.buttonDelete);
         delete.setOnClickListener(v -> {
             if (input.length() > 0) {
                 input.deleteCharAt(input.length() - 1);

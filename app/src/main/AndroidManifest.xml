@@ -22,10 +22,10 @@
 
         <activity android:name=".MainActivity" android:exported="false" />
         <activity android:name=".HiraganaBasicZnaki" android:exported="false" />
-        <activity android:name=".WidokPremiumKatakana" android:exported="false" />
-        <activity android:name=".WidokPremiumHiragana" android:exported="false" />
-        <activity android:name=".WidokBasicKatakana" android:exported="false" />
-        <activity android:name=".WidokBasicHiragana" android:exported="false" />
+        <activity android:name=".KatakanaPremium.WidokPremiumKatakana" android:exported="false" />
+        <activity android:name=".HiraganaPremium.WidokPremiumHiragana" android:exported="false" />
+        <activity android:name=".KatakanaBasic.WidokBasicKatakana" android:exported="false" />
+        <activity android:name=".HiraganaBasic.WidokBasicHiragana" android:exported="false" />
         <activity android:name=".PoczatekHiraganaKatakana" android:exported="false" />
         <activity android:name=".WyborPoziomu.WyborPoziomuKatakana" android:exported="false" />
         <activity android:name=".Slowa.SlowaKatakana" android:exported="false" />

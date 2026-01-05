@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient_orange2"
-    tools:context=".WidokPremiumKatakana">
+    tools:context=".KatakanaPremium.WidokPremiumKatakana">
 
     <ImageButton
         android:id="@+id/buttonBack"

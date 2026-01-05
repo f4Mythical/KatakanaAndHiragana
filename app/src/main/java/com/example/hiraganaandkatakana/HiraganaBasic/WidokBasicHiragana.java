@@ -1,7 +1,8 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.HiraganaBasic;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.activity.EdgeToEdge;
@@ -10,13 +11,16 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class WidokPremiumHiragana extends AppCompatActivity {
+import com.example.hiraganaandkatakana.R;
+import com.example.hiraganaandkatakana.KatakanaBasic.WidokBasicKatakana;
+
+public class WidokBasicHiragana extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_widok_premium_hiragana);
+        setContentView(R.layout.activity_widok_basic_hiragana);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -24,7 +28,7 @@ public class WidokPremiumHiragana extends AppCompatActivity {
         });
         ImageButton ibtnKatakana = findViewById(R.id.imageButtonKatakana);
         ibtnKatakana.setOnClickListener(v -> {
-            Intent intent = new Intent(WidokPremiumHiragana.this, WidokPremiumKatakana.class);
+            Intent intent = new Intent(WidokBasicHiragana.this, WidokBasicKatakana.class);
             startActivity(intent);
             finish();
 
@@ -32,6 +36,14 @@ public class WidokPremiumHiragana extends AppCompatActivity {
         ImageButton ibtnBack = findViewById(R.id.buttonBack);
         ibtnBack.setOnClickListener(v -> {
             finish();
+        });
+        Button btnZnaki = findViewById(R.id.buttonZnaki);
+        btnZnaki.setOnClickListener(v -> {
+            Intent intent1 = new Intent(
+                    WidokBasicHiragana.this,
+                    HiraganaBasicZnaki.class
+            );
+            startActivity(intent1);
         });
     }
 }

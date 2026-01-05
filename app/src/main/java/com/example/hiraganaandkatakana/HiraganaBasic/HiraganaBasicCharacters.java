@@ -1,4 +1,4 @@
-package com.example.hiraganaandkatakana;
+package com.example.hiraganaandkatakana.HiraganaBasic;
 
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -9,16 +9,18 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.hiraganaandkatakana.R;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class HiraganaBasicZnaki extends AppCompatActivity {
+public class HiraganaBasicCharacters extends AppCompatActivity {
 
     private final String[][] hiraPodstawowe = {
             {"あ","a"}, {"い","i"}, {"う","u"}, {"え","e"}, {"お","o"},

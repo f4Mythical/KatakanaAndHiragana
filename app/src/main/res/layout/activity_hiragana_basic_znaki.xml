@@ -12,6 +12,7 @@
         android:id="@+id/buttonBack"
         style="@style/BackButtonStyle"
         android:layout_margin="16dp"
+        android:contentDescription="@string/cofniecie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
@@ -21,7 +22,7 @@
         android:layout_height="48dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@android:drawable/ic_menu_preferences"
-        android:contentDescription="Ustawienia"
+        android:contentDescription="@string/ustawienia_donauki"
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -86,8 +87,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="Q"
-                android:textSize="16sp"
+                android:text="@string/LiteraQ"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -98,8 +99,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="W"
-                android:textSize="16sp"
+                android:text="@string/LiteraW"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -110,8 +111,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="E"
-                android:textSize="16sp"
+                android:text="@string/LiteraE"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -122,8 +123,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="R"
-                android:textSize="16sp"
+                android:text="@string/LiteraR"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -134,8 +135,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="T"
-                android:textSize="16sp"
+                android:text="@string/LiteraT"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -146,8 +147,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="Y"
-                android:textSize="16sp"
+                android:text="@string/LiteraY"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -158,8 +159,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="U"
-                android:textSize="16sp"
+                android:text="@string/LiteraU"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -170,8 +171,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="I"
-                android:textSize="16sp"
+                android:text="@string/LiteraI"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -182,8 +183,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="O"
-                android:textSize="16sp"
+                android:text="@string/LiteraO"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -194,8 +195,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="P"
-                android:textSize="16sp"
+                android:text="@string/LiteraP"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -214,8 +215,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="A"
-                android:textSize="16sp"
+                android:text="@string/LiteraA"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -226,8 +227,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="S"
-                android:textSize="16sp"
+                android:text="@string/LiteraS"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -238,8 +239,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="D"
-                android:textSize="16sp"
+                android:text="@string/LiteraD"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -250,8 +251,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="F"
-                android:textSize="16sp"
+                android:text="@string/LiteraF"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -262,8 +263,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="G"
-                android:textSize="16sp"
+                android:text="@string/LiteraG"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -274,8 +275,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="H"
-                android:textSize="16sp"
+                android:text="@string/LiteraH"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -286,8 +287,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="J"
-                android:textSize="16sp"
+                android:text="@string/LiteraJ"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -298,8 +299,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="K"
-                android:textSize="16sp"
+                android:text="@string/LiteraK"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -310,8 +311,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="L"
-                android:textSize="16sp"
+                android:text="@string/LiteraL"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -330,8 +331,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="Z"
-                android:textSize="16sp"
+                android:text="@string/LiteraZ"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -342,8 +343,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="X"
-                android:textSize="16sp"
+                android:text="@string/LiteraX"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -354,8 +355,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="C"
-                android:textSize="16sp"
+                android:text="@string/LiteraC"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -366,8 +367,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="V"
-                android:textSize="16sp"
+                android:text="@string/LiteraV"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -378,8 +379,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="B"
-                android:textSize="16sp"
+                android:text="@string/LiteraB"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -390,8 +391,8 @@
                 android:layout_width="38dp"
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="N"
-                android:textSize="16sp"
+                android:text="@string/LiteraN"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 android:textColor="@color/tekst_podstawowy"
                 android:backgroundTint="@color/przycisk_klawiatura"/>
@@ -400,13 +401,14 @@
                 android:id="@+id/buttonM"
                 style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="38dp"
+
                 android:layout_height="44dp"
                 android:layout_margin="2dp"
-                android:text="M"
-                android:textSize="16sp"
-                android:textStyle="bold"
+                android:backgroundTint="@color/przycisk_klawiatura"
+                android:text="@string/LiteraM"
                 android:textColor="@color/tekst_podstawowy"
-                android:backgroundTint="@color/przycisk_klawiatura"/>
+                android:textSize="13sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -416,12 +418,12 @@
             android:gravity="center"
             android:layout_marginTop="6dp">
 
-            <TextView
+            <Button
                 android:id="@+id/buttonCheck"
                 android:layout_width="60dp"
                 android:layout_height="44dp"
                 android:layout_marginEnd="4dp"
-                android:text="👍"
+                android:text="@string/sprawdz_klawiatura"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textColor="@color/tekst_na_glownym"
@@ -450,7 +452,7 @@
                 android:layout_height="44dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginEnd="4dp"
-                android:text="🎲"
+                android:text="@string/losuj"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textColor="@color/tekst_na_glownym"
@@ -464,7 +466,7 @@
                 android:id="@+id/buttonDelete"
                 android:layout_width="60dp"
                 android:layout_height="44dp"
-                android:text="⌫"
+                android:text="@string/cofnij_klawiatura"
                 android:textSize="18sp"
                 android:gravity="center"
                 android:textColor="@color/tekst_na_glownym"

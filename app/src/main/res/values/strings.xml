@@ -57,5 +57,38 @@
     <string name="ciemny">Ciemny</string>
     <string name="zmienjezyk">Zmien Jezyk</string>
 
-    <string name="Q">Q</string>
+
+    <!--Znaki-->
+    <string name="LiteraQ">Q</string>
+    <string name="LiteraW">W</string>
+    <string name="LiteraE">E</string>
+    <string name="LiteraR">R</string>
+    <string name="LiteraT">T</string>
+    <string name="LiteraY">Y</string>
+    <string name="LiteraU">U</string>
+    <string name="LiteraI">I</string>
+    <string name="LiteraO">O</string>
+    <string name="LiteraP">P</string>
+    <string name="LiteraA">A</string>
+    <string name="LiteraS">S</string>
+    <string name="LiteraD">D</string>
+    <string name="LiteraF">F</string>
+    <string name="LiteraG">G</string>
+    <string name="LiteraH">H</string>
+    <string name="LiteraJ">J</string>
+    <string name="LiteraK">K</string>
+    <string name="LiteraL">L</string>
+    <string name="LiteraZ">Z</string>
+    <string name="LiteraX">X</string>
+    <string name="LiteraC">C</string>
+    <string name="LiteraV">V</string>
+    <string name="LiteraB">B</string>
+    <string name="LiteraN">N</string>
+    <string name="LiteraM">M</string>
+    <string name="sprawdz_klawiatura">👍</string>
+    <string name="cofnij_klawiatura">⌫</string>
+    <string name="cofniecie">Cofniecie</string>
+    <string name="losuj">🎲</string>
+    <string name="ustawienia_donauki">Ustawienia</string>
+
 </resources>

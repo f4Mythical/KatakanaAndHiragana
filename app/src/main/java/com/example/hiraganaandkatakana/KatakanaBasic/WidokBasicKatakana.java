@@ -38,8 +38,8 @@ public class WidokBasicKatakana extends AppCompatActivity {
         ibtnBack.setOnClickListener(v -> {
             finish();
         });
-        Button KatakanaCharacters = findViewById(R.id.buttonZnaki);
-        KatakanaCharacters.setOnClickListener(v -> {
+        Button katakanaCharacters = findViewById(R.id.buttonZnak);
+        katakanaCharacters.setOnClickListener(v -> {
             Intent intent = new Intent(WidokBasicKatakana.this, KatakanaBasicCharacters.class);
             startActivity(intent);
         });

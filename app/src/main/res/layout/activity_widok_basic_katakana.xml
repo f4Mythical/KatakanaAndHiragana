@@ -34,7 +34,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
-        android:id="@+id/buttonZnaki"
+        android:id="@+id/buttonZnak"
         android:layout_width="0dp"
         android:layout_height="72dp"
         android:layout_marginHorizontal="64dp"

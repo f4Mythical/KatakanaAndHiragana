@@ -9,8 +9,6 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
-
         android:theme="@style/Theme.HiraganaAndKatakana">
 
         <activity android:name=".LanguageSelectionActivity" android:exported="true">
@@ -21,9 +19,12 @@
         </activity>
 
         <activity android:name=".MainActivity" android:exported="false" />
-        <activity android:name=".HiraganaBasicZnaki" android:exported="false" />
-        <activity android:name=".KatakanaPremium.WidokPremiumKatakana" android:exported="false" />
+
+        <activity android:name=".KatakanaBasic.KatakanaBasicCharacters" android:exported="false" />
+        <activity android:name=".HiraganaBasic.HiraganaBasicCharacters" android:exported="false" />
+        <activity android:name=".HiraganaBasic.HiraganaBasicWords" android:exported="false"/>
         <activity android:name=".HiraganaPremium.WidokPremiumHiragana" android:exported="false" />
+        <activity android:name=".KatakanaPremium.WidokPremiumKatakana" android:exported="false" />
         <activity android:name=".KatakanaBasic.WidokBasicKatakana" android:exported="false" />
         <activity android:name=".HiraganaBasic.WidokBasicHiragana" android:exported="false" />
         <activity android:name=".PoczatekHiraganaKatakana" android:exported="false" />

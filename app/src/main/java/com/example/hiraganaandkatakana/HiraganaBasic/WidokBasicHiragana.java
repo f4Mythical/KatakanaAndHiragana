@@ -45,5 +45,13 @@ public class WidokBasicHiragana extends AppCompatActivity {
             );
             startActivity(intent1);
         });
+        Button btnSlowa = findViewById(R.id.buttonSlowa);
+        btnSlowa.setOnClickListener(v -> {
+            Intent intent = new Intent(
+              WidokBasicHiragana.this,
+              HiraganaBasicWords.class
+            );
+            startActivity(intent);
+        });
     }
 }

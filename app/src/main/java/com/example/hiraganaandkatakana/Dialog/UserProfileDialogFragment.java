@@ -91,7 +91,6 @@ public class UserProfileDialogFragment extends DialogFragment {
         logoutText.setOnClickListener(v -> {
             autoryzacja.signOut();
 
-            // Nie wywołuj listenera w MainActivity - unikamy finish()
             if (mListener != null && !(requireActivity() instanceof MainActivity)) {
                 mListener.onUserLoggedOut();
             }

@@ -1,5 +1,9 @@
 package com.example.hiraganaandkatakana.HiraganaBasic;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -10,6 +14,7 @@ import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +24,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.hiraganaandkatakana.R;
+import com.example.hiraganaandkatakana.WordData;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -26,6 +32,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class HiraganaBasicWords extends AppCompatActivity {
@@ -34,8 +41,10 @@ public class HiraganaBasicWords extends AppCompatActivity {
     private TextView odpowiedzPodana;
     private final StringBuilder input = new StringBuilder();
 
-    private final List<String[]> slowa = new ArrayList<>();
+    private final List<WordData> slowa = new ArrayList<>();
     private int aktualnyIndex = -1;
+    private boolean pokazujHiragane = true;
+    private TextView switchLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +63,24 @@ public class HiraganaBasicWords extends AppCompatActivity {
         ImageButton back = findViewById(R.id.buttonBack);
         back.setOnClickListener(v -> finish());
 
+        switchLabel = findViewById(R.id.switchLabel);
+        Switch switchLanguage = findViewById(R.id.switchLanguage);
+        switchLanguage.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            pokazujHiragane = !isChecked;
+            aktualizujWyswietlaneSlowo();
+            aktualizujTekstSwitcha();
+        });
+
         setupKeyboard();
         wczytajSlowaZExcela();
         losujNoweSlowo();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        aktualizujWyswietlaneSlowo();
+        aktualizujTekstSwitcha();
     }
 
     private void wczytajSlowaZExcela() {
@@ -72,9 +96,13 @@ public class HiraganaBasicWords extends AppCompatActivity {
 
                 String hiragana = row.getCell(0).getStringCellValue().trim();
                 String romaji = row.getCell(1).getStringCellValue().trim();
+                String polski = row.getCell(2).getStringCellValue().trim();
+                String angielski = row.getCell(3).getStringCellValue().trim();
+                String hiszpanski = row.getCell(4).getStringCellValue().trim();
+                String kategoria = row.getCell(5).getStringCellValue().trim();
 
                 if (!hiragana.isEmpty() && !romaji.isEmpty()) {
-                    slowa.add(new String[]{hiragana, romaji});
+                    slowa.add(new WordData(hiragana, romaji, polski, angielski, hiszpanski, kategoria));
                 }
             }
 
@@ -96,10 +124,45 @@ public class HiraganaBasicWords extends AppCompatActivity {
 
         Random random = new Random();
         aktualnyIndex = random.nextInt(slowa.size());
-        hiraganaText.setText(slowa.get(aktualnyIndex)[0]);
+        aktualizujWyswietlaneSlowo();
+        aktualizujTekstSwitcha();
         input.setLength(0);
         odpowiedzPodana.setText("");
         odpowiedzPodana.setTextColor(getColor(R.color.tekst_podstawowy));
+    }
+
+    private String getPobranyKodJezyka() {
+        SharedPreferences prefs = getSharedPreferences("ustawienia_aplikacji", MODE_PRIVATE);
+        return prefs.getString("jezyk_aplikacji", "pl");
+    }
+
+    private void aktualizujWyswietlaneSlowo() {
+        if (aktualnyIndex == -1 || slowa.isEmpty()) return;
+
+        String wyswietlanyTekst;
+        if (pokazujHiragane) {
+            wyswietlanyTekst = slowa.get(aktualnyIndex).getHiragana();
+        } else {
+            String kodJezyka = getPobranyKodJezyka();
+            wyswietlanyTekst = slowa.get(aktualnyIndex).getTlumaczenieDlaJezyka(kodJezyka);
+        }
+        hiraganaText.setText(wyswietlanyTekst);
+    }
+
+    private void aktualizujTekstSwitcha() {
+        if (pokazujHiragane) {
+            switchLabel.setText(R.string.hiragana);
+        } else {
+            String kodJezyka = getPobranyKodJezyka();
+            if ("en".equals(kodJezyka)) {
+                switchLabel.setText("English");
+            } else if ("es".equals(kodJezyka)) {
+                switchLabel.setText("Español");
+            } else {
+                switchLabel.setText("Polski");
+            }
+        }
+        switchLabel.setTextColor(getColor(R.color.tekst_podstawowy));
     }
 
     private void setupKeyboard() {
@@ -190,7 +253,7 @@ public class HiraganaBasicWords extends AppCompatActivity {
         String odpowiedz = input.toString().trim();
         if (odpowiedz.isEmpty()) return;
 
-        String poprawna = slowa.get(aktualnyIndex)[1];
+        String poprawna = slowa.get(aktualnyIndex).getRomaji();
 
         if (odpowiedz.equalsIgnoreCase(poprawna)) {
             losujNoweSlowo();

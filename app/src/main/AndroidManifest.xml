@@ -23,6 +23,7 @@
         <activity android:name=".KatakanaBasic.KatakanaBasicCharacters" android:exported="false" />
         <activity android:name=".HiraganaBasic.HiraganaBasicCharacters" android:exported="false" />
         <activity android:name=".HiraganaBasic.HiraganaBasicWords" android:exported="false"/>
+        <activity android:name=".KatakanaBasic.KatakanaBasicWords" android:exported="false"/>
         <activity android:name=".HiraganaPremium.WidokPremiumHiragana" android:exported="false" />
         <activity android:name=".KatakanaPremium.WidokPremiumKatakana" android:exported="false" />
         <activity android:name=".KatakanaBasic.WidokBasicKatakana" android:exported="false" />

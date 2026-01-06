@@ -11,7 +11,6 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicCharacters;
 import com.example.hiraganaandkatakana.HiraganaBasic.WidokBasicHiragana;
 import com.example.hiraganaandkatakana.R;
 
@@ -38,10 +37,16 @@ public class WidokBasicKatakana extends AppCompatActivity {
         ibtnBack.setOnClickListener(v -> {
             finish();
         });
-        Button katakanaCharacters = findViewById(R.id.buttonZnak);
-        katakanaCharacters.setOnClickListener(v -> {
+        Button btnZnaki = findViewById(R.id.buttonZnak);
+        btnZnaki.setOnClickListener(v -> {
             Intent intent = new Intent(WidokBasicKatakana.this, KatakanaBasicCharacters.class);
             startActivity(intent);
         });
+        Button btnSlowa = findViewById(R.id.buttonSlowa);
+        btnSlowa.setOnClickListener(v -> {
+            Intent intent = new Intent(WidokBasicKatakana.this, KatakanaBasicWords.class);
+            startActivity(intent);
+        });
+
     }
 }

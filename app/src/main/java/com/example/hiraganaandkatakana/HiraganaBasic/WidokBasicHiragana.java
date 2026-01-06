@@ -49,7 +49,7 @@ public class WidokBasicHiragana extends AppCompatActivity {
         btnSlowa.setOnClickListener(v -> {
             Intent intent = new Intent(
               WidokBasicHiragana.this,
-              HiraganaBasicWords.class
+                    HiraganaBasicWords.class
             );
             startActivity(intent);
         });

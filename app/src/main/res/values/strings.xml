@@ -91,4 +91,34 @@
     <string name="losuj">🎲</string>
     <string name="ustawienia_donauki">Ustawienia</string>
 
+
+
+    <string name="wybierz_znak">Wybierz przynajmniej jeden znak!</string>
+    <string name="zacznij_nauke">Zacznij naukę</string>
+    <string name="hiragana_podstawowe">Hiragana Podstawowe</string>
+    <string name="hiragana_dakuten">Hiragana Dakuten</string>
+    <string name="hiragana_kombinowane">Hiragana Kombinowane</string>
+    <string name="katakana_podstawowe">Katakana Podstawowe</string>
+    <string name="katakana_dakuten">Katakana Dakuten</string>
+    <string name="katakana_kombinowane">Katakana Kombinowane</string>
+    <string name="dodaj_katakana">DODAJ KATAKANA</string>
+    <string name="ukryj_katakana">UKRYJ KATAKANA</string>
+    <string name="ustaw_powtorzenia">Ustaw powtórzenia</string>
+    <string name="ok">OK</string>
+    <string name="anuluj">Anuluj</string>
+
+    <string name="premium_info">
+Witaj, użytkowniku premium!\n
+Jest to jedna z zaawansowanych funkcji dostępnych w aplikacji.\n
+Możesz wybrać dokładnie, których znaków chcesz się uczyć,\n
+a nawet ustawić częstotliwość ich pojawiania się.\n
+Jeśli klikniesz dwa razy na wybrany znak,\n
+po lewej stronie oraz u góry możesz zaznaczyć\n
+cały rząd lub kolumnę.\n
+Po kliknięciu „Dodaj Katakanę”\n
+dodasz katakanę do ogólnej nauki —\n
+jest to szybsza metoda nauki.
+</string>
+    <string name="pomoc">POMOC</string>
+
 </resources>

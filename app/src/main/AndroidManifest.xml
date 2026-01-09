@@ -32,5 +32,9 @@
         <activity android:name=".WyborPoziomu.WyborPoziomuKatakana" android:exported="false" />
         <activity android:name=".Slowa.SlowaKatakana" android:exported="false" />
         <activity android:name=".Slowa.SlowaHiragana" android:exported="false" />
+
+
+        <activity android:name=".CharacterSelectionActivity" android:exported="false"/>
+    <activity android:name=".WybraneZnakiPremium" android:exported="false"/>
     </application>
 </manifest>

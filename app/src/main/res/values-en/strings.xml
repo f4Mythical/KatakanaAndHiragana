@@ -84,5 +84,39 @@
     <string name="LiteraB">B</string>
     <string name="LiteraN">N</string>
     <string name="LiteraM">M</string>
-    <string name="cofniecie">Cofniecie</string>
+    <string name="sprawdz_klawiatura">👍</string>
+    <string name="cofnij_klawiatura">⌫</string>
+    <string name="cofniecie">Undo</string>
+    <string name="losuj">🎲</string>
+    <string name="ustawienia_donauki">Settings</string>
+
+
+
+
+    <string name="wybierz_znak">Select at least one character!</string>
+    <string name="zacznij_nauke">Start learning</string>
+    <string name="hiragana_podstawowe">Basic Hiragana</string>
+    <string name="hiragana_dakuten">Hiragana Dakuten</string>
+    <string name="hiragana_kombinowane">Combined Hiragana</string>
+    <string name="katakana_podstawowe">Basic Katakana</string>
+    <string name="katakana_dakuten">Katakana Dakuten</string>
+    <string name="katakana_kombinowane">Combined Katakana</string>
+    <string name="dodaj_katakana">ADD KATAKANA</string>
+    <string name="ukryj_katakana">HIDE KATAKANA</string>
+    <string name="ustaw_powtorzenia">Set repetitions</string>
+    <string name="ok">OK</string>
+    <string name="anuluj">Cancel</string>
+    <string name="premium_info">
+Welcome, premium user!\n
+This is one of the advanced features available in the app.\n
+You can choose exactly which characters you want to learn\n
+and even set how often they appear.\n
+If you double-tap a character,\n
+you can select an entire row or column\n
+using the options on the left and at the top.\n
+By tapping “Add Katakana”,\n
+you include katakana in general learning,\n
+which makes studying faster.
+</string>
+<string name="pomoc">HELP</string>
 </resources>

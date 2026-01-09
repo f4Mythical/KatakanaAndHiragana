@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:background="@color/tlo_powierzchnia"
+    android:minWidth="3000000dp"
     android:padding="20dp">
 
     <TextView
@@ -22,6 +22,7 @@
         android:layout_height="wrap_content"
         android:text="@string/tryb"
         android:textSize="18sp"
+        android:gravity="center"
         android:textColor="@color/tekst_podstawowy"
         android:textStyle="bold"
         android:paddingTop="8dp"

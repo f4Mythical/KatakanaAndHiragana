@@ -28,7 +28,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     private MaterialButton btnGotowy;
     private HashMap<String, Locale> mapaJezykow = new HashMap<>();
     private SharedPreferences preferencje;
-    private String wybranyKodJezyka = "pl";
+    private String wybranyKodJezyka = "en";
 
     @Override
     protected void onCreate(Bundle zapisStanu) {
@@ -54,7 +54,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     }
 
     private void wczytajZapisanyJezyk() {
-        wybranyKodJezyka = preferencje.getString("jezyk_aplikacji", "pl");
+        wybranyKodJezyka = preferencje.getString("jezyk_aplikacji", "en");
     }
 
     private void zapiszJezyk(String kod) {
@@ -76,8 +76,8 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     }
 
     private void przygotujMapeJezykow() {
-        mapaJezykow.put("Polski", new Locale("pl"));
         mapaJezykow.put("English", new Locale("en"));
+        mapaJezykow.put("Polski", new Locale("pl"));
         mapaJezykow.put("Español", new Locale("es"));
     }
 
@@ -114,7 +114,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
                 return entry.getKey();
             }
         }
-        return "Polski";
+        return "English";
     }
 
     private void odswiezTekstyInterfejsu() {

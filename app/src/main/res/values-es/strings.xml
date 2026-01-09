@@ -85,5 +85,37 @@
     <string name="LiteraB">B</string>
     <string name="LiteraN">N</string>
     <string name="LiteraM">M</string>
-    <string name="cofniecie">Cofniecie</string>
+    <string name="sprawdz_klawiatura">👍</string>
+    <string name="cofnij_klawiatura">⌫</string>
+    <string name="cofniecie">Deshacer</string>
+    <string name="losuj">🎲</string>
+    <string name="ustawienia_donauki">Configuración</string>
+
+
+    <string name="wybierz_znak">¡Selecciona al menos un carácter!</string>
+    <string name="zacznij_nauke">Comenzar a aprender</string>
+    <string name="hiragana_podstawowe">Hiragana básica</string>
+    <string name="hiragana_dakuten">Hiragana con dakuten</string>
+    <string name="hiragana_kombinowane">Hiragana combinada</string>
+    <string name="katakana_podstawowe">Katakana básica</string>
+    <string name="katakana_dakuten">Katakana con dakuten</string>
+    <string name="katakana_kombinowane">Katakana combinada</string>
+    <string name="dodaj_katakana">AÑADIR KATAKANA</string>
+    <string name="ukryj_katakana">OCULTAR KATAKANA</string>
+    <string name="ustaw_powtorzenia">Configurar repeticiones</string>
+    <string name="ok">OK</string>
+    <string name="anuluj">Cancelar</string>
+    <string name="premium_info">
+¡Bienvenido, usuario premium!\n
+Esta es una de las funciones avanzadas disponibles en la aplicación.\n
+Puedes elegir exactamente qué caracteres deseas aprender\n
+e incluso configurar la frecuencia con la que aparecen.\n
+Si tocas dos veces un carácter,\n
+puedes seleccionar una fila o columna completa\n
+usando las opciones de la izquierda y la parte superior.\n
+Al pulsar “Añadir Katakana”,\n
+agregas katakana al aprendizaje general,\n
+lo que hace el estudio más rápido.
+</string>
+<string name="pomoc">AYUDA</string>
 </resources>

@@ -1,12 +1,27 @@
 package com.example.hiraganaandkatakana;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicCharacters;
+import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicSentences;
+import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicWords;
+import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumCharacters;
+import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumSentences;
+import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumWords;
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicSentences;
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicWords;
+import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumCharacters;
+import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumSentences;
+import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumWords;
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicCharacters;
 public class Probny extends AppCompatActivity {
 
     private boolean isHiraganaActive = true;
@@ -14,16 +29,116 @@ public class Probny extends AppCompatActivity {
     private TextView tabHiragana, tabKatakana;
     private Button btnZnakiH, btnSlowaH, btnZdaniaH;
     private Button btnZnakiK, btnSlowaK, btnZdaniaK;
+    private Button back;
     private ConstraintLayout mainLayout;
-
+    private boolean isPremium = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.test_nic_robic_nie_bede_pozniej_zmienie);
+        isPremium = getIntent().getBooleanExtra("czyMaPremium", false);
 
         initViews();
         setupTabs();
         showHiragana();
+        back.setOnClickListener(v -> {finish();});
+        btnZnakiH.setOnClickListener(v -> {
+            if (isPremium) {
+                Intent intent = new Intent(
+                        Probny.this,
+                        HiraganaPremiumCharacters.class
+                );
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(
+                        Probny.this,
+                        HiraganaBasicCharacters.class
+                );
+                startActivity(intent);
+            }
+        });
+        btnSlowaH.setOnClickListener(v -> {
+            if(isPremium){
+                Intent intent = new Intent(
+                        Probny.this,
+                        HiraganaPremiumWords.class
+                );
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(
+                        Probny.this,
+                        HiraganaBasicWords.class
+                );
+                startActivity(intent);
+            }
+        });
+        btnZdaniaH.setOnClickListener(v -> {
+            if(isPremium){
+                Intent intent = new Intent(
+                        Probny.this,
+                        HiraganaPremiumSentences.class
+                );
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(
+                        Probny.this,
+                        HiraganaBasicSentences.class
+                );
+                startActivity(intent);
+            }
+        });
+        btnZnakiK.setOnClickListener(v -> {
+            if (isPremium) {
+                Intent intent = new Intent(
+                        Probny.this,
+                        KatakanaPremiumCharacters.class
+                );
+                startActivity(intent);
+            }
+            else {
+                Intent intent = new Intent(
+                        Probny.this,
+                        KatakanaBasicCharacters.class
+                );
+                startActivity(intent);
+            }
+        });
+        btnSlowaK.setOnClickListener(v -> {
+            if(isPremium){
+                Intent intent = new Intent(
+                        Probny.this,
+                        KatakanaPremiumWords.class
+                );
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(
+                        Probny.this,
+                        KatakanaBasicWords.class
+                );
+                startActivity(intent);
+            }
+        });
+        btnZdaniaK.setOnClickListener(v -> {
+            if(isPremium){
+                Intent intent = new Intent(
+                        Probny.this,
+                        KatakanaPremiumSentences.class
+                );
+                startActivity(intent);
+            }
+            else{
+                Intent intent = new Intent(
+                        Probny.this,
+                        KatakanaBasicSentences.class
+                );
+                startActivity(intent);
+            }
+        });
     }
 
     private void initViews() {
@@ -39,6 +154,7 @@ public class Probny extends AppCompatActivity {
         btnZdaniaK = findViewById(R.id.buttonZdaniaKatakana);
 
         mainLayout = findViewById(R.id.main);
+        back = findViewById(R.id.buttonBack);
     }
 
     private void setupTabs() {

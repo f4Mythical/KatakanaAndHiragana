@@ -20,14 +20,28 @@
 
         <activity android:name=".MainActivity" android:exported="false" />
 
-        <activity android:name=".KatakanaBasic.KatakanaBasicCharacters" android:exported="false" />
+        <activity android:name=".HiraganaBasic.HiraganaBasicSenteces" android:exported="false" />
         <activity android:name=".HiraganaBasic.HiraganaBasicCharacters" android:exported="false" />
         <activity android:name=".HiraganaBasic.HiraganaBasicWords" android:exported="false"/>
-        <activity android:name=".KatakanaBasic.KatakanaBasicWords" android:exported="false"/>
-        <activity android:name=".HiraganaPremium.WidokPremiumHiragana" android:exported="false" />
-        <activity android:name=".KatakanaPremium.WidokPremiumKatakana" android:exported="false" />
-        <activity android:name=".KatakanaBasic.WidokBasicKatakana" android:exported="false" />
         <activity android:name=".HiraganaBasic.WidokBasicHiragana" android:exported="false" />
+
+        <activity android:name=".KatakanaBasic.WidokBasicKatakana" android:exported="false" />
+        <activity android:name=".KatakanaBasic.KatakanaBasicWords" android:exported="false"/>
+        <activity android:name=".KatakanaBasic.KatakanaBasicSentences" android:exported="false"/>
+        <activity android:name=".KatakanaBasic.KatakanaBasicCharacters" android:exported="false"/>
+        <activity android:name=".KatakanaBasic.KatakanaBasicCharacters" android:exported="false"/>
+        <activity android:name=".KatakanaBasic.KatakanaBasicSentences" android:exported="false"/>
+
+        <activity android:name=".HiraganaPremium.WidokPremiumHiragana" android:exported="false" />
+        <activity android:name=".HiraganaPremium.HiraganaPremiumSentences" android:exported="false"/>
+        <activity android:name=".HiraganaPremium.HiraganaPremiumWords" android:exported="false"/>
+        <activity android:name=".HiraganaPremium.HiraganaPremiumCharacters" android:exported="false"/>
+
+        <activity android:name=".KatakanaPremium.WidokPremiumKatakana" android:exported="false" />
+        <activity android:name=".KatakanaPremium.KatakanaPremiumWords" android:exported="false"/>
+        <activity android:name=".KatakanaPremium.KatakanaPremiumSentences" android:exported="false"/>
+        <activity android:name=".KatakanaPremium.KatakanaPremiumCharacters" android:exported="false"/>
+
         <activity android:name=".PoczatekHiraganaKatakana" android:exported="false" />
         <activity android:name=".WyborPoziomu.WyborPoziomuKatakana" android:exported="false" />
         <activity android:name=".Slowa.SlowaKatakana" android:exported="false" />
@@ -35,7 +49,7 @@
 
 
         <activity android:name=".CharacterSelectionActivity" android:exported="false"/>
-    <activity android:name=".WybraneZnakiPremium" android:exported="false"/>
+        <activity android:name=".WybraneZnakiPremium" android:exported="false"/>
         <activity android:name=".Probny" android:exported="false"/>
     </application>
 </manifest>

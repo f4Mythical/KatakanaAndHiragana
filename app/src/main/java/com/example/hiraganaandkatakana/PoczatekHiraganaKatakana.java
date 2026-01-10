@@ -169,6 +169,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
         przyciskPodstawoweHiragana.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, Probny.class);
+            intent.putExtra("czyMaPremium", premiumTracker.getCzyMaPremium());
             startActivity(intent);
         });
 

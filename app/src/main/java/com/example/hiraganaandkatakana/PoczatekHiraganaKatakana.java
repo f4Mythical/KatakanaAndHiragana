@@ -168,7 +168,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         }));
 
         przyciskPodstawoweHiragana.setOnClickListener(v -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicHiragana.class);
+            Intent intent = new Intent(PoczatekHiraganaKatakana.this, Probny.class);
             startActivity(intent);
         });
 

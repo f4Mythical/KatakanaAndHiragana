@@ -36,5 +36,6 @@
 
         <activity android:name=".CharacterSelectionActivity" android:exported="false"/>
     <activity android:name=".WybraneZnakiPremium" android:exported="false"/>
+        <activity android:name=".Probny" android:exported="false"/>
     </application>
 </manifest>

@@ -4,11 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
 import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicCharacters;
 import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicSentences;
@@ -29,7 +33,7 @@ public class Probny extends AppCompatActivity {
     private TextView tabHiragana, tabKatakana;
     private Button btnZnakiH, btnSlowaH, btnZdaniaH;
     private Button btnZnakiK, btnSlowaK, btnZdaniaK;
-    private Button back;
+    private ImageButton back;
     private ConstraintLayout mainLayout;
     private boolean isPremium = false;
     @Override
@@ -37,6 +41,11 @@ public class Probny extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.test_nic_robic_nie_bede_pozniej_zmienie);
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
         isPremium = getIntent().getBooleanExtra("czyMaPremium", false);
 
         initViews();

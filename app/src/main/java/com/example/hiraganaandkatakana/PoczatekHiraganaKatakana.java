@@ -41,7 +41,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     private FragmentManager fragmentManager;
     private boolean czyMaPremium = false;
     private boolean statusPremiumZaladowany = false;
-    private Button przyciskPremiumHiragana, przyciskPremiumKatakana;
+    private Button zacznijNauke;
     private PremiumStatusTracker premiumTracker;
 
     String[][] hiraPodstawowe = {
@@ -146,50 +146,24 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         Button przyciskDakuten = findViewById(R.id.buttonDakuten);
         Button przyciskKombinowane = findViewById(R.id.buttonKombinowane);
 
-        Button przyciskPodstawoweHiragana = findViewById(R.id.buttonBasicHiragana);
-        Button przyciskPodstawoweKatakana = findViewById(R.id.buttonBasicKatakana);
-        przyciskPremiumHiragana = findViewById(R.id.buttonPremiumHiragana);
-        przyciskPremiumKatakana = findViewById(R.id.buttonPremiumKatakana);
+        zacznijNauke = findViewById(R.id.zacznijNauke);
 
-        przyciskPremiumHiragana.setEnabled(false);
-        przyciskPremiumHiragana.setAlpha(0.5f);
-        przyciskPremiumKatakana.setEnabled(false);
-        przyciskPremiumKatakana.setAlpha(0.5f);
-        statusPremiumZaladowany = false;
 
-        przyciskPremiumHiragana.setOnClickListener(v -> obsluzPrzyciskPremium(() -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokPremiumHiragana.class);
-            startActivity(intent);
-        }));
 
-        przyciskPremiumKatakana.setOnClickListener(v -> obsluzPrzyciskPremium(() -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokPremiumKatakana.class);
-            startActivity(intent);
-        }));
-
-        przyciskPodstawoweHiragana.setOnClickListener(v -> {
+        zacznijNauke.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, Probny.class);
             intent.putExtra("czyMaPremium", premiumTracker.getCzyMaPremium());
             startActivity(intent);
         });
 
-        przyciskPodstawoweKatakana.setOnClickListener(v -> {
-            Intent intent = new Intent(PoczatekHiraganaKatakana.this, WidokBasicKatakana.class);
-            startActivity(intent);
-        });
-
         przyciskWstecz.setOnClickListener(v -> finish());
 
-        LinearLayout layoutHiragana = findViewById(R.id.layoutHiraganaButtons);
-        LinearLayout layoutKatakana = findViewById(R.id.layoutKatakanaButtons);
 
         zakladkaHiragana.setOnClickListener(v -> {
             if (!czyHiragana) {
                 czyHiragana = true;
                 ustawStyleZakladek(zakladkaHiragana, zakladkaKatakana);
                 ustawZestaw();
-                layoutHiragana.setVisibility(View.VISIBLE);
-                layoutKatakana.setVisibility(View.GONE);
             }
         });
 
@@ -198,8 +172,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
                 czyHiragana = false;
                 ustawStyleZakladek(zakladkaHiragana, zakladkaKatakana);
                 ustawZestaw();
-                layoutHiragana.setVisibility(View.GONE);
-                layoutKatakana.setVisibility(View.VISIBLE);
             }
         });
 
@@ -241,7 +213,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
                 premiumTracker.stopListening();
                 przyciskAuth.setImageResource(R.drawable.login);
                 przyciskAuth.setContentDescription("Zaloguj się");
-                aktualizujStanPrzyciskowPremium();
             }
         };
 
@@ -249,15 +220,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
         aktualnyZestaw = hiraPodstawowe;
         wyswietlZestaw();
-        aktualizujStanPrzyciskowPremium();
-    }
-
-    private void obsluzPrzyciskPremium(Runnable akcjaDlaPremium) {
-        if (czyMaPremium) {
-            akcjaDlaPremium.run();
-        } else {
-            Toast.makeText(this, "Aby uzyskać dostęp do tej funkcji, potrzebujesz konta Premium!", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void obsluzPrzyciskAuth() {
@@ -268,24 +230,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
             dialog.show(fragmentManager, "logowanie");
-        }
-    }
-
-    private void aktualizujStanPrzyciskowPremium() {
-        if (!statusPremiumZaladowany) {
-            return;
-        }
-
-        przyciskPremiumHiragana.setEnabled(czyMaPremium);
-        przyciskPremiumHiragana.setAlpha(czyMaPremium ? 1.0f : 0.5f);
-        przyciskPremiumKatakana.setEnabled(czyMaPremium);
-        przyciskPremiumKatakana.setAlpha(czyMaPremium ? 1.0f : 0.5f);
-
-        if (!czyMaPremium) {
-            przyciskPremiumHiragana.setEnabled(false);
-            przyciskPremiumHiragana.setAlpha(0.5f);
-            przyciskPremiumKatakana.setEnabled(false);
-            przyciskPremiumKatakana.setAlpha(0.5f);
         }
     }
 
@@ -307,7 +251,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             premiumTracker.stopListening();
             przyciskAuth.setImageResource(R.drawable.login);
             przyciskAuth.setContentDescription("Zaloguj się");
-            aktualizujStanPrzyciskowPremium();
         }
     }
 
@@ -335,7 +278,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             przyciskAuth.setImageResource(R.drawable.login);
             przyciskAuth.setContentDescription("Zaloguj się");
         }
-        aktualizujStanPrzyciskowPremium();
     }
 
     @Override
@@ -346,7 +288,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         premiumTracker.stopListening();
         przyciskAuth.setImageResource(R.drawable.login);
         przyciskAuth.setContentDescription("Zaloguj się");
-        aktualizujStanPrzyciskowPremium();
         finish();
     }
 
@@ -354,7 +295,6 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     public void onPremiumStatusChanged(boolean czyMaPremium) {
         this.czyMaPremium = czyMaPremium;
         statusPremiumZaladowany = true;
-        runOnUiThread(this::aktualizujStanPrzyciskowPremium);
     }
 
     @Override

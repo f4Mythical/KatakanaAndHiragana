@@ -80,7 +80,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
-    <!-- Przyciski Hiragana -->
     <Button
         android:id="@+id/buttonZnakiHiragana"
         android:layout_width="0dp"
@@ -132,7 +131,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Przyciski Katakana (początkowo ukryte) -->
     <Button
         android:id="@+id/buttonZnakiKatakana"
         android:layout_width="0dp"
@@ -187,7 +185,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Placeholder na dole (możesz usunąć, jeśli niepotrzebny) -->
     <TextView
         android:id="@+id/textView3"
         android:layout_width="0dp"

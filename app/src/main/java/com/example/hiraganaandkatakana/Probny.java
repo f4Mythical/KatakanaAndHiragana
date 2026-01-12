@@ -3,212 +3,248 @@ package com.example.hiraganaandkatakana;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.FragmentManager;
 
-import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicCharacters;
-import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicSentences;
-import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicWords;
-import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumCharacters;
-import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumSentences;
-import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumWords;
-import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicSentences;
-import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicWords;
-import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumCharacters;
-import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumSentences;
-import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumWords;
-import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicCharacters;
-public class Probny extends AppCompatActivity {
+import com.example.hiraganaandkatakana.Dialog.LoginDialogFragment;
+import com.example.hiraganaandkatakana.Dialog.UserProfileDialogFragment;
+import com.example.hiraganaandkatakana.HiraganaBasic.*;
+import com.example.hiraganaandkatakana.HiraganaPremium.*;
+import com.example.hiraganaandkatakana.KatakanaBasic.*;
+import com.example.hiraganaandkatakana.KatakanaPremium.*;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+public class Probny extends AppCompatActivity implements AuthCallback,
+        UserProfileDialogFragment.OnProfileDialogListener,
+        PremiumStatusTracker.OnPremiumStatusChangedListener {
 
     private boolean isHiraganaActive = true;
+    private boolean isPremium = false;
+    private boolean statusPremiumZaladowany = false;
 
     private TextView tabHiragana, tabKatakana;
-    private Button btnZnakiH, btnSlowaH, btnZdaniaH;
-    private Button btnZnakiK, btnSlowaK, btnZdaniaK;
-    private ImageButton back;
-    private ConstraintLayout mainLayout;
-    private boolean isPremium = false;
+    private ImageButton buttonBack, imageButtonAuth;
+    private LinearLayout buttonCharacters, buttonWords, buttonSentences;
+    private TextView iconCharacters, iconWords, iconSentences;
+
+    private FirebaseAuth autoryzacja;
+    private FirebaseAuth.AuthStateListener authStateListener;
+    private PremiumStatusTracker premiumTracker;
+    private FragmentManager fragmentManager;
+    private long czasZalogowania = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.test_nic_robic_nie_bede_pozniej_zmienie);
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        isPremium = getIntent().getBooleanExtra("czyMaPremium", false);
 
+        initFirebase();
         initViews();
         setupTabs();
-        showHiragana();
-        back.setOnClickListener(v -> {finish();});
-        btnZnakiH.setOnClickListener(v -> {
-            if (isPremium) {
-                Intent intent = new Intent(
-                        Probny.this,
-                        HiraganaPremiumCharacters.class
-                );
-                startActivity(intent);
-            }
-            else {
-                Intent intent = new Intent(
-                        Probny.this,
-                        HiraganaBasicCharacters.class
-                );
-                startActivity(intent);
-            }
-        });
-        btnSlowaH.setOnClickListener(v -> {
-            if(isPremium){
-                Intent intent = new Intent(
-                        Probny.this,
-                        HiraganaPremiumWords.class
-                );
-                startActivity(intent);
-            }
-            else{
-                Intent intent = new Intent(
-                        Probny.this,
-                        HiraganaBasicWords.class
-                );
-                startActivity(intent);
-            }
-        });
-        btnZdaniaH.setOnClickListener(v -> {
-            if(isPremium){
-                Intent intent = new Intent(
-                        Probny.this,
-                        HiraganaPremiumSentences.class
-                );
-                startActivity(intent);
-            }
-            else{
-                Intent intent = new Intent(
-                        Probny.this,
-                        HiraganaBasicSentences.class
-                );
-                startActivity(intent);
-            }
-        });
-        btnZnakiK.setOnClickListener(v -> {
-            if (isPremium) {
-                Intent intent = new Intent(
-                        Probny.this,
-                        KatakanaPremiumCharacters.class
-                );
-                startActivity(intent);
-            }
-            else {
-                Intent intent = new Intent(
-                        Probny.this,
-                        KatakanaBasicCharacters.class
-                );
-                startActivity(intent);
-            }
-        });
-        btnSlowaK.setOnClickListener(v -> {
-            if(isPremium){
-                Intent intent = new Intent(
-                        Probny.this,
-                        KatakanaPremiumWords.class
-                );
-                startActivity(intent);
-            }
-            else{
-                Intent intent = new Intent(
-                        Probny.this,
-                        KatakanaBasicWords.class
-                );
-                startActivity(intent);
-            }
-        });
-        btnZdaniaK.setOnClickListener(v -> {
-            if(isPremium){
-                Intent intent = new Intent(
-                        Probny.this,
-                        KatakanaPremiumSentences.class
-                );
-                startActivity(intent);
-            }
-            else{
-                Intent intent = new Intent(
-                        Probny.this,
-                        KatakanaBasicSentences.class
-                );
-                startActivity(intent);
-            }
-        });
+        setupButtons();
+        setupAuth();
+    }
+
+    private void initFirebase() {
+        autoryzacja = FirebaseAuth.getInstance();
+        premiumTracker = PremiumStatusTracker.getInstance();
+        premiumTracker.setOnPremiumStatusChangedListener(this);
+        fragmentManager = getSupportFragmentManager();
+
+        isPremium = getIntent().getBooleanExtra("czyMaPremium", false);
+        statusPremiumZaladowany = isPremium;
     }
 
     private void initViews() {
         tabHiragana = findViewById(R.id.tabHiragana);
         tabKatakana = findViewById(R.id.tabKatakana);
+        buttonBack = findViewById(R.id.buttonBack);
+        imageButtonAuth = findViewById(R.id.imageButtonAuth);
 
-        btnZnakiH = findViewById(R.id.buttonZnakiHiragana);
-        btnSlowaH = findViewById(R.id.buttonSlowaHiragana);
-        btnZdaniaH = findViewById(R.id.buttonZdaniaHiragana);
+        buttonCharacters = findViewById(R.id.buttonCharacters);
+        buttonWords = findViewById(R.id.buttonWords);
+        buttonSentences = findViewById(R.id.buttonSentences);
 
-        btnZnakiK = findViewById(R.id.buttonZnakiKatakana);
-        btnSlowaK = findViewById(R.id.buttonSlowaKatakana);
-        btnZdaniaK = findViewById(R.id.buttonZdaniaKatakana);
-
-        mainLayout = findViewById(R.id.main);
-        back = findViewById(R.id.buttonBack);
+        iconCharacters = findViewById(R.id.iconCharacters);
+        iconWords = findViewById(R.id.iconWords);
+        iconSentences = findViewById(R.id.iconSentences);
     }
 
     private void setupTabs() {
         tabHiragana.setOnClickListener(v -> {
             if (!isHiraganaActive) {
                 isHiraganaActive = true;
-                showHiragana();
+                updateUIForCurrentTab();
             }
         });
 
         tabKatakana.setOnClickListener(v -> {
             if (isHiraganaActive) {
                 isHiraganaActive = false;
-                showKatakana();
+                updateUIForCurrentTab();
             }
         });
+
+        buttonBack.setOnClickListener(v -> finish());
     }
 
-    private void showHiragana() {
-        btnZnakiH.setVisibility(View.VISIBLE);
-        btnSlowaH.setVisibility(View.VISIBLE);
-        btnZdaniaH.setVisibility(View.VISIBLE);
-
-        btnZnakiK.setVisibility(View.GONE);
-        btnSlowaK.setVisibility(View.GONE);
-        btnZdaniaK.setVisibility(View.GONE);
-
-
-
-        tabHiragana.setBackgroundColor(getColor(R.color.tlo_powierzchnia));
-        tabKatakana.setBackgroundColor(getColor(R.color.tlo_zakladki));
+    private void setupButtons() {
+        buttonCharacters.setOnClickListener(v -> openCharactersActivity());
+        buttonWords.setOnClickListener(v -> openWordsActivity());
+        buttonSentences.setOnClickListener(v -> openSentencesActivity());
     }
 
-    private void showKatakana() {
-        btnZnakiH.setVisibility(View.GONE);
-        btnSlowaH.setVisibility(View.GONE);
-        btnZdaniaH.setVisibility(View.GONE);
+    private void setupAuth() {
+        authStateListener = firebaseAuth -> {
+            FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
+            if (uzytkownik != null) {
+                czasZalogowania = System.currentTimeMillis();
+                premiumTracker.startListening();
+                premiumTracker.aktualizujStatusDlaUzytkownika();
+                imageButtonAuth.setImageResource(R.drawable.konto1);
+                imageButtonAuth.setContentDescription("Mój profil");
+            } else {
+                czasZalogowania = 0;
+                isPremium = false;
+                statusPremiumZaladowany = false;
+                premiumTracker.stopListening();
+                imageButtonAuth.setImageResource(R.drawable.login);
+                imageButtonAuth.setContentDescription("Zaloguj się");
+            }
+        };
 
-        btnZnakiK.setVisibility(View.VISIBLE);
-        btnSlowaK.setVisibility(View.VISIBLE);
-        btnZdaniaK.setVisibility(View.VISIBLE);
+        imageButtonAuth.setOnClickListener(v -> obsluzPrzyciskAuth());
+    }
 
+    private void obsluzPrzyciskAuth() {
+        FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
+        if (aktualnyUzytkownik != null) {
+            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(
+                    czasZalogowania,
+                    premiumTracker.getCzyMaPremium()
+            );
+            dialog.show(fragmentManager, "profilUzytkownika");
+        } else {
+            LoginDialogFragment dialog = new LoginDialogFragment();
+            dialog.show(fragmentManager, "logowanie");
+        }
+    }
 
+    private void openCharactersActivity() {
+        Intent intent;
+        boolean premium = premiumTracker.getCzyMaPremium();
+        if (isHiraganaActive) {
+            intent = new Intent(this, premium ?
+                    HiraganaPremiumCharacters.class : HiraganaBasicCharacters.class);
+        } else {
+            intent = new Intent(this, premium ?
+                    KatakanaPremiumCharacters.class : KatakanaBasicCharacters.class);
+        }
+        intent.putExtra("czyMaPremium", premium);
+        startActivity(intent);
+    }
 
-        tabKatakana.setBackgroundColor(getColor(R.color.tlo_powierzchnia));
-        tabHiragana.setBackgroundColor(getColor(R.color.tlo_zakladki));
+    private void openWordsActivity() {
+        Intent intent;
+        boolean premium = premiumTracker.getCzyMaPremium();
+        if (isHiraganaActive) {
+            intent = new Intent(this, premium ?
+                    HiraganaPremiumWords.class : HiraganaBasicWords.class);
+        } else {
+            intent = new Intent(this, premium ?
+                    KatakanaPremiumWords.class : KatakanaBasicWords.class);
+        }
+        intent.putExtra("czyMaPremium", premium);
+        startActivity(intent);
+    }
+
+    private void openSentencesActivity() {
+        Intent intent;
+        boolean premium = premiumTracker.getCzyMaPremium();
+        if (isHiraganaActive) {
+            intent = new Intent(this, premium ?
+                    HiraganaPremiumSentences.class : HiraganaBasicSentences.class);
+        } else {
+            intent = new Intent(this, premium ?
+                    KatakanaPremiumSentences.class : KatakanaBasicSentences.class);
+        }
+        intent.putExtra("czyMaPremium", premium);
+        startActivity(intent);
+    }
+
+    private void updateUIForCurrentTab() {
+        if (isHiraganaActive) {
+            tabHiragana.setBackgroundColor(getColor(R.color.tlo_powierzchnia));
+            tabKatakana.setBackgroundColor(getColor(R.color.tlo_zakladki));
+            iconCharacters.setText("あ");
+            iconWords.setText("本");
+            iconSentences.setText("文");
+        } else {
+            tabKatakana.setBackgroundColor(getColor(R.color.tlo_powierzchnia));
+            tabHiragana.setBackgroundColor(getColor(R.color.tlo_zakladki));
+            iconCharacters.setText("ア");
+            iconWords.setText("本");
+            iconSentences.setText("文");
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        autoryzacja.addAuthStateListener(authStateListener);
+        premiumTracker.startListening();
+        premiumTracker.aktualizujStatusDlaUzytkownika();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        premiumTracker.stopListening();
+        autoryzacja.removeAuthStateListener(authStateListener);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        premiumTracker.stopListening();
+    }
+
+    @Override
+    public void onUserAuthenticated() {
+        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
+        if (uzytkownik != null) {
+            czasZalogowania = System.currentTimeMillis();
+            premiumTracker.startListening();
+            premiumTracker.aktualizujStatusDlaUzytkownika();
+        }
+    }
+
+    @Override
+    public void onUserLoggedOut() {
+        czasZalogowania = 0;
+        isPremium = false;
+        statusPremiumZaladowany = false;
+        premiumTracker.stopListening();
+        finish();
+    }
+
+    @Override
+    public void onPremiumStatusChanged(boolean czyMaPremium) {
+        this.isPremium = czyMaPremium;
+        this.statusPremiumZaladowany = true;
     }
 }

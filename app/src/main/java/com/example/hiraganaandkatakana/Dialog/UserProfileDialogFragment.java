@@ -74,6 +74,7 @@ public class UserProfileDialogFragment extends DialogFragment {
         TextView emailTextView = view.findViewById(R.id.emailTextView);
         TextView premiumTextView = view.findViewById(R.id.premiumTextView);
         sessionTextView = view.findViewById(R.id.sessionTextView);
+        TextView settingsText = view.findViewById(R.id.settingsText);
         TextView logoutText = view.findViewById(R.id.logoutText);
 
         FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
@@ -87,6 +88,12 @@ public class UserProfileDialogFragment extends DialogFragment {
         }
 
         startTimer();
+
+        settingsText.setOnClickListener(v -> {
+            dismiss();
+            GeneralSettingsDialogFragment settingsDialog = new GeneralSettingsDialogFragment();
+            settingsDialog.show(requireActivity().getSupportFragmentManager(), "GeneralSettingsDialogFragment");
+        });
 
         logoutText.setOnClickListener(v -> {
             autoryzacja.signOut();

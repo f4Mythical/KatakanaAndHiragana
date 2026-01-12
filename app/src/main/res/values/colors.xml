@@ -26,4 +26,5 @@
     <color name="przycisk_klawiatura">#FFCCBC</color>
     <color name="poprawny">#4CAF50</color>
     <color name="bledny">#B71C1C</color>
+    <color name="tekst_sukces">#4CAF50</color>
 </resources>

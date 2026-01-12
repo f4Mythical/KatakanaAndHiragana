@@ -27,16 +27,35 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:id="@+id/poleHaslo"
-        android:hint="@string/haslo"
-        android:inputType="textPassword"
-        android:textColor="@color/tekst_podstawowy"
-        android:textColorHint="@color/tekst_podpowiedz"
-        android:minHeight="48dp"
-        android:layout_marginTop="8dp"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/poleHaslo"
+            android:hint="@string/haslo"
+            android:inputType="textPassword"
+            android:textColor="@color/tekst_podstawowy"
+            android:textColorHint="@color/tekst_podpowiedz"
+            android:minHeight="48dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tekstZapomnialemHasla"
+            android:text="Zapomniałem hasła"
+            android:textColor="@color/tekst_glowny"
+            android:alpha="0.7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:paddingEnd="16dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"/>
+
+    </FrameLayout>
 
     <TextView
         android:id="@+id/tekstBladLogowanie"

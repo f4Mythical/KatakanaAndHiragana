@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
@@ -35,6 +36,7 @@ public class LoginDialogFragment extends DialogFragment {
         EditText poleHaslo = view.findViewById(R.id.poleHaslo);
         Button przyciskLogowanie = view.findViewById(R.id.przyciskLogowanie);
         TextView tekstRejestracja = view.findViewById(R.id.tekstRejestracja);
+        TextView tekstZapomnialemHasla = view.findViewById(R.id.tekstZapomnialemHasla);
         tekstBladLogowanie = view.findViewById(R.id.tekstBladLogowanie);
 
         przyciskLogowanie.setOnClickListener(v -> {
@@ -60,6 +62,11 @@ public class LoginDialogFragment extends DialogFragment {
         tekstRejestracja.setOnClickListener(v -> {
             dismiss();
             new RegisterDialogFragment().show(getParentFragmentManager(), "rejestracja");
+        });
+
+        tekstZapomnialemHasla.setOnClickListener(v -> {
+            dismiss();
+            new RecoverPasswordDialogFragment().show(getParentFragmentManager(), "odzyskiwanieHasla");
         });
 
         builder.setView(view);

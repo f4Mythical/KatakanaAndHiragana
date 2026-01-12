@@ -117,5 +117,22 @@ Al pulsar “Añadir Katakana”,\n
 agregas katakana al aprendizaje general,\n
 lo que hace el estudio más rápido.
 </string>
-<string name="pomoc">AYUDA</string>
+    <string name="pomoc">AYUDA</string>
+
+    <string name="nie_moze_byc_pusty">El correo electrónico no puede estar vacío</string>
+    <string name="email_resetujacy">¡Correo de restablecimiento enviado! Revisa tu bandeja de entrada.</string>
+    <string name="nie_ma_emaila">El correo electrónico no existe</string>
+
+    <string name="znaki6">6+ caracteres</string>
+    <string name="cyfra">Número</string>
+    <string name="wielka">Letra mayúscula</string>
+    <string name="mala">Letra minúscula</string>
+
+    <string name="strona">Visitar sitio web</string>
+    <string name="odzyskiwanie_hasla">Recuperación de contraseña</string>
+    <string name="wyslij_email">Enviar correo de restablecimiento</string>
+    <string name="zapomnialem_haslo">Olvidé mi contraseña</string>
+
+    <string name="zajety_email">El correo electrónico ya está en uso</string>
+    <string name="zle_haslo_lub_email">El correo electrónico o la contraseña son incorrectos</string>
 </resources>

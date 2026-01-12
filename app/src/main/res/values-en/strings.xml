@@ -118,5 +118,21 @@ By tapping “Add Katakana”,\n
 you include katakana in general learning,\n
 which makes studying faster.
 </string>
-<string name="pomoc">HELP</string>
+    <string name="pomoc">HELP</string>
+    <string name="nie_moze_byc_pusty">Email cannot be empty</string>
+    <string name="email_resetujacy">Password reset email sent! Check your inbox.</string>
+    <string name="nie_ma_emaila">Email does not exist</string>
+
+    <string name="znaki6">6+ characters</string>
+    <string name="cyfra">Number</string>
+    <string name="wielka">Uppercase letter</string>
+    <string name="mala">Lowercase letter</string>
+
+    <string name="strona">Visit website</string>
+    <string name="odzyskiwanie_hasla">Password recovery</string>
+    <string name="wyslij_email">Send reset email</string>
+    <string name="zapomnialem_haslo">Forgot password</string>
+
+    <string name="zajety_email">Email is already taken</string>
+    <string name="zle_haslo_lub_email">Email or password is incorrect</string>
 </resources>

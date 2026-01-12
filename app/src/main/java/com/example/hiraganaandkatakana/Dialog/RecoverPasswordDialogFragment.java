@@ -38,7 +38,7 @@ public class RecoverPasswordDialogFragment extends DialogFragment {
             String email = poleEmail.getText().toString().trim();
 
             if (email.isEmpty()) {
-                tekstBladEmail.setText("Email nie może być pusty");
+                tekstBladEmail.setText(R.string.nie_moze_byc_pusty);
                 tekstBladEmail.setTextColor(getResources().getColor(R.color.tekst_blad));
                 tekstBladEmail.setVisibility(View.VISIBLE);
                 return;
@@ -53,10 +53,8 @@ public class RecoverPasswordDialogFragment extends DialogFragment {
                         if (!querySnapshot.isEmpty()) {
                             autoryzacja.sendPasswordResetEmail(email)
                                     .addOnSuccessListener(aVoid -> {
-                                        tekstBladEmail.setText("Email resetujący wysłany! Sprawdź skrzynkę.");
-                                        tekstBladEmail.setTextColor(getResources().getColor(R.color.tekst_sukces));
-                                        tekstBladEmail.setVisibility(View.VISIBLE);
-                                        przyciskWyslij.setEnabled(false);
+                                        dismiss();
+                                        new LoginDialogFragment().show(getParentFragmentManager(), "logowanie");
                                     })
                                     .addOnFailureListener(e -> {
                                         tekstBladEmail.setText("Błąd: " + e.getMessage());
@@ -64,7 +62,7 @@ public class RecoverPasswordDialogFragment extends DialogFragment {
                                         tekstBladEmail.setVisibility(View.VISIBLE);
                                     });
                         } else {
-                            tekstBladEmail.setText("Nie istnieje taki email");
+                            tekstBladEmail.setText(R.string.nie_ma_emaila);
                             tekstBladEmail.setTextColor(getResources().getColor(R.color.tekst_blad));
                             tekstBladEmail.setVisibility(View.VISIBLE);
                         }

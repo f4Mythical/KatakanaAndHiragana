@@ -44,7 +44,7 @@
 
         <TextView
             android:id="@+id/tekstZapomnialemHasla"
-            android:text="Zapomniałem hasła"
+            android:text="@string/zapomnialem_haslo"
             android:textColor="@color/tekst_glowny"
             android:alpha="0.7"
             android:layout_width="wrap_content"
@@ -61,7 +61,7 @@
         android:id="@+id/tekstBladLogowanie"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Email albo hasło jest złe"
+        android:text="@string/zle_haslo_lub_email"
         android:textColor="@color/tekst_blad"
         android:textSize="12sp"
         android:visibility="gone"

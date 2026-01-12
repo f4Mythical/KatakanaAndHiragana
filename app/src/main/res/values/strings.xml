@@ -121,4 +121,20 @@ jest to szybsza metoda nauki.
 </string>
     <string name="pomoc">POMOC</string>
 
+    <string name="nie_moze_byc_pusty">Email nie może być pusty</string>
+    <string name="email_resetujacy">Email resetujący wysłany! Sprawdź skrzynkę.</string>
+    <string name="nie_ma_emaila">Nie istnieje taki email</string>
+
+    <string name="znaki6">6+ znaków</string>
+    <string name="cyfra">Cyfra</string>
+    <string name="wielka">Wielka litera</string>
+    <string name="mala">Mała litera</string>
+
+    <string name="strona">Odwiedź stronę</string>
+    <string name="odzyskiwanie_hasla">Odzyskiwanie hasła</string>
+    <string name="wyslij_email">Wyślij email resetujący</string>
+    <string name="zapomnialem_haslo">Zapomniałem hasła</string>
+
+    <string name="zajety_email">Email jest już zajęty</string>
+    <string name="zle_haslo_lub_email">Email albo hasło jest złe</string>
 </resources>

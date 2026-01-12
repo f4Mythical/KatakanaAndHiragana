@@ -15,11 +15,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
 import com.google.android.material.button.MaterialButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class LanguageSelectionActivity extends AppCompatActivity {
 
@@ -59,6 +66,15 @@ public class LanguageSelectionActivity extends AppCompatActivity {
 
     private void zapiszJezyk(String kod) {
         preferencje.edit().putString("jezyk_aplikacji", kod).apply();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            Map<String, Object> jezykUpdate = new HashMap<>();
+            jezykUpdate.put("jezyk", kod);
+            db.collection("users").document(user.getUid())
+                    .set(jezykUpdate, SetOptions.merge());
+        }
     }
 
     private void ustawLocale(String kod) {

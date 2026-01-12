@@ -2,19 +2,21 @@ package com.example.hiraganaandkatakana.Dialog;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.hiraganaandkatakana.AuthCallback;
 import com.example.hiraganaandkatakana.R;
+import com.example.hiraganaandkatakana.Utils;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginDialogFragment extends DialogFragment {
@@ -49,6 +51,26 @@ public class LoginDialogFragment extends DialogFragment {
 
             autoryzacja.signInWithEmailAndPassword(emailUzytkownika, hasloUzytkownika)
                     .addOnSuccessListener(authResult -> {
+                        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
+                        if (uzytkownik != null) {
+                            bazaDanych.collection("users").document(uzytkownik.getUid())
+                                    .get()
+                                    .addOnSuccessListener(documentSnapshot -> {
+                                        if (documentSnapshot.exists()) {
+                                            String jezykZFirestore = documentSnapshot.getString("jezyk");
+                                            if (jezykZFirestore != null) {
+                                                SharedPreferences prefs = requireActivity().getSharedPreferences("ustawienia_aplikacji", requireContext().MODE_PRIVATE);                                                String aktualnyJezyk = prefs.getString("jezyk_aplikacji", "en");
+
+                                                if (!jezykZFirestore.equals(aktualnyJezyk)) {
+                                                    prefs.edit().putString("jezyk_aplikacji", jezykZFirestore).apply();
+                                                    Utils.ustawJezyk(requireActivity(), jezykZFirestore);
+                                                    requireActivity().recreate();
+                                                }
+                                            }
+                                        }
+                                    });
+                        }
+
                         if (getActivity() instanceof AuthCallback) {
                             ((AuthCallback) getActivity()).onUserAuthenticated();
                         }

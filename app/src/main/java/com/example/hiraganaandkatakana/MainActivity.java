@@ -2,8 +2,8 @@ package com.example.hiraganaandkatakana;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     private ImageButton przyciskAuth;
     private ImageButton przyciskUstawienia;
     private TextView madeByText;
+    private TextView linkTextView;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
     private long czasZalogowania = 0;
@@ -40,11 +41,11 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
         SharedPreferences prefs = getSharedPreferences("ustawienia_aplikacji", MODE_PRIVATE);
         String jezyk = prefs.getString("jezyk_aplikacji", "pl");
         Utils.ustawJezyk(this, jezyk);
-
-        super.onCreate(savedInstanceState);
 
         if (prefs.getBoolean("pierwsze_uruchomienie", true)) {
             prefs.edit().putBoolean("pierwsze_uruchomienie", false).apply();
@@ -78,14 +79,19 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         przyciskAuth = findViewById(R.id.imageButtonAuth);
         przyciskUstawienia = findViewById(R.id.imageButtonSettings);
         madeByText = findViewById(R.id.madeByText);
+        linkTextView = findViewById(R.id.linkTextView);
 
         if (przyciskStart == null) {
-            Log.e("MainActivity", "BŁĄD: przyciskStart jest null!");
             Toast.makeText(this, "Błąd UI: nie znaleziono przycisku", Toast.LENGTH_SHORT).show();
         }
 
         madeByText.setText(R.string.made_by);
         przyciskStart.setText(R.string.start);
+
+        linkTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/f4Mythical"));
+            startActivity(intent);
+        });
 
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
@@ -104,7 +110,6 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         };
 
         przyciskStart.setOnClickListener(v -> {
-            Log.d("MainActivity", "Przycisk Start kliknięty!");
             Intent intent = new Intent(MainActivity.this, PoczatekHiraganaKatakana.class);
             intent.putExtra("czyMaPremium", czyMaPremium);
             intent.putExtra("czasZalogowania", czasZalogowania);

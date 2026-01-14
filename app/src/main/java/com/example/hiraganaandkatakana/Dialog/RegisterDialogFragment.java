@@ -67,6 +67,7 @@ public class RegisterDialogFragment extends DialogFragment {
                         daneUzytkownika.put("email", emailUzytkownika);
                         daneUzytkownika.put("czyMaPremium", false);
                         daneUzytkownika.put("jezyk", jezyk);
+                        daneUzytkownika.put("sessionStart", System.currentTimeMillis());
 
                         bazaDanych.collection("users").document(identyfikatorUzytkownika).set(daneUzytkownika)
                                 .addOnSuccessListener(unused -> {
@@ -95,12 +96,9 @@ public class RegisterDialogFragment extends DialogFragment {
 
     private void ustawWeryfikacjeEmail() {
         poleEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(Editable s) {
                 String emailUzytkownika = s.toString().trim();
                 if (emailUzytkownika.isEmpty()) {
                     tekstBladEmail.setVisibility(View.GONE);
@@ -124,12 +122,9 @@ public class RegisterDialogFragment extends DialogFragment {
 
     private void ustawWeryfikacjeHasla() {
         poleHaslo.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
-            @Override
-            public void afterTextChanged(Editable s) {
+            @Override public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override public void afterTextChanged(Editable s) {
                 tekstPodpowiedzHaslo.setText(sprawdzPoprawnoscHasla(s.toString()));
             }
         });
@@ -141,14 +136,12 @@ public class RegisterDialogFragment extends DialogFragment {
         boolean maCyfre = false;
         boolean maWielkaLitere = false;
         boolean maMalaLitere = false;
-
         String cyfry = "1234567890";
         for (char znak : hasloUzytkownika.toCharArray()) {
             if (cyfry.contains(String.valueOf(znak))) maCyfre = true;
             if (Character.isUpperCase(znak)) maWielkaLitere = true;
             if (Character.isLowerCase(znak)) maMalaLitere = true;
         }
-
         podpowiedz.append(ma6Znakow ? "✅" : "❌").append(getString(R.string.znaki6));
         podpowiedz.append(maCyfre ? "✅" : "❌").append(getString(R.string.cyfra));
         podpowiedz.append(maWielkaLitere ? "✅" : "❌").append(getString(R.string.wielka));

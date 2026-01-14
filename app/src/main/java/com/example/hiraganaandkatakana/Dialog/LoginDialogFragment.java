@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class LoginDialogFragment extends DialogFragment {
 
     private FirebaseAuth autoryzacja;
@@ -51,25 +54,44 @@ public class LoginDialogFragment extends DialogFragment {
 
             autoryzacja.signInWithEmailAndPassword(emailUzytkownika, hasloUzytkownika)
                     .addOnSuccessListener(authResult -> {
+                        if (!isAdded()) return;
                         FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
-                        if (uzytkownik != null) {
-                            bazaDanych.collection("users").document(uzytkownik.getUid())
-                                    .get()
-                                    .addOnSuccessListener(documentSnapshot -> {
-                                        if (documentSnapshot.exists()) {
-                                            String jezykZFirestore = documentSnapshot.getString("jezyk");
-                                            if (jezykZFirestore != null) {
-                                                SharedPreferences prefs = requireActivity().getSharedPreferences("ustawienia_aplikacji", requireContext().MODE_PRIVATE);                                                String aktualnyJezyk = prefs.getString("jezyk_aplikacji", "en");
+                        if (uzytkownik == null) return;
 
-                                                if (!jezykZFirestore.equals(aktualnyJezyk)) {
-                                                    prefs.edit().putString("jezyk_aplikacji", jezykZFirestore).apply();
-                                                    Utils.ustawJezyk(requireActivity(), jezykZFirestore);
-                                                    requireActivity().recreate();
-                                                }
+                        String uid = uzytkownik.getUid();
+                        long teraz = System.currentTimeMillis();
+
+                        Map<String, Object> daneStart = new HashMap<>();
+                        daneStart.put("sessionStart", teraz);
+
+                        bazaDanych.collection("users").document(uid)
+                                .update(daneStart)
+                                .addOnFailureListener(e -> {
+                                    if (!isAdded()) return;
+                                    if (e.getMessage() != null && e.getMessage().contains("NO_DOCUMENT")) {
+                                        bazaDanych.collection("users").document(uid)
+                                                .set(daneStart);
+                                    }
+                                });
+
+                        bazaDanych.collection("users").document(uid)
+                                .get()
+                                .addOnSuccessListener(documentSnapshot -> {
+                                    if (!isAdded()) return;
+                                    if (documentSnapshot.exists()) {
+                                        String jezykZFirestore = documentSnapshot.getString("jezyk");
+                                        if (jezykZFirestore != null) {
+                                            SharedPreferences prefs = requireActivity()
+                                                    .getSharedPreferences("ustawienia_aplikacji", requireContext().MODE_PRIVATE);
+                                            String aktualnyJezyk = prefs.getString("jezyk_aplikacji", "en");
+                                            if (!jezykZFirestore.equals(aktualnyJezyk)) {
+                                                prefs.edit().putString("jezyk_aplikacji", jezykZFirestore).apply();
+                                                Utils.ustawJezyk(requireActivity(), jezykZFirestore);
+                                                requireActivity().recreate();
                                             }
                                         }
-                                    });
-                        }
+                                    }
+                                });
 
                         if (getActivity() instanceof AuthCallback) {
                             ((AuthCallback) getActivity()).onUserAuthenticated();
@@ -77,7 +99,7 @@ public class LoginDialogFragment extends DialogFragment {
                         dismiss();
                     })
                     .addOnFailureListener(e -> {
-                        tekstBladLogowanie.setVisibility(View.VISIBLE);
+                        if (isAdded()) tekstBladLogowanie.setVisibility(View.VISIBLE);
                     });
         });
 

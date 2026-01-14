@@ -60,6 +60,12 @@ public class GeneralSettingsDialogFragment extends DialogFragment {
         });
 
         buttonJezyk.setOnClickListener(v -> {
+            requireActivity()
+                    .getSharedPreferences("ustawienia_aplikacji", 0)
+                    .edit()
+                    .putBoolean("przepustka_jezyk", true)
+                    .apply();
+
             Intent intent = new Intent(getActivity(), LanguageSelectionActivity.class);
             startActivity(intent);
             dismiss();

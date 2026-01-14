@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     private TextView linkTextView;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private long czasZalogowania = 0;
     private FragmentManager fragmentManager;
     private boolean czyMaPremium = false;
     private PremiumStatusTracker premiumTracker;
@@ -75,6 +74,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         premiumTracker.setOnPremiumStatusChangedListener(this);
         fragmentManager = getSupportFragmentManager();
 
+        initUI();
+    }
+
+    private void initUI() {
         przyciskStart = findViewById(R.id.Poczatek);
         przyciskAuth = findViewById(R.id.imageButtonAuth);
         przyciskUstawienia = findViewById(R.id.imageButtonSettings);
@@ -82,7 +85,8 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         linkTextView = findViewById(R.id.linkTextView);
 
         if (przyciskStart == null) {
-            Toast.makeText(this, "Błąd UI: nie znaleziono przycisku", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Błąd UI", Toast.LENGTH_SHORT).show();
+            finish();
         }
 
         madeByText.setText(R.string.made_by);
@@ -96,12 +100,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
             if (uzytkownik != null) {
-                czasZalogowania = System.currentTimeMillis();
                 premiumTracker.aktualizujStatusDlaUzytkownika();
                 przyciskAuth.setImageResource(R.drawable.konto1);
                 przyciskAuth.setContentDescription(getString(R.string.profil));
             } else {
-                czasZalogowania = 0;
                 czyMaPremium = false;
                 premiumTracker.stopListening();
                 przyciskAuth.setImageResource(R.drawable.login);
@@ -112,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         przyciskStart.setOnClickListener(v -> {
             Intent intent = new Intent(MainActivity.this, PoczatekHiraganaKatakana.class);
             intent.putExtra("czyMaPremium", czyMaPremium);
-            intent.putExtra("czasZalogowania", czasZalogowania);
             startActivity(intent);
         });
 
@@ -126,7 +127,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     private void obsluzPrzyciskAuth() {
         FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
         if (aktualnyUzytkownik != null) {
-            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(czasZalogowania, premiumTracker.getCzyMaPremium());
+            if (SessionTimer.getInstance().getElapsedSeconds() == 0) {
+                SessionTimer.getInstance().start();
+            }
+            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(premiumTracker.getCzyMaPremium());
             dialog.show(fragmentManager, "profilUzytkownika");
         } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
@@ -138,20 +142,8 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
     protected void onResume() {
         super.onResume();
         autoryzacja.addAuthStateListener(authStateListener);
-        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
-        if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
-            premiumTracker.startListening();
-            premiumTracker.aktualizujStatusDlaUzytkownika();
-            przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription(getString(R.string.profil));
-        } else {
-            czasZalogowania = 0;
-            czyMaPremium = false;
-            premiumTracker.stopListening();
-            przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription(getString(R.string.zaloguj));
-        }
+        premiumTracker.startListening();
+        premiumTracker.aktualizujStatusDlaUzytkownika();
     }
 
     @Override
@@ -163,40 +155,21 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
 
     @Override
     public void onUserAuthenticated() {
-        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
-        if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
-            premiumTracker.startListening();
-            premiumTracker.aktualizujStatusDlaUzytkownika();
-            przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription(getString(R.string.profil));
-        } else {
-            czasZalogowania = 0;
-            czyMaPremium = false;
-            premiumTracker.stopListening();
-            przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription(getString(R.string.zaloguj));
-        }
+        SessionTimer.getInstance().start();
+        premiumTracker.startListening();
+        premiumTracker.aktualizujStatusDlaUzytkownika();
     }
 
     @Override
     public void onUserLoggedOut() {
-        czasZalogowania = 0;
+        SessionTimer.getInstance().reset();
         czyMaPremium = false;
         premiumTracker.stopListening();
-        przyciskAuth.setImageResource(R.drawable.login);
-        przyciskAuth.setContentDescription(getString(R.string.zaloguj));
         finish();
     }
 
     @Override
     public void onPremiumStatusChanged(boolean statusPremium) {
         czyMaPremium = statusPremium;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        premiumTracker.stopListening();
     }
 }

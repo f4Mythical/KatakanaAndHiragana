@@ -42,6 +42,19 @@ public class LanguageSelectionActivity extends AppCompatActivity {
         super.onCreate(zapisStanu);
 
         preferencje = getSharedPreferences("ustawienia_aplikacji", MODE_PRIVATE);
+
+        boolean przepustka = preferencje.getBoolean("przepustka_jezyk", false);
+        if (przepustka) {
+            preferencje.edit().putBoolean("przepustka_jezyk", false).apply();
+        } else {
+            String zapisanyJezyk = preferencje.getString("jezyk_aplikacji", null);
+            if (zapisanyJezyk != null) {
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                return;
+            }
+        }
+
         wczytajZapisanyJezyk();
         ustawLocale(wybranyKodJezyka);
 
@@ -141,8 +154,7 @@ public class LanguageSelectionActivity extends AppCompatActivity {
     private void ustawPrzyciskGotowy() {
         btnGotowy.setOnClickListener(v -> {
             zapiszJezyk(wybranyKodJezyka);
-            Intent intencja = new Intent(LanguageSelectionActivity.this, MainActivity.class);
-            startActivity(intencja);
+            startActivity(new Intent(LanguageSelectionActivity.this, MainActivity.class));
             finish();
         });
     }

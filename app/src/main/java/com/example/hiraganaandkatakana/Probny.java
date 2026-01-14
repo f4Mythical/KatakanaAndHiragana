@@ -2,23 +2,21 @@ package com.example.hiraganaandkatakana;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.hiraganaandkatakana.Dialog.LoginDialogFragment;
 import com.example.hiraganaandkatakana.Dialog.UserProfileDialogFragment;
-import com.example.hiraganaandkatakana.HiraganaBasic.*;
-import com.example.hiraganaandkatakana.HiraganaPremium.*;
-import com.example.hiraganaandkatakana.KatakanaBasic.*;
-import com.example.hiraganaandkatakana.KatakanaPremium.*;
+import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicCharacters;
+import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicSentences;
+import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicWords;
+import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumCharacters;
+import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumSentences;
+import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumWords;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,7 +26,6 @@ public class Probny extends AppCompatActivity implements AuthCallback,
 
     private boolean isHiraganaActive = true;
     private boolean isPremium = false;
-    private boolean statusPremiumZaladowany = false;
 
     private TextView tabHiragana, tabKatakana;
     private ImageButton buttonBack, imageButtonAuth;
@@ -39,24 +36,18 @@ public class Probny extends AppCompatActivity implements AuthCallback,
     private FirebaseAuth.AuthStateListener authStateListener;
     private PremiumStatusTracker premiumTracker;
     private FragmentManager fragmentManager;
-    private long czasZalogowania = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_nic_robic_nie_bede_pozniej_zmienie);
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
-
         initFirebase();
         initViews();
         setupTabs();
         setupButtons();
         setupAuth();
+        updateUIForCurrentTab();
     }
 
     private void initFirebase() {
@@ -64,9 +55,7 @@ public class Probny extends AppCompatActivity implements AuthCallback,
         premiumTracker = PremiumStatusTracker.getInstance();
         premiumTracker.setOnPremiumStatusChangedListener(this);
         fragmentManager = getSupportFragmentManager();
-
         isPremium = getIntent().getBooleanExtra("czyMaPremium", false);
-        statusPremiumZaladowany = isPremium;
     }
 
     private void initViews() {
@@ -74,11 +63,9 @@ public class Probny extends AppCompatActivity implements AuthCallback,
         tabKatakana = findViewById(R.id.tabKatakana);
         buttonBack = findViewById(R.id.buttonBack);
         imageButtonAuth = findViewById(R.id.imageButtonAuth);
-
         buttonCharacters = findViewById(R.id.buttonCharacters);
         buttonWords = findViewById(R.id.buttonWords);
         buttonSentences = findViewById(R.id.buttonSentences);
-
         iconCharacters = findViewById(R.id.iconCharacters);
         iconWords = findViewById(R.id.iconWords);
         iconSentences = findViewById(R.id.iconSentences);
@@ -112,15 +99,12 @@ public class Probny extends AppCompatActivity implements AuthCallback,
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
             if (uzytkownik != null) {
-                czasZalogowania = System.currentTimeMillis();
                 premiumTracker.startListening();
                 premiumTracker.aktualizujStatusDlaUzytkownika();
                 imageButtonAuth.setImageResource(R.drawable.konto1);
                 imageButtonAuth.setContentDescription("Mój profil");
             } else {
-                czasZalogowania = 0;
                 isPremium = false;
-                statusPremiumZaladowany = false;
                 premiumTracker.stopListening();
                 imageButtonAuth.setImageResource(R.drawable.login);
                 imageButtonAuth.setContentDescription("Zaloguj się");
@@ -133,10 +117,10 @@ public class Probny extends AppCompatActivity implements AuthCallback,
     private void obsluzPrzyciskAuth() {
         FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
         if (aktualnyUzytkownik != null) {
-            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(
-                    czasZalogowania,
-                    premiumTracker.getCzyMaPremium()
-            );
+            if (SessionTimer.getInstance().getElapsedSeconds() == 0) {
+                SessionTimer.getInstance().start();
+            }
+            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(premiumTracker.getCzyMaPremium());
             dialog.show(fragmentManager, "profilUzytkownika");
         } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
@@ -145,43 +129,22 @@ public class Probny extends AppCompatActivity implements AuthCallback,
     }
 
     private void openCharactersActivity() {
-        Intent intent;
         boolean premium = premiumTracker.getCzyMaPremium();
-        if (isHiraganaActive) {
-            intent = new Intent(this, premium ?
-                    HiraganaPremiumCharacters.class : HiraganaBasicCharacters.class);
-        } else {
-            intent = new Intent(this, premium ?
-                    KatakanaPremiumCharacters.class : KatakanaBasicCharacters.class);
-        }
+        Intent intent = new Intent(this, premium ? HiraganaPremiumCharacters.class : HiraganaBasicCharacters.class);
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }
 
     private void openWordsActivity() {
-        Intent intent;
         boolean premium = premiumTracker.getCzyMaPremium();
-        if (isHiraganaActive) {
-            intent = new Intent(this, premium ?
-                    HiraganaPremiumWords.class : HiraganaBasicWords.class);
-        } else {
-            intent = new Intent(this, premium ?
-                    KatakanaPremiumWords.class : KatakanaBasicWords.class);
-        }
+        Intent intent = new Intent(this, premium ? HiraganaPremiumWords.class : HiraganaBasicWords.class);
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }
 
     private void openSentencesActivity() {
-        Intent intent;
         boolean premium = premiumTracker.getCzyMaPremium();
-        if (isHiraganaActive) {
-            intent = new Intent(this, premium ?
-                    HiraganaPremiumSentences.class : HiraganaBasicSentences.class);
-        } else {
-            intent = new Intent(this, premium ?
-                    KatakanaPremiumSentences.class : KatakanaBasicSentences.class);
-        }
+        Intent intent = new Intent(this, premium ? HiraganaPremiumSentences.class : HiraganaBasicSentences.class);
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }
@@ -225,26 +188,19 @@ public class Probny extends AppCompatActivity implements AuthCallback,
 
     @Override
     public void onUserAuthenticated() {
-        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
-        if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
-            premiumTracker.startListening();
-            premiumTracker.aktualizujStatusDlaUzytkownika();
-        }
+        SessionTimer.getInstance().start();
+        premiumTracker.startListening();
+        premiumTracker.aktualizujStatusDlaUzytkownika();
     }
 
     @Override
     public void onUserLoggedOut() {
-        czasZalogowania = 0;
-        isPremium = false;
-        statusPremiumZaladowany = false;
-        premiumTracker.stopListening();
+        SessionTimer.getInstance().reset();
         finish();
     }
 
     @Override
     public void onPremiumStatusChanged(boolean czyMaPremium) {
         this.isPremium = czyMaPremium;
-        this.statusPremiumZaladowany = true;
     }
 }

@@ -15,15 +15,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.hiraganaandkatakana.Dialog.LoginDialogFragment;
 import com.example.hiraganaandkatakana.Dialog.UserProfileDialogFragment;
-import com.example.hiraganaandkatakana.HiraganaBasic.WidokBasicHiragana;
-import com.example.hiraganaandkatakana.HiraganaPremium.WidokPremiumHiragana;
-import com.example.hiraganaandkatakana.KatakanaBasic.WidokBasicKatakana;
-import com.example.hiraganaandkatakana.KatakanaPremium.WidokPremiumKatakana;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -37,10 +32,8 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     private ImageButton przyciskAuth;
     private FirebaseAuth autoryzacja;
     private FirebaseAuth.AuthStateListener authStateListener;
-    private long czasZalogowania = 0;
     private FragmentManager fragmentManager;
     private boolean czyMaPremium = false;
-    private boolean statusPremiumZaladowany = false;
     private Button zacznijNauke;
     private PremiumStatusTracker premiumTracker;
 
@@ -77,7 +70,7 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             {"ひゃ","hya"},{" "," "}, {"ひゅ","hyu"},{" "," "}, {"ひょ","hyo"},
             {"びゃ","bya"},{" "," "}, {"びゅ","byu"},{" "," "}, {"びょ","byo"},
             {"ぴゃ","pya"}, {" "," "},{"ぴゅ","pyu"},{" "," "}, {"ぴょ","pyo"},
-            {"みゃ","mya"},{" "," "}, {"みゅ","myu"}, {" "," "},{"みょ","myo"},
+            {"みゃ","mya"},{" "," "}, {"みゅ","myu"}, {" "," "}, {"みょ","myo"},
             {"りゃ","rya"},{" "," "}, {"りゅ","ryu"},{" "," "}, {"りょ","ryo"},
     };
 
@@ -107,15 +100,15 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
             {"キャ","kya"},{" "," "}, {"キュ","kyu"}, {" "," "},{"キョ","kyo"},
             {"ギャ","gya"}, {" "," "},{"ギュ","gyu"}, {" "," "},{"ギョ","gyo"},
             {"シャ","sha"},{" "," "}, {"シュ","shu"},{" "," "}, {"ショ","sho"},
-            {"ジャ","ja"}, {" "," "},{"ジュ","ju"}, {" "," "},{"ジョ","jo"},
+            {"ジャ","ja"}, {" "," "},{"ジュ","ju"}, {" "," "}, {"ジョ","jo"},
             {"チャ","cha"},{" "," "}, {"チュ","chu"},{" "," "}, {"チョ","cho"},
-            {"ヂャ","ja"}, {" "," "},{"ヂュ","ju"},{" "," "}, {"ヂョ","jo"},
-            {"ニャ","nya"},{" "," "}, {"ニュ","nyu"},{" "," "}, {"ニョ","nyo"},
-            {"ヒャ","hya"},{" "," "}, {"ヒュ","hyu"},{" "," "}, {"ヒョ","hyo"},
-            {"ビャ","bya"},{" "," "}, {"ビュ","byu"},{" "," "}, {"ビョ","byo"},
-            {"ピャ","pya"},{" "," "}, {"ピュ","pyu"},{" "," "}, {"ピョ","pyo"},
+            {"ヂャ","ja"}, {" "," "},{"ヂュ","ju"}, {" "," "}, {"ヂョ","jo"},
+            {"ニャ","nya"},{" "," "}, {"ニュ","nyu"}, {" "," "}, {"ニョ","nyo"},
+            {"ヒャ","hya"},{" "," "}, {"ヒュ","hyu"}, {" "," "}, {"ヒョ","hyo"},
+            {"ビャ","bya"}, {" "," "}, {"ビュ","byu"}, {" "," "}, {"ビョ","byo"},
+            {"ピャ","pya"}, {" "," "},{"ピュ","pyu"}, {" "," "}, {"ピョ","pyo"},
             {"ミャ","mya"}, {" "," "},{"ミュ","myu"}, {" "," "}, {"ミョ","myo"},
-            {"リャ","rya"},{" "," "}, {"リュ","ryu"}, {" "," "},{"リョ","ryo"}
+            {"リャ","rya"},{" "," "}, {"リュ","ryu"}, {" "," "}, {"リョ","ryo"}
     };
 
     String[][] aktualnyZestaw;
@@ -129,26 +122,22 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         setContentView(R.layout.activity_poczatek_hiragana_katakana);
 
         czyMaPremium = getIntent().getBooleanExtra("czyMaPremium", false);
-        czasZalogowania = getIntent().getLongExtra("czasZalogowania", System.currentTimeMillis());
 
         autoryzacja = FirebaseAuth.getInstance();
         premiumTracker = PremiumStatusTracker.getInstance();
         premiumTracker.setOnPremiumStatusChangedListener(this);
         fragmentManager = getSupportFragmentManager();
+
         container = findViewById(R.id.dynamicContainer);
         ImageButton przyciskWstecz = findViewById(R.id.buttonBack);
         przyciskAuth = findViewById(R.id.imageButtonAuth);
-
-        TextView zakladkaHiragana = findViewById(R.id.tabHiragana);
-        TextView zakladkaKatakana = findViewById(R.id.tabKatakana);
-
-        Button przyciskPodstawowe = findViewById(R.id.buttonPodstawowe);
-        Button przyciskDakuten = findViewById(R.id.buttonDakuten);
-        Button przyciskKombinowane = findViewById(R.id.buttonKombinowane);
-
         zacznijNauke = findViewById(R.id.zacznijNauke);
 
-
+        if (container == null || przyciskAuth == null || zacznijNauke == null) {
+            Toast.makeText(this, "Błąd UI", Toast.LENGTH_SHORT).show();
+            finish();
+            return;
+        }
 
         zacznijNauke.setOnClickListener(v -> {
             Intent intent = new Intent(PoczatekHiraganaKatakana.this, Probny.class);
@@ -158,6 +147,12 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
         przyciskWstecz.setOnClickListener(v -> finish());
 
+        TextView zakladkaHiragana = findViewById(R.id.tabHiragana);
+        TextView zakladkaKatakana = findViewById(R.id.tabKatakana);
+
+        Button przyciskPodstawowe = findViewById(R.id.buttonPodstawowe);
+        Button przyciskDakuten = findViewById(R.id.buttonDakuten);
+        Button przyciskKombinowane = findViewById(R.id.buttonKombinowane);
 
         zakladkaHiragana.setOnClickListener(v -> {
             if (!czyHiragana) {
@@ -202,14 +197,11 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         authStateListener = firebaseAuth -> {
             FirebaseUser uzytkownik = firebaseAuth.getCurrentUser();
             if (uzytkownik != null) {
-                czasZalogowania = System.currentTimeMillis();
                 premiumTracker.aktualizujStatusDlaUzytkownika();
                 przyciskAuth.setImageResource(R.drawable.konto1);
                 przyciskAuth.setContentDescription("Mój profil");
             } else {
-                czasZalogowania = 0;
                 czyMaPremium = false;
-                statusPremiumZaladowany = false;
                 premiumTracker.stopListening();
                 przyciskAuth.setImageResource(R.drawable.login);
                 przyciskAuth.setContentDescription("Zaloguj się");
@@ -225,7 +217,10 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     private void obsluzPrzyciskAuth() {
         FirebaseUser aktualnyUzytkownik = autoryzacja.getCurrentUser();
         if (aktualnyUzytkownik != null) {
-            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(czasZalogowania, premiumTracker.getCzyMaPremium());
+            if (SessionTimer.getInstance().getElapsedSeconds() == 0) {
+                SessionTimer.getInstance().start();
+            }
+            UserProfileDialogFragment dialog = UserProfileDialogFragment.newInstance(premiumTracker.getCzyMaPremium());
             dialog.show(fragmentManager, "profilUzytkownika");
         } else {
             LoginDialogFragment dialog = new LoginDialogFragment();
@@ -239,18 +234,8 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
         autoryzacja.addAuthStateListener(authStateListener);
         FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
         if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
             premiumTracker.startListening();
             premiumTracker.aktualizujStatusDlaUzytkownika();
-            przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription("Mój profil");
-        } else {
-            czasZalogowania = 0;
-            czyMaPremium = false;
-            statusPremiumZaladowany = false;
-            premiumTracker.stopListening();
-            przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription("Zaloguj się");
         }
     }
 
@@ -262,45 +247,30 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
     }
 
     @Override
-    public void onUserAuthenticated() {
-        FirebaseUser uzytkownik = autoryzacja.getCurrentUser();
-        if (uzytkownik != null) {
-            czasZalogowania = System.currentTimeMillis();
-            premiumTracker.startListening();
-            premiumTracker.aktualizujStatusDlaUzytkownika();
-            przyciskAuth.setImageResource(R.drawable.konto1);
-            przyciskAuth.setContentDescription("Mój profil");
-        } else {
-            czasZalogowania = 0;
-            czyMaPremium = false;
-            statusPremiumZaladowany = false;
-            premiumTracker.stopListening();
-            przyciskAuth.setImageResource(R.drawable.login);
-            przyciskAuth.setContentDescription("Zaloguj się");
+    protected void onDestroy() {
+        super.onDestroy();
+        if (pendingTasks != null) {
+            for (Runnable r : pendingTasks) if (r != null) handler.removeCallbacks(r);
         }
+        premiumTracker.stopListening();
+    }
+
+    @Override
+    public void onUserAuthenticated() {
+        SessionTimer.getInstance().start();
+        premiumTracker.startListening();
+        premiumTracker.aktualizujStatusDlaUzytkownika();
     }
 
     @Override
     public void onUserLoggedOut() {
-        czasZalogowania = 0;
-        czyMaPremium = false;
-        statusPremiumZaladowany = false;
-        premiumTracker.stopListening();
-        przyciskAuth.setImageResource(R.drawable.login);
-        przyciskAuth.setContentDescription("Zaloguj się");
+        SessionTimer.getInstance().reset();
         finish();
     }
 
     @Override
     public void onPremiumStatusChanged(boolean czyMaPremium) {
         this.czyMaPremium = czyMaPremium;
-        statusPremiumZaladowany = true;
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        premiumTracker.stopListening();
     }
 
     private void ustawStyleZakladek(TextView zakladkaHiragana, TextView zakladkaKatakana) {
@@ -344,83 +314,64 @@ public class PoczatekHiraganaKatakana extends AppCompatActivity implements AuthC
 
     private void wyswietlZestaw() {
         if (pendingTasks != null) {
-            for (Runnable zadanie : pendingTasks) {
-                if (zadanie != null) {
-                    handler.removeCallbacks(zadanie);
-                }
-            }
+            for (Runnable zadanie : pendingTasks) if (zadanie != null) handler.removeCallbacks(zadanie);
         }
-
         container.removeAllViews();
-
         pendingTasks = new Runnable[aktualnyZestaw.length];
-
         int kolumny = 5;
         container.setColumnCount(kolumny);
-
         for (int i = 0; i < aktualnyZestaw.length; i++) {
             final String[] znak = aktualnyZestaw[i];
             final long opoznienie = i * 30L;
-
             Runnable zadanie = () -> {
-                CardView karta = new CardView(this);
-                GridLayout.LayoutParams parametryKarty = new GridLayout.LayoutParams();
-                parametryKarty.width = 0;
-                parametryKarty.height = dpToPx(140);
-                parametryKarty.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
-                parametryKarty.setMargins(8, 8, 8, 8);
-                karta.setLayoutParams(parametryKarty);
-                karta.setCardElevation(4f);
-                karta.setRadius(12f);
-                karta.setCardBackgroundColor(getResources().getColor(R.color.tlo_powierzchnia));
+                try {
+                    CardView karta = new CardView(this);
+                    GridLayout.LayoutParams parametryKarty = new GridLayout.LayoutParams();
+                    parametryKarty.width = 0;
+                    parametryKarty.height = dpToPx(140);
+                    parametryKarty.columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1, 1f);
+                    parametryKarty.setMargins(8, 8, 8, 8);
+                    karta.setLayoutParams(parametryKarty);
+                    karta.setCardElevation(4f);
+                    karta.setRadius(12f);
+                    karta.setCardBackgroundColor(getResources().getColor(R.color.tlo_powierzchnia));
 
-                LinearLayout element = new LinearLayout(this);
-                element.setOrientation(LinearLayout.VERTICAL);
-                element.setPadding(16, 24, 16, 24);
-                element.setGravity(Gravity.CENTER);
+                    LinearLayout element = new LinearLayout(this);
+                    element.setOrientation(LinearLayout.VERTICAL);
+                    element.setPadding(16, 24, 16, 24);
+                    element.setGravity(Gravity.CENTER);
 
-                TextView kana = new TextView(this);
-                kana.setText(znak[0]);
-                kana.setTextSize(32);
-                kana.setTextColor(getResources().getColor(R.color.tekst_glowny));
-                kana.setGravity(Gravity.CENTER);
-                element.addView(kana);
+                    TextView kana = new TextView(this);
+                    kana.setText(znak[0]);
+                    kana.setTextSize(32);
+                    kana.setTextColor(getResources().getColor(R.color.tekst_glowny));
+                    kana.setGravity(Gravity.CENTER);
+                    element.addView(kana);
 
-                if (!znak[1].isEmpty()) {
-                    TextView romaji = new TextView(this);
-                    romaji.setText(znak[1]);
-                    romaji.setTextSize(14);
-                    romaji.setTextColor(getResources().getColor(R.color.tekst_dodatkowy));
-                    romaji.setGravity(Gravity.CENTER);
-                    LinearLayout.LayoutParams parametryRomaji = new LinearLayout.LayoutParams(
-                            LinearLayout.LayoutParams.MATCH_PARENT,
-                            LinearLayout.LayoutParams.WRAP_CONTENT
-                    );
-                    parametryRomaji.setMargins(0, 8, 0, 0);
-                    romaji.setLayoutParams(parametryRomaji);
-                    element.addView(romaji);
-                }
+                    if (!znak[1].isEmpty()) {
+                        TextView romaji = new TextView(this);
+                        romaji.setText(znak[1]);
+                        romaji.setTextSize(14);
+                        romaji.setTextColor(getResources().getColor(R.color.tekst_dodatkowy));
+                        romaji.setGravity(Gravity.CENTER);
+                        LinearLayout.LayoutParams parametryRomaji = new LinearLayout.LayoutParams(
+                                LinearLayout.LayoutParams.MATCH_PARENT,
+                                LinearLayout.LayoutParams.WRAP_CONTENT
+                        );
+                        parametryRomaji.setMargins(0, 8, 0, 0);
+                        romaji.setLayoutParams(parametryRomaji);
+                        element.addView(romaji);
+                    }
 
-                karta.addView(element);
-
-                karta.setAlpha(0f);
-                karta.setTranslationY(50f);
-                karta.animate()
-                        .alpha(1f)
-                        .translationY(0f)
-                        .setDuration(300)
-                        .setStartDelay(0)
-                        .start();
-
-                container.addView(karta);
+                    karta.addView(element);
+                    karta.setAlpha(0f);
+                    karta.setTranslationY(50f);
+                    karta.animate().alpha(1f).translationY(0f).setDuration(300).start();
+                    container.addView(karta);
+                } catch (Exception ignored) {}
             };
-
             pendingTasks[i] = zadanie;
             handler.postDelayed(zadanie, opoznienie);
         }
-    }
-
-    private FragmentActivity getActivity() {
-        return this;
     }
 }

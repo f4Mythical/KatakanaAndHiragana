@@ -130,7 +130,7 @@ public class Probny extends AppCompatActivity implements AuthCallback,
 
     private void openCharactersActivity() {
         boolean premium = premiumTracker.getCzyMaPremium();
-        Intent intent = new Intent(this, premium ? HiraganaPremiumCharacters.class : HiraganaBasicCharacters.class);
+        Intent intent = new Intent(this, premium ? HiraganaDialog.class : HiraganaBasicCharacters.class);
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }

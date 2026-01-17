@@ -165,7 +165,10 @@ public class MainActivity extends AppCompatActivity implements AuthCallback,
         SessionTimer.getInstance().reset();
         czyMaPremium = false;
         premiumTracker.stopListening();
-        finish();
+
+        przyciskAuth.setImageResource(R.drawable.login);
+        przyciskAuth.setContentDescription(getString(R.string.zaloguj));
+
     }
 
     @Override

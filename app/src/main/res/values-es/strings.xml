@@ -135,4 +135,18 @@ lo que hace el estudio más rápido.
 
     <string name="zajety_email">El correo electrónico ya está en uso</string>
     <string name="zle_haslo_lub_email">El correo electrónico o la contraseña son incorrectos</string>
+    <string name="usun_konto">Eliminar cuenta</string>
+    <string name="haslo_puste">La contraseña no puede estar vacía</string>
+    <string name="blad_uzytkownika">Error de usuario</string>
+    <string name="zle_haslo">Contraseña incorrecta</string>
+    <string name="jestes_pewny">
+    ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción no se puede deshacer.
+</string>
+    <string name="tak">Sí</string>
+    <string name="nie">No</string>
+    <string name="wprowadz_haslo">
+    Introduce tu contraseña para confirmar la eliminación de la cuenta:
+</string>
+    <string name="potwierdz">Confirmar</string>
+
 </resources>

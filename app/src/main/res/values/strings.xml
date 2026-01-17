@@ -137,4 +137,18 @@ jest to szybsza metoda nauki.
 
     <string name="zajety_email">Email jest już zajęty</string>
     <string name="zle_haslo_lub_email">Email albo hasło jest złe</string>
+    <string name="usun_konto">Usuń konto</string>
+    <string name="haslo_puste">Hasło nie może być puste</string>
+    <string name="blad_uzytkownika">Błąd użytkownika</string>
+    <string name="zle_haslo">Błędne hasło</string>
+    <string name="jestes_pewny">
+    Czy jesteś pewny, że chcesz usunąć swoje konto? Tej operacji nie można cofnąć.
+</string>
+    <string name="tak">Tak</string>
+    <string name="nie">Nie</string>
+    <string name="wprowadz_haslo">
+    Wprowadź hasło, aby potwierdzić usunięcie konta:
+</string>
+    <string name="potwierdz">Potwierdź</string>
+
 </resources>

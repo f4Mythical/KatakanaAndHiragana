@@ -135,4 +135,18 @@ which makes studying faster.
 
     <string name="zajety_email">Email is already taken</string>
     <string name="zle_haslo_lub_email">Email or password is incorrect</string>
+    <string name="usun_konto">Delete account</string>
+    <string name="haslo_puste">Password cannot be empty</string>
+    <string name="blad_uzytkownika">User error</string>
+    <string name="zle_haslo">Incorrect password</string>
+    <string name="jestes_pewny">
+    Are you sure you want to delete your account? This action cannot be undone.
+</string>
+    <string name="tak">Yes</string>
+    <string name="nie">No</string>
+    <string name="wprowadz_haslo">
+    Enter your password to confirm account deletion:
+</string>
+    <string name="potwierdz">Confirm</string>
+
 </resources>

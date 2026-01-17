@@ -17,6 +17,7 @@ import com.example.hiraganaandkatakana.SessionTimer;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class UserProfileDialogFragment extends DialogFragment {
 
@@ -48,7 +49,6 @@ public class UserProfileDialogFragment extends DialogFragment {
     }
 
     @SuppressLint("SetTextI18n")
-    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = requireActivity().getLayoutInflater().inflate(R.layout.dialog_user_profile, null);
@@ -58,7 +58,8 @@ public class UserProfileDialogFragment extends DialogFragment {
         sessionTextView            = view.findViewById(R.id.sessionTextView);
         TextView settingsText      = view.findViewById(R.id.settingsText);
         TextView logoutText        = view.findViewById(R.id.logoutText);
-
+        TextView deleteAccountText = view.findViewById(R.id.deleteAccountText);
+        deleteAccountText.setOnClickListener(v -> showDeleteAccountConfirmationDialog());
         FirebaseUser uzytkownik = FirebaseAuth.getInstance().getCurrentUser();
         if (uzytkownik != null) {
             emailTextView.setText(getString(R.string.email) + ": " + uzytkownik.getEmail());
@@ -115,4 +116,51 @@ public class UserProfileDialogFragment extends DialogFragment {
         super.onDestroyView();
         if (updateTimerRunnable != null) handler.removeCallbacks(updateTimerRunnable);
     }
+    private void showDeleteAccountConfirmationDialog() {
+        new MaterialAlertDialogBuilder(requireActivity())
+                .setTitle(R.string.usun_konto)
+                .setMessage(R.string.jestes_pewny)
+                .setPositiveButton(R.string.tak, (dialog, which) -> deleteUserAccount())
+                .setNegativeButton(R.string.nie, null)
+                .show();
+    }
+
+
+        private void deleteUserAccount() {
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            if (user == null) return;
+
+            String uid = user.getUid();
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            ReauthDialogFragment reauthDialog = new ReauthDialogFragment();
+            reauthDialog.setCallback(() -> {
+                db.collection("users").document(uid)
+                        .delete()
+                        .addOnSuccessListener(aVoid -> {
+                            user.delete()
+                                    .addOnSuccessListener(bVoid -> {
+                                        if (mListener != null) mListener.onUserLoggedOut();
+                                        dismiss();
+                                    })
+                                    .addOnFailureListener(e -> {
+                                        new MaterialAlertDialogBuilder(requireActivity())
+                                                .setTitle("Błąd")
+                                                .setMessage("Nie udało się usunąć konta Firebase: " + e.getLocalizedMessage())
+                                                .setPositiveButton("OK", null)
+                                                .show();
+                                    });
+                        })
+                        .addOnFailureListener(e -> {
+                            new MaterialAlertDialogBuilder(requireActivity())
+                                    .setTitle("Błąd")
+                                    .setMessage("Nie udało się usunąć danych użytkownika: " + e.getLocalizedMessage())
+                                    .setPositiveButton("OK", null)
+                                    .show();
+                        });
+            });
+            reauthDialog.show(getParentFragmentManager(), "reauth");
+        }
 }
+
+

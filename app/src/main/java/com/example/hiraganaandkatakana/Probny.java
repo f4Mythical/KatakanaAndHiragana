@@ -17,6 +17,12 @@ import com.example.hiraganaandkatakana.HiraganaBasic.HiraganaBasicWords;
 import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumCharacters;
 import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumSentences;
 import com.example.hiraganaandkatakana.HiraganaPremium.HiraganaPremiumWords;
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicCharacters;
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicSentences;
+import com.example.hiraganaandkatakana.KatakanaBasic.KatakanaBasicWords;
+import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumCharacters;
+import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumSentences;
+import com.example.hiraganaandkatakana.KatakanaPremium.KatakanaPremiumWords;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -130,21 +136,42 @@ public class Probny extends AppCompatActivity implements AuthCallback,
 
     private void openCharactersActivity() {
         boolean premium = premiumTracker.getCzyMaPremium();
-        Intent intent = new Intent(this, premium ? HiraganaDialog.class : HiraganaBasicCharacters.class);
+        Intent intent;
+
+        if (isHiraganaActive) {
+            intent = new Intent(this, premium ? HiraganaPremiumCharacters.class : HiraganaBasicCharacters.class);
+        } else {
+            intent = new Intent(this, premium ? KatakanaPremiumCharacters.class : KatakanaBasicCharacters.class);
+        }
+
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }
 
     private void openWordsActivity() {
         boolean premium = premiumTracker.getCzyMaPremium();
-        Intent intent = new Intent(this, premium ? HiraganaPremiumWords.class : HiraganaBasicWords.class);
+        Intent intent;
+
+        if (isHiraganaActive) {
+            intent = new Intent(this, premium ? HiraganaPremiumWords.class : HiraganaBasicWords.class);
+        } else {
+            intent = new Intent(this, premium ? KatakanaPremiumWords.class : KatakanaBasicWords.class);
+        }
+
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }
 
     private void openSentencesActivity() {
         boolean premium = premiumTracker.getCzyMaPremium();
-        Intent intent = new Intent(this, premium ? HiraganaPremiumSentences.class : HiraganaBasicSentences.class);
+        Intent intent;
+
+        if (isHiraganaActive) {
+            intent = new Intent(this, premium ? HiraganaPremiumSentences.class : HiraganaBasicSentences.class);
+        } else {
+            intent = new Intent(this, premium ? KatakanaPremiumSentences.class : KatakanaBasicSentences.class);
+        }
+
         intent.putExtra("czyMaPremium", premium);
         startActivity(intent);
     }

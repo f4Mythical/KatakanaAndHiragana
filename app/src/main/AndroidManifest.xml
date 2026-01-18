@@ -52,5 +52,7 @@
         <activity android:name=".WybraneZnakiPremium" android:exported="false"/>
         <activity android:name=".Probny" android:exported="false"/>
         <activity android:name=".HiraganaDialog" android:exported="false"/>
+        <activity android:name=".Test" android:exported="false"/>
+
     </application>
 </manifest>

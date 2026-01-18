@@ -153,7 +153,7 @@ public class Probny extends AppCompatActivity implements AuthCallback,
         Intent intent;
 
         if (isHiraganaActive) {
-            intent = new Intent(this, premium ? HiraganaPremiumWords.class : HiraganaBasicWords.class);
+            intent = new Intent(this, premium ? Test.class : HiraganaBasicWords.class);
         } else {
             intent = new Intent(this, premium ? KatakanaPremiumWords.class : KatakanaBasicWords.class);
         }
